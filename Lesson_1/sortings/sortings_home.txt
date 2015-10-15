@@ -1,0 +1,23 @@
+1. Fix a bug in insertion_sort_bug.cpp
+
+2. What is time complexity of all sortings?
+
+3. Eliminate tail recusion in case of quicksort.
+
+4. Make pivot selection in quicksort randomized.
+Compare time performance with non-randomized quicksort
+and std::sort().
+
+5. Compare time performance between each sortings, using
+a large array as input.
+
+6. Make quicksort stable.
+
+7. Implement binarySearch(int[] array, int x) function:
+
+This function takes an array of integers and a particular integer value
+as input and returns the index at which this value is in array,
+or -1 in case no such value in array. Implement well-known binary search
+algorithm. Write unit-tests and compare result and time performance
+with standard std::binary_search() method from <algorithm> header file.
+

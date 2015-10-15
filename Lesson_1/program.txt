@@ -1,0 +1,11 @@
+1. Visibility scope [1..7]
+2. Logging [1..4]
+3. Functions [1..11]
+4. Arrays [1..7]
+5. Sortings [insertion, insertion_bug]
+6. Pointers [1..8]
+7. Statements [1..9]
+8. Arrays [8..15]
+9. Sortings [merge, quick, std 1, std 2, std 3]
+10. Arrays [16..17]
+

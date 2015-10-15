@@ -1,0 +1,28 @@
+1. Write a program which takes a file expressions.txt, reads each line
+from it and prints the result of calculation of every expression.
+
+For example, read the following line from the file:
+
+5 + 7
+
+And write the following answer to the standard output:
+
+5 + 7 = 12
+
+For strings do a concatenation:
+
+Hello + , + World + !
+
+Answer: Hello, World!
+
+Separate words with whitespaces if necessary.
+
+// ----------------------------------------------------------------------------
+2. Get some string from stdin and write them into an empty file.
+
+3. Solve the previous task using std::copy() from <algorithm>. Do not forget
+to use std::ostream_iterator<> from <iterator>.
+
+4. Read square matrix NxN from stdin and write it into an empty file.
+You should read integer N >= 0 first and handle the case, when N <= 0.
+

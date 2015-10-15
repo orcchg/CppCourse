@@ -1,0 +1,7 @@
+1. In every program fix the visibility scope of local variables:
+
+In case the visibility scope of any particular local variable could be
+narrowed, fill free to do that in this hometask.
+
+2. Solve the quiz.
+

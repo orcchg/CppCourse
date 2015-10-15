@@ -1,0 +1,19 @@
+1. Eliminate duplication in generate() method in statmenets_4.cpp
+
+2. Implement program which calculates power(value, base) - value in power 'base'.
+
+3. One have two kinds of parentheses: '(' and ')'.
+The following expressions are correct:  (), ()(), ((())), (()()), ((()())()), ...
+The following expressions are invalid:  )(, ()))(, (, ()), )(())(, ...
+
+Write a program that takes a sequence of '(' and ')' and let us know
+whether this expression is correct (print 'TRUE') or not (print 'FALSE').
+
+Use Stack data structure.
+
+4*. Implement the same task, but now you have: '[', ']', '(', ')', '{', '}', '<', '>'.
+Correct expressions: ({[()]}), [{}]<>, (), ()[], ([<(([]))>]{}),...
+Invalid expressions: ({, (}, [>, (][), ([<(([])>)]), ...
+
+Also, use Stack data structure.
+

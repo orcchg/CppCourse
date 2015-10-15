@@ -1,0 +1,4 @@
+1. Write your own structure Matrix representing a square matrix of size N > 0.
+Implement begin() and end() member-functions and an iterator through the matrix.
+Output the matrix's content into stdout using for-loop with iterators.
+

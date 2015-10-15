@@ -1,0 +1,6 @@
+1. Debug your first applciation!
+
+Using 'gdb' tool debug memory_2.cpp source and
+figure out, why it always returns false in case of two
+equal strings.
+

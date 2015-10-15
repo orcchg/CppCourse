@@ -1,0 +1,44 @@
+Arrays [1..7]
+1. Revert the array:
+
+Given an array of integers of some size, implement a function
+that reverts this array. For example:
+
+Initial array is:  [-1, 5, 2, 7, 4]
+Reverted array is: [4, 7, 2, 5, -1]
+
+Make your soultion to have time complexity of O(n).
+
+Arrays [8..15]
+1. Test Stack implementation:
+
+Use std::stack<int> from <stack> header file and write some unit tests
+for each stack's basic operations, such as push(), pop().
+
+2. Test Queue implementation:
+
+Use std::queue<int> from <queue> header file and write some unit tests
+for each queue's basic operations, such as enqueue(), dequeue().
+
+3. Implement Queue using two different Stacks.
+
+4. Implement a function maxInStack(), which returns a maximum value
+in stack. Each time one can push some value in Stack or pop it,
+and maxInStack() must always give a correct result.
+
+5. Implement a function maxinQueue(), as mentioned above.
+
+6. Using an std::vector<int> from <vector> header file, write
+function, which keeps a vector always sorted. You should add new
+values in vector keeping it's sorted order.
+
+7. Compare time performance of SortedLinkedList and sorted vector.
+Add a lot of values and measure times it had taken.
+
+8. Implement double-linked-list: in such list each node has pointers both
+to the next and to the previous nodes. Implement push_front() function, which
+pushes new value to the front of the linked list.
+
+9. Make your double-linked-list always sorted. Also, compare time performance
+both with one-linked-list and std::vector.
+

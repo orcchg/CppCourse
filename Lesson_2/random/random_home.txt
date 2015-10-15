@@ -1,0 +1,44 @@
+1. Use std::default_random_engine and std::normal_distribution from <random>
+and write a program which takes an integer N > 0 as input and generates N
+random integer values in range [0..25] using this distribution.
+Output the result like this:
+
+*
+****
+*********
+***************
+******************
+*******************
+***************
+********
+****
+*
+
+2* Same task, but output the result vertically:
+        
+          *
+        * *
+        * *
+        * *
+      * * * 
+      * * * *
+      * * * *
+      * * * *
+      * * * *
+      * * * *
+    * * * * *
+    * * * * * *
+    * * * * * *
+    * * * * * *
+    * * * * * *
+  * * * * * * * *
+  * * * * * * * *
+  * * * * * * * *
+* * * * * * * * * *
+
+3* Try other kinds of distributions in <random> and output the result in
+the same form as above. Use Strategy pattern to pass a type of distribution
+into a common function.
+
+4. Measure performance of various types of distributions and random engines.
+

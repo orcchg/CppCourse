@@ -1,0 +1,5 @@
+1. Modify string_3.cpp and trim leading whitespaces as well.
+
+2. Compare performance between std::string and std::vector<char>.
+Provide lots of push-operations and measures time elapsed.
+

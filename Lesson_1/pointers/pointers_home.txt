@@ -1,0 +1,6 @@
+1. Implement a sorting function with various sorting strategies:
+
+Implement a function, which takes an array of integers and a sorting strategy,
+and performs sorting of array using a particular sorting algorithm specified
+with the strategy passed.
+
