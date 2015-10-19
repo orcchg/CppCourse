@@ -425,7 +425,7 @@ int main(int argc, char** argv) {
   Page* page_31 = manager.getPage(24676);  time();
 
   //PageBlock* pages_64 = allocator.allocate(65536);  // 64 kB
-  //PgeBlock* pages_32 = allocator.allocate(32768);  // 32 kB
+  //PageBlock* pages_32 = allocator.allocate(32768);  // 32 kB
   //PageBlock* pages_16 = allocator.allocate(16384);  // 16 kB
 
   Object* object_1 = allocateObject(allocator);

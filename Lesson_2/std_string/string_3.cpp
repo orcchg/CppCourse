@@ -3,7 +3,7 @@
 #include "include/logger.h"
 
 int main(int argc, char** argv) {
-  DBG("[Lesson 2]: STD string 1");
+  DBG("[Lesson 2]: STD string 3");
 
   // Length
   std::string str = "Hello, World";
@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
   }
   std::cout << '[' << str << "]\n";
 
-  DBG("[Lesson 2]: STD string 1 [END]");
+  DBG("[Lesson 2]: STD string 3 [END]");
   return 0;
 }
 

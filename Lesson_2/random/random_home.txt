@@ -36,9 +36,3 @@ Output the result like this:
   * * * * * * * *
 * * * * * * * * * *
 
-3* Try other kinds of distributions in <random> and output the result in
-the same form as above. Use Strategy pattern to pass a type of distribution
-into a common function.
-
-4. Measure performance of various types of distributions and random engines.
-
