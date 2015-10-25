@@ -1,6 +1,4 @@
-1. class [0..5.8.1]
-2. operators [0..
-3.
-4. matrix [0..
-5.
+1. class
+2. operators
+3. matrix
 

@@ -5,7 +5,7 @@
 
 struct Node {
   int key;
-  std::string value;
+  std::string value;  // sizeof(std::string) is undefined !
   
   Node(int k, const std::string& v);
 };
