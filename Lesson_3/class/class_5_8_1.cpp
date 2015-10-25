@@ -1,51 +1,69 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <cstring>
 #include "logger.h"
 
-struct Node {
+class Node {
+private:
   int key;
   char* value;
   
+public:
   Node(int k, const std::string& v);
-  void destroy();
+  Node(const Node& obj);
+  ~Node();
+  
+  int getKey() const;
+  char* getValue() const;
 };
 
 Node::Node(int k, const std::string& v)
   : key(k)
   , value(new char[v.size()]) {
-  for (size_t i = 0; i < v.size(); ++i) {
-    value[i] = v[i];
-  }
+  INF("Constructor");
+  strcpy(value, v.c_str());
 }
 
-void Node::destroy() {
+Node::Node(const Node& obj)
+  : key(obj.key)
+  , value(new char[strlen(obj.value)]) {
+  CRT("Copy contructor");
+  strcpy(value, obj.value);
+}
+
+Node::~Node() {
+  WRN("~Destructor");
   if (value != nullptr) {
     delete [] value;
   }
   value = nullptr;
 }
 
+int Node::getKey() const {
+  return key;
+}
+
+char* Node::getValue() const {
+  return value;
+}
+
 std::ostream& operator << (std::ostream& out, const Node& node) {
-  out << "{" << node.key << ", " << node.value << "}";
+  out << "{" << node.getKey() << ", " << node.getValue() << "}";
   return out;
 }
 
 int main(int argc, char** argv) {
-  DBG("[Lesson 3]: Class 5.3");
+  DBG("[Lesson 3]: Class 5.8.1");
   
   {  // block 1
     std::vector<Node> nodes = {Node(0, "Lesson"), Node(1, "three"), Node(2, "is"), Node(3, "devoted"), Node(4, "to"), Node(5, "classes")};
     for (auto& node : nodes) {
       std::cout << node << std::endl;
     }
-	
-    // clear vector
-    for (auto& node : nodes) {
-      node.destroy();
-    }
   }  // end block 1
   
-  DBG("[Lesson 3]: Class 5.3 [END]");
+  DBG("[Lesson 3]: Class 5.8.1 [END]");
   return 0;
 }
+

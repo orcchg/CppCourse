@@ -13,7 +13,7 @@ struct Node {
 };
 
 Node::Node(int k, const std::string& v)
-  : key(k) {
+  : key(k)
   , value(new char[v.size()]) {
   INF("Constructor");
   strcpy(value, v.c_str());

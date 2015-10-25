@@ -7,7 +7,7 @@ struct Node {
   std::string value;
 };
 
-std::istream* operator >> (std::istream& in, Node& node) {
+std::istream& operator >> (std::istream& in, Node& node) {
   in >> node.key >> node.value;
   return in;
 }

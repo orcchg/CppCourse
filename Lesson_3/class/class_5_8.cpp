@@ -5,6 +5,7 @@
 #include "logger.h"
 
 class Node {
+private:
   int key;
   char* value;
   
@@ -12,12 +13,12 @@ public:
   Node(int k, const std::string& v);
   ~Node();
   
-  int getKey();
-  char* getValue();
+  int getKey() const;
+  char* getValue() const;
 };
 
 Node::Node(int k, const std::string& v)
-  : key(k) {
+  : key(k)
   , value(new char[v.size()]) {
   INF("Constructor");
   strcpy(value, v.c_str());
@@ -31,11 +32,11 @@ Node::~Node() {
   value = nullptr;
 }
 
-int Node::getKey() {
+int Node::getKey() const {
   return key;
 }
 
-char* getValue() {
+char* Node::getValue() const {
   return value;
 }
 

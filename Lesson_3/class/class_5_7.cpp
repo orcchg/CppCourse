@@ -13,7 +13,7 @@ struct Node {
 };
 
 Node::Node(int k, const std::string& v)
-  : key(k) {
+  : key(k)
   , value(new char[v.size()]) {
   INF("Constructor");
   strcpy(value, v.c_str());
@@ -37,6 +37,7 @@ int main(int argc, char** argv) {
   
   {  // block 1
     std::vector<Node> nodes = {Node(0, "Lesson"), Node(1, "three"), Node(2, "is"), Node(3, "devoted"), Node(4, "to"), Node(5, "classes")};
+    DBG("Vector filled");
     for (auto& node : nodes) {
       std::cout << node << std::endl;
     }

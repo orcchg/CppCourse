@@ -4,25 +4,27 @@
 #include <cstring>
 #include "logger.h"
 
-class Node {
+struct Node {
   int key;
-  size_t size;
   char* value;
   
-public:
   Node(int k, const std::string& v);
+  Node(const Node& obj);
   ~Node();
-  
-  int getKey();
-  char* getValue();
 };
 
-Node::Node(int k, const std::string& v)  // Quiz: order of initialization
-  : key(k) {
-  , size(v.size())
+Node::Node(int k, const std::string& v)
+  : key(k)
   , value(new char[v.size()]) {
   INF("Constructor");
   strcpy(value, v.c_str());
+}
+
+Node::Node(const Node& obj)
+  : key(obj.key)
+  , value(new char[strlen(obj.value)]) {
+  CRT("Copy contructor");
+  strcpy(value, obj.value);
 }
 
 Node::~Node() {
@@ -33,33 +35,22 @@ Node::~Node() {
   value = nullptr;
 }
 
-int Node::getKey() {
-  return key;
-}
-
-char* getValue() {
-  return value;
-}
-
 std::ostream& operator << (std::ostream& out, const Node& node) {
-  out << "{" << node.getKey() << ", ";
-  for (size_t i = 0; i < size; ++i) {
-    out << getValue()[i];
-  }
-  out << "}";
+  out << "{" << node.key << ", " << node.value << "}";
   return out;
 }
 
 int main(int argc, char** argv) {
-  DBG("[Lesson 3]: Class 5.9");
+  DBG("[Lesson 3]: Class 5.7.1");
   
   {  // block 1
     std::vector<Node> nodes = {Node(0, "Lesson"), Node(1, "three"), Node(2, "is"), Node(3, "devoted"), Node(4, "to"), Node(5, "classes")};
+    DBG("Vector filled");
     for (auto& node : nodes) {
       std::cout << node << std::endl;
     }
   }  // end block 1
   
-  DBG("[Lesson 3]: Class 5.9 [END]");
+  DBG("[Lesson 3]: Class 5.7.1 [END]");
   return 0;
 }

@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
   std::string value;
   std::cin >> key >> value;
   
-  Node* node = (Node*) malloc(sizeof(Node));
+  Node* node = (Node*) malloc(sizeof(key) + sizeof(value));
   node->init(key, value);
   
   std::cout << "Node is: " << *node << std::endl;

@@ -14,7 +14,7 @@ void Node::init(int k, const std::string& v) {
   value = v;
 }
 
-std::istream* operator >> (std::istream& in, Node& node) {
+std::istream& operator >> (std::istream& in, Node& node) {
   int key;
   std::string value;
   
