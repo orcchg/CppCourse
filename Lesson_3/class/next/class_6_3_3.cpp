@@ -39,6 +39,7 @@ Vector::~Vector() {
 }
 
 Vector& Vector::operator = (Vector rhs) {  // Copy & Swap idiom
+  WRN("Assigment Operator");
   std::swap(m_size, rhs.m_size);
   std::swap(m_data, rhs.m_data);
   return *this;

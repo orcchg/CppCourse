@@ -1,0 +1,17 @@
+1. Implement other arithmetic operations on complex values:
+
+Use operations_6.cpp and provide other operations:
+
+binary operations: -, *, /, ==, !=
+unary operations: -, +, prefix and postfix ++, --
+assignment operations: -=, *=, /=
+
+Think carefully, what type return value should have?
+What operations should be 'const' and what should not?
+
+Avoid code duplication.
+
+2. Write unit-test and check correctness of these operations
+using std::complex from <complex> header file.
+{@see http://en.cppreference.com/w/cpp/numeric/complex }
+

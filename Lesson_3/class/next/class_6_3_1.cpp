@@ -39,6 +39,8 @@ Vector::~Vector() {
 }
 
 Vector& Vector::operator = (const Vector& rhs) {  // Quiz: why it is bad implementation?
+  WRN("Assigment Operator");
+
   delete [] m_data;
   m_data = nullptr;
 
