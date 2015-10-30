@@ -26,7 +26,7 @@ for each queue's basic operations, such as enqueue(), dequeue().
 in stack. Each time one can push some value in Stack or pop it,
 and maxInStack() must always give a correct result.
 
-5. Implement a function maxinQueue(), as mentioned above.
+5. Implement a function maxInQueue(), as mentioned above.
 
 6. Using an std::vector<int> from <vector> header file, write
 function, which keeps a vector always sorted. You should add new

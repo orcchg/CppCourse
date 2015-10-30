@@ -153,9 +153,9 @@ void unitTest() {
 /* Main */
 // ----------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 1]: Arrays: Solutions 1");
+  DBG("[Lesson 1]: Arrays: Solutions 2");
   unitTest();
-  DBG("[Lesson 1]: Arrays: Solutions 1 [END]");
+  DBG("[Lesson 1]: Arrays: Solutions 2 [END]");
   return 0;
 }
 
