@@ -40,8 +40,6 @@ Provide some member-functions: determinant(), transpose(), inversion(), submatri
 What of these operations should and what should not change the initial matrix?
 What arguments should be passed to these functions, what are the types of return values?
 
-Provide begin(), end() and iterator type definition.
-
 Provide member-function minor(size_t row, size_t col) - initializes an adjacent minor (matrix N-1 x N-1) 
 from matrix with row-th row and col-th column discarded; Use this member-function, when implementing
 determinant() and inverse(). Provide similar ctor(const Matrix& obj, size_t row, size_t col) to initialize an adjacent minor.
@@ -51,23 +49,27 @@ Provide global function power() which raises a given matrix into an integer powe
 Provide test samples. Do not check bounds of rows and cols in this implementation.
 
 // ----------------------------------------------------------------------------
-4* Write class Rational.
+4** Write class Polynomial.
 
-Class Rational represents a rational value P/Q, Q != 0.
-Overload some ctors and all possible arithmetic operators.
-Overload additional compare operators: <, >, <=, >= ;
+Class Polynomial represents a polynomial of N-th power (N >= -9999999) with 'double' coefficients.
 
-Provide test samples.
+Overload constructors: default ctor, ~dtor, copy ctor (deep copy), ctor from array of coefficients;
+Overload all possible arithmetic operators and compare operators: +, -, *, /, %, +=, -=, *=, /=, %=, ==, !=, unary + and -;
+Also, overload arithmetic operations when right-hand-side parameter is a 'double' scalar value;
 
-// ----------------------------------------------------------------------------
-5** Write class Polynomial.
-
-Class Polynomial represents a polynomial of N-th power with double coefficients.
-Overload constructors: default ctor, ~dtor, copy ctor (deep copy), ctor(double[], N);
-Overload all possible arithmetic operators and compare operators;
-Overload operator () which takes a double x and calculates value of polynomial in x; Use Horner's rule.
+Overload operator () which takes a double value x and calculates value of polynomial at point x; Use Horner's rule.
 Overload operator , "comma", which calculated GCD of two polynomials (what is the type of result?);
-Overload operator << and >>; Output should look like: 3x^2 + 5.7x + 11.0 ;
+
+Provide derivative() member-function which calculates 1st derivative of given polynomial. What should this function return?
+Provide getPower() member-function which returns an integer power of given polynomial.
+
+Overload operator << and >>; Output should look like: -1.5x^3 + 3x^2 - 5.7x + 11.0 - 0.5x^-1 ; Note: if coeffs is less than 0, you should skip leading '+' sign and replace it with '-', i.e. not like that: 3x^2 + -5.7x, instead: 3x^2 - 5.7x ;
+You should not input a polynomial consisting of two or more monomials with the same power, i.e.: 5x^3 + 3x^3 + x^2 - 1.12
+You can use x^1 or x^0 during input to determine termination of polynomial, 
+but you should discard x^1 (replace by x) and x^0 (replace by just coeff), 
+as well as coeffs equal to '1': 1x^2 should be x^2, x^1 should be x, 3x^0 should be 3.
 
 Provide test samples.
+
+Think carefully the way you choose to implement Polynomial.
 
