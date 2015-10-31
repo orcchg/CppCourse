@@ -1,6 +1,12 @@
 #include <iomanip>
 #include <cmath>
 #include "square_matrix.h"
+#include "utility.h"
+
+Matrix::Matrix()
+  : m_size(0)
+  , m_data(nullptr) {
+}
 
 Matrix::Matrix(size_t size)
   : m_size(size)
@@ -10,7 +16,7 @@ Matrix::Matrix(size_t size)
   }
 }
 
-Matrix::Matrix(size_t size, const Matrix::reference_type value)
+Matrix::Matrix(size_t size, Matrix::value_type value)
   : m_size(size)
   , m_data(new Matrix::pointer_type[size]) {
   for (size_t i = 0; i < m_size; ++i) {
@@ -89,33 +95,72 @@ Matrix Matrix::operator + () const {
 }
 
 Matrix Matrix::operator - () const {
-  return *this * static_cast<value_type>(-1);
+  Matrix result = *this;
+  for (size_t row = 0; row < m_size; ++row) {
+    for (size_t col = 0; col < m_size; ++col) {
+      result.m_data[row][col] *= -1.0;
+    }
+  }
+  return result;
 }
 
 Matrix Matrix::operator + (const Matrix& rhs) const {
   Matrix result = *this;
-  return result += rhs;
+  result += rhs;
+  return result;
+}
+
+Matrix Matrix::operator + (Matrix::value_type value) const {
+  Matrix result = *this;
+  result += value;
+  return result;
 }
 
 Matrix Matrix::operator - (const Matrix& rhs) const {
   Matrix result = *this;
-  return result -= rhs;
+  result -= rhs;
+  return result;
+}
+
+Matrix Matrix::operator - (Matrix::value_type value) const {
+  Matrix result = *this;
+  result -= value;
+  return result;
 }
 
 Matrix Matrix::operator * (const Matrix& rhs) const {
   Matrix result = *this;
-  return result *= rhs;
+  for (size_t row = 0; row < m_size; ++row) {
+    for (size_t col = 0; col < m_size; ++col) {
+      Matrix::value_type sum = 0.0;  // implicit conversion
+      for (size_t k = 0; k < m_size; ++k) {
+        sum += m_data[row][k] * rhs.m_data[k][col];
+      }
+      result.m_data[row][col] = sum;
+    }
+  }
+  return result;
 }
 
-Matrix Matrix::operator * (const Matrix::reference_type value) const {
+Matrix Matrix::operator * (Matrix::value_type value) const {
   Matrix result = *this;
-  return result *= value;
+  result *= value;
+  return result;
 }
 
 Matrix& Matrix::operator += (const Matrix& rhs) {
   for (size_t row = 0; row < m_size; ++row) {
     for (size_t col = 0; col < m_size; ++col) {
       m_data[row][col] += rhs[row][col];
+    }
+  }
+  return *this;
+}
+
+Matrix& Matrix::operator += (Matrix::value_type value) {
+  for (size_t row = 0; row < m_size; ++row) {
+    for (size_t col = 0; col < m_size; ++col) {
+      m_data[row][col] += value;
     }
   }
   return *this;
@@ -130,16 +175,22 @@ Matrix& Matrix::operator -= (const Matrix& rhs) {
   return *this;
 }
 
-Matrix& Matrix::operator *= (const Matrix& rhs) {
+Matrix& Matrix::operator -= (Matrix::value_type value) {
   for (size_t row = 0; row < m_size; ++row) {
     for (size_t col = 0; col < m_size; ++col) {
-      m_data[row][col] *= rhs[row][col];
+      m_data[row][col] -= value;
     }
   }
   return *this;
 }
 
-Matrix& Matrix::operator *= (const Matrix::reference_type value) {
+Matrix& Matrix::operator *= (const Matrix& rhs) {
+  Matrix result = *this * rhs;
+  *this = result;
+  return *this;
+}
+
+Matrix& Matrix::operator *= (Matrix::value_type value) {
   for (size_t row = 0; row < m_size; ++row) {
     for (size_t col = 0; col < m_size; ++col) {
       m_data[row][col] *= value;
@@ -167,7 +218,7 @@ bool Matrix::operator != (const Matrix& rhs) const {
 bool Matrix::operator < (const Matrix& rhs) const {
   for (size_t row = 0; row < m_size; ++row) {
     for (size_t col = 0; col < m_size; ++col) {
-      if (m_data[row][col] >= rhs[row][col]) {
+      if (m_data[row][col] >= rhs.m_data[row][col]) {
         return false;
       }
     }
@@ -178,7 +229,7 @@ bool Matrix::operator < (const Matrix& rhs) const {
 bool Matrix::operator <= (const Matrix& rhs) const {
   for (size_t row = 0; row < m_size; ++row) {
     for (size_t col = 0; col < m_size; ++col) {
-      if (m_data[row][col] > rhs[row][col]) {
+      if (m_data[row][col] > rhs.m_data[row][col]) {
         return false;
       }
     }
@@ -299,7 +350,7 @@ Matrix& Matrix::inverse() {
 
 Matrix Matrix::getInversed() const {
   Matrix::value_type det = determinant();
-  if (det == 0) {
+  if (util::equals(det, 0.0)) {
     ERR("Determinant is zero!");
     throw MatrixInversionException();
   }
@@ -308,7 +359,8 @@ Matrix Matrix::getInversed() const {
     for (size_t col = 0; col < m_size; ++col) {
       Matrix adjugate(*this, col, row);  // note the inversion of 'row' and 'col'
       Matrix::value_type cofactor = adjugate.determinant();
-      inversed[row][col] = std::pow(-1.0, row + col) * cofactor / det;
+      double sign = util::equals(cofactor, 0.0) ? 1.0 : std::pow(-1.0, row + col);
+      inversed[row][col] = sign * cofactor / det;
     }
   }
   return inversed;
@@ -316,32 +368,40 @@ Matrix Matrix::getInversed() const {
 
 // ----------------------------------------------
 Matrix power(const Matrix& matrix, int power) {
-}
+  if (power == 0) { return Matrix::Identity(matrix.size()); }
 
-/* Iterator group */
-// ----------------------------------------------------------------------------
-Matrix::iterator Matrix::begin() {
-}
-
-Matrix::iterator Matrix::end() {
-}
-
-Matrix::const_iterator Matrix::begin() const {
-}
-
-Matrix::const_iterator Matrix::end() const {
+  Matrix result, inversed;
+  if (power > 0) {
+    result = matrix;  // Note: assignment operator invoked
+    while (power > 1) {
+      result *= matrix;
+      --power;
+    }
+  } else {
+    inversed = matrix.getInversed();
+    result = inversed;
+    while (power < -1) {
+      result *= inversed;
+      ++power;
+    }
+  }
+  return result;
 }
 
 /* I/O */
 // ----------------------------------------------------------------------------
 std::ostream& operator << (std::ostream& out, const Matrix& obj) {
+  double precision = 0.0001;
   for (size_t row = 0; row < obj.size(); ++row) {
     for (size_t col = 0; col < obj.size(); ++col) {
-      double intpart = 0;
-      if (std::modf(obj[row][col], &intpart) == 0) {
+      Matrix::value_type value = obj[row][col];
+      double intpart = 0.0;
+      double decimalpart = std::modf(std::abs(value), &intpart);
+      if (decimalpart < precision) {  // trunc decimal part if it consists only from zeroes
         out << intpart << " ";
       } else {
-        out << std::fixed << std::setprecision(4) << obj[row][col] << " ";
+        Matrix::value_type value = (std::abs(obj[row][col]) < precision) ? 0.0 : obj[row][col];
+        out << std::fixed << std::setprecision(4) << value << " ";
       }
     }
     out << "\n";
@@ -349,6 +409,12 @@ std::ostream& operator << (std::ostream& out, const Matrix& obj) {
   return out;
 }
 
-std::istream& operator >> (std::istream& in, const Matrix& obj) {
+std::istream& operator >> (std::istream& in, Matrix& obj) {
+  for (size_t row = 0; row < obj.size(); ++row) {
+    for (size_t col = 0; col < obj.size(); ++col) {
+      in >> obj[row][col];
+    }
+  }
+  return in;
 }
 
