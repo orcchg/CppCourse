@@ -26,6 +26,9 @@ Monomial::Monomial(Monomial::value_type scalar)
 Monomial::Monomial(int power, Monomial::value_type coeff)
   : m_power(power)
   , m_coeff(coeff) {
+  if (util::equals(coeff, 0.0)) {
+    m_power = 0;
+  }
 }
 
 Monomial::Monomial(const Monomial& obj)
@@ -130,7 +133,11 @@ Monomial& Monomial::operator += (const Monomial& rhs) {  // Quiz: why this membe
 /* end of Operators group */
 // ------------------------------------------------------------------------------------------------
 std::ostream& operator << (std::ostream& out, const Monomial& monomial) {
-  out << std::setprecision(3) << monomial.m_coeff;
+  if (!util::equals(monomial.m_coeff, 0.0)) {
+    out << std::setprecision(3) << monomial.m_coeff;
+  } else {
+    return out;
+  }
   if (monomial.getPower() == 1) {
     out << "x";
   } else if (monomial.getPower() == 0) {

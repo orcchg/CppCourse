@@ -26,6 +26,7 @@ public:
   typedef double value_type;
 
   Polynomial();
+  Polynomial(const Monomial& monomial);
   Polynomial(const std::vector<Monomial>& monomials);
   Polynomial(const Polynomial& obj);
   virtual ~Polynomial();
@@ -89,10 +90,14 @@ private:
 
   int calculatePower() const;
   void squashSamePowers();  //!< Squashes monomials with the same power into one single monomial
+  Polynomial divide(const Polynomial& rhs, Polynomial& quotient);
 };
 
 std::ostream& operator << (std::ostream& out, const Polynomial& polynomial);
-std::istream& operator >> (std::istream& in, Polynomial& polynomial);
+std::istream& operator >> (std::istream& in, Polynomial& residual);
+
+Polynomial operator + (const Monomial& lhs, const Monomial& rhs);
+Polynomial operator - (const Monomial& lhs, const Monomial& rhs);
 
 #endif  // POLYNOMIAL_H_
 
