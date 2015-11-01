@@ -26,6 +26,12 @@ Polynomial::Polynomial()
   , m_power(0) {
 }
 
+Polynomial::Polynomial(const Monomial& monomial)
+  : m_monomials()
+  , m_power(monomial.getPower()) {
+  m_monomials.push_back(monomial);
+}
+
 Polynomial::Polynomial(const std::vector<Monomial>& monomials)
   : m_monomials(monomials)
   , m_power(calculatePower()) {
@@ -154,6 +160,8 @@ Polynomial& Polynomial::operator += (Polynomial::value_type scalar) {
     last.m_coeff += scalar;
   } else {
     m_monomials.emplace_back(scalar);  // Monomial(scalar) ctor
+    std::sort(m_monomials.begin(), m_monomials.end(), std::greater<Monomial>());
+    squashSamePowers();
   }
   return *this;
 }
@@ -195,7 +203,8 @@ Polynomial& Polynomial::operator *= (Polynomial::value_type scalar) {
 }
 
 Polynomial& Polynomial::operator /= (const Polynomial& rhs) {
-  // TODO:
+  Polynomial residual;
+  *this = divide(rhs, residual);
   return *this;
 }
 
@@ -207,13 +216,14 @@ Polynomial& Polynomial::operator /= (Polynomial::value_type scalar) {
 }
 
 Polynomial& Polynomial::operator %= (const Polynomial& rhs) {
-  // TODO:
+  Polynomial residual;
+  divide(rhs, residual);
   return *this;
 }
 
 bool Polynomial::operator == (const Polynomial& rhs) const {
-  if (m_power != rhs.m_power) { return false; }
-  // TODO:
+  if (m_power != rhs.m_power || m_monomials.size() != rhs.m_monomials.size()) { return false; }
+  return m_monomials == rhs.m_monomials;
 }
 
 bool Polynomial::operator != (const Polynomial& rhs) const {
@@ -248,13 +258,19 @@ Polynomial Polynomial::derivative() const {
 /* end of Maths group */
 // ------------------------------------------------------------------------------------------------
 int Polynomial::calculatePower() const {
-  int power = -9999999;
+/*  int power = 0;
   for (auto& monomial : m_monomials) {
-    if (power < monomial.getPower()) {
+    if (!util::equals(monomial.getCoeff(), 0.0) && power < monomial.getPower()) {
       power = monomial.getPower();
     }
   }
-  return power;
+  return power;*/
+  for (auto& monomial : m_monomials) {
+    if (!util::equals(monomial.getCoeff(), 0.0)) {
+      return monomial.getPower();
+    }
+  }
+  return 0;
 }
 
 void Polynomial::squashSamePowers() {
@@ -268,13 +284,25 @@ void Polynomial::squashSamePowers() {
     if (prev.getPower() == current.getPower()) {
       aggregate += current;  // private Monomial::operator +=
     } else {
-      monomials.push_back(aggregate);
+      if (!util::equals(aggregate.getCoeff(), 0.0)) { monomials.push_back(aggregate); }
       aggregate = current;
     }
   }
   monomials.push_back(aggregate);
   std::swap(m_monomials, monomials);
   m_power = calculatePower();
+}
+
+Polynomial Polynomial::divide(const Polynomial& rhs, Polynomial& residual) {
+  std::vector<Monomial> monomials;
+  while (m_power >= rhs.m_power) {
+    Monomial leading = m_monomials.front() / rhs.m_monomials.front();
+    *this -= rhs * leading;
+    monomials.push_back(leading);
+    std::cout << "DIV [" << rhs.m_power << "]: " << leading << " ### " << *this << " [" << m_power << "] ### " << rhs * leading << std::endl;
+  }
+  residual = *this;
+  return Polynomial(monomials);
 }
 
 /* I/O */
@@ -314,4 +342,21 @@ void Polynomial::print() const {
   }
   printf("\n");
 }
+
+/* Arithmetic global operations */
+// ----------------------------------------------------------------------------
+Polynomial operator + (const Monomial& lhs, const Monomial& rhs) {
+  if (lhs.getPower() == rhs.getPower()) {
+    Monomial monomial = Monomial(lhs.getPower(), lhs.getCoeff() + rhs.getCoeff());
+    return Polynomial(monomial);
+  } else {
+    std::vector<Monomial> monomials = {lhs, rhs};
+    return Polynomial(monomials);
+  }
+}
+
+Polynomial operator - (const Monomial& lhs, const Monomial& rhs) {
+  return lhs + -rhs;
+}
+
 
