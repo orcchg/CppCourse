@@ -1,0 +1,7 @@
+1. Indicate all dangerous lines of code in samples 4 and 5.
+Why these points are dangerous in multi-threaded environment?
+
+2. Figure out, where in samples 4 and 5 some synchronization
+primitives should be added. What functions should be synchronized?
+What kind of synchronization primitives could be used there?
+

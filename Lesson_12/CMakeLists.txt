@@ -13,6 +13,7 @@ elseif( (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX) AND NOT CMAKE_COMP
     ADD_DEFINITIONS( -fPIC )
     ADD_DEFINITIONS( -fvisibility=hidden -Wall )
     ADD_DEFINITIONS( -std=c++11 )
+    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread" )
 elseif( MSVC )
     ADD_DEFINITIONS( /MP )  # multi-core compilation with MSVC
 endif()
