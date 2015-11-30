@@ -39,8 +39,6 @@ struct Node {
   std::string value;
 
   Node(int key, const std::string& value);
-
-  bool operator > (const Node& rhs) const;
 };
 
 Node::Node(int key, const std::string& value)
@@ -48,18 +46,26 @@ Node::Node(int key, const std::string& value)
   , value(value) {
 }
 
-bool Node::operator > (const Node& rhs) const {
-  return key > rhs.key;
-}
-
 std::ostream& operator << (std::ostream& out, const Node& node) {
   out << "{" << node.key << ", " << node.value << "}";
+}
+
+template <>
+bool greater<Node>(const Node& lhs, const Node& rhs) {  // template specialization
+  return lhs.key > rhs.key;
+}
+
+/* std::string */
+// ------------------------------------------------------------------------------------------------
+template <>
+bool greater<std::string>(const std::string& lhs, const std::string& rhs) {  // template specialization
+  return lhs.compare(rhs) > 0;
 }
 
 /* Main */
 // ------------------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 4]: Templates 1");
+  DBG("[Lesson 4]: Templates 4");
 
   int int_array[10] = {5, 8, 1, 12, -4, -7, 3, 5, 9, 0};
   INF("Sorting <int>");
@@ -82,7 +88,13 @@ int main(int argc, char** argv) {
   sort::insertion(node_array, 10);
   print(node_array, 10);
 
-  DBG("[Lesson 4]: Templates 1 [END]");
+  std::string string_array[10] = {"5_five", "8_eight", "1_one", "2_two", "7_seven", "0_zero", "3_three", "9_nine", "4_four", "6_six"};
+  INF("Sorting <std::string>");
+  print(string_array, 10);
+  sort::insertion(string_array, 10);
+  print(string_array, 10);
+
+  DBG("[Lesson 4]: Templates 4 [END]");
   return 0;
 }
 

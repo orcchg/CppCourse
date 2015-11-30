@@ -1,28 +1,8 @@
+#include <algorithm>
 #include <iostream>
+#include <functional>
 #include <string>
 #include "logger.h"
-
-template <typename T>
-bool greater(const T& lhs, const T& rhs) {
-  return lhs > rhs;
-}
-
-namespace sort {
-
-template <typename T>
-void insertion(T array[], size_t size) {
-  for (size_t j = 1; j < size; ++j) {
-    T key = array[j];
-    int i = j - 1;
-    while (i >= 0 && greater(array[i], key)) {
-      array[i + 1] = array[i];
-      --i;
-    }
-    array[i + 1] = key;
-  }
-}
-
-}
 
 template <typename T>
 void print(T array[], size_t size) {
@@ -40,12 +20,17 @@ struct Node {
 
   Node(int key, const std::string& value);
 
-  bool operator > (const Node& rhs) const;
+  bool operator < (const Node& rhs) const;
+  bool operator > (const Node& rhs) const;  // additional operator
 };
 
 Node::Node(int key, const std::string& value)
   : key(key)
   , value(value) {
+}
+
+bool Node::operator < (const Node& rhs) const {
+  return key < rhs.key;
 }
 
 bool Node::operator > (const Node& rhs) const {
@@ -59,18 +44,18 @@ std::ostream& operator << (std::ostream& out, const Node& node) {
 /* Main */
 // ------------------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 4]: Templates 1");
+  DBG("[Lesson 4]: Templates 0.1");
 
   int int_array[10] = {5, 8, 1, 12, -4, -7, 3, 5, 9, 0};
   INF("Sorting <int>");
   print(int_array, 10);
-  sort::insertion(int_array, 10);
+  std::sort(int_array, int_array + 10, std::greater<int>());
   print(int_array, 10);
 
   double double_array[10] = {5.31, 8.11, 1.09, 12.21, -4.05, -7.57, 3.48, 5.02, 9.09, 0.1};
   INF("Sorting <double>");
   print(double_array, 10);
-  sort::insertion(double_array, 10);
+  std::sort(double_array, double_array + 10, std::greater<double>());
   print(double_array, 10);
 
   Node node_array[10] = {
@@ -79,10 +64,10 @@ int main(int argc, char** argv) {
     Node(3, "three"), Node(5, "five"), Node(9, "nine"), Node(0, "zero")};
   INF("Sorting <Node>");
   print(node_array, 10);
-  sort::insertion(node_array, 10);
+  std::sort(node_array, node_array + 10, std::greater<Node>());
   print(node_array, 10);
 
-  DBG("[Lesson 4]: Templates 1 [END]");
+  DBG("[Lesson 4]: Templates 0.1 [END]");
   return 0;
 }
 
