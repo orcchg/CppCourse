@@ -2,4 +2,5 @@
 
 Make class Matrix a template class with template parameter T for types of elements.
 
+2. Make Stack, Queue, LinkedList, DoubleLinkedList, SortedLinkedList class templates.
 

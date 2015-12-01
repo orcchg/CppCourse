@@ -3,3 +3,7 @@
 2. hashing
 3. algorithms
 
+After lesson 7:
+5. templates/advanced
+6. containers/advanced
+
