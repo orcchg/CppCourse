@@ -1,0 +1,5 @@
+1. Template class Matrix.
+
+Make class Matrix a template class with template parameter T for types of elements.
+
+

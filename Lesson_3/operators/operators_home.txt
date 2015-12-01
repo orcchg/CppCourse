@@ -2,7 +2,7 @@
 
 Use operations_6.cpp and provide other operations:
 
-binary operations: -, *, /, ==, !=
+binary operations: +, -, *, /, ==, !=
 unary operations: -, +, prefix and postfix ++, --
 assignment operations: -=, *=, /=
 
