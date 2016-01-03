@@ -1,0 +1,32 @@
+Basic:
+1. Statements and functions
+2. Symbolic streams, I/O.
+3. Struct and class. Operators.
+4. Templates, algorithms, containers.
+5. Inheritance.
+6. Deep into iterators.
+7. Polymorphism.
+8. Build systems, linking, libraries.
+9. Exceptions.
+10. Binders, adapters, functors, lambdas.
+11. Smart pointers.
+12. Threads, events.
+13. Multiple inheritance. RTTI.
+14. Rvalue references.
+15. Variadic templates, metaprogramming.
+16. Operators new and delete, allocators.
+
+Advanced:
+1. Perfect hashing.
+2. Trees and set unions.
+3. IPC, dbus.
+4. Network, AV streaming.
+5. OpenGL, 2D and 3D graphics.
+6. Reactive programming.
+7. Design patterns.
+8. Android Native Development.
+9. Search algorithms.
+10. Machine learning.
+11. Debugging and profiling.
+12. Unit-testing, CI.
+
