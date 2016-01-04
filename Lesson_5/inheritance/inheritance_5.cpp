@@ -1,7 +1,11 @@
 #include <string>
+#include <cmath>
 #include <iostream>
 #include "logger.h"
 
+/**
+ * Inheritance: methods hiding
+ */
 class Base {
 public:
   Base(int key);

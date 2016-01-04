@@ -1,0 +1,25 @@
+1. Implement a class hierarchy "Geometric polygons". Write a base class with methods: getColor(), calculateSquare(), getName();
+Write derived classes: Circle, Rectangle, Triangle, Ellipse and provide some property calculation methods and getters.
+Make samples.
+
+2. Use the following base logger class:
+
+class Logger {
+public:
+  void log(const std::string& message) {
+    std::string preparedMessage = prepareString(message);
+	doLog(preparedMessage);
+  }
+  
+protected:
+  virtual std::string prepareString(const std::string& message) {}
+  virtual void doLog(const std::string& message) {}
+};
+
+Make various logger classes, writing into: stdout, std::string, file. Override virtual methods.
+Make samples.
+
+3. Write class Matrix with all base operations as described in Lesson_3 homework and
+inherit SquareMatrix from it. Demonstrate how some arithmetic operations could work with both
+accidental matrix (instance of Matrix) and square matrix (instance of SquareMatrix): +, -, *, @=, transpose().
+Make Samples.

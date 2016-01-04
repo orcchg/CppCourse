@@ -2,6 +2,9 @@
 #include <iostream>
 #include "logger.h"
 
+/**
+ * Inheritance: same name field, but access to Base field
+ */
 class Base {
 public:
   Base(int key);
@@ -24,7 +27,7 @@ class Derived : public Base {
 public:
   Derived(int key, const std::string& value);
 
-  inline int getKey() const {  // overriding
+  inline int getKey() const {  // hiding
     return Base::m_key;
   }
 

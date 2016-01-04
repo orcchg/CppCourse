@@ -3,9 +3,9 @@ Basic:
 2. Symbolic streams, I/O.
 3. Struct and class. Operators.
 4. Templates, algorithms, containers.
-5. Inheritance.
+5. Inheritance and Polymorphism.
 6. Deep into iterators.
-7. Polymorphism.
+7. //
 8. Build systems, linking, libraries.
 9. Exceptions.
 10. Binders, adapters, functors, lambdas.

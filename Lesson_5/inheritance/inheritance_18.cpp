@@ -5,7 +5,7 @@
 // @see http://en.cppreference.com/w/cpp/language/using_declaration
 
 /**
- * Inheritance: access to overloaded methods and hiding
+ * Inheritance: access to overloaded methods and overriding
  */
 class Base {
 public:
@@ -19,7 +19,7 @@ protected:
   int m_key;
   
   // overloading
-  size_t hashCode() const;
+  virtual size_t hashCode() const;
   size_t hashCode(int base) const;
   size_t hashCode(int base, int addon) const;
 };
@@ -45,43 +45,50 @@ public:
     return m_value;
   }
   
-  using Base::hashCode;
-  size_t hashCode() const;  // hiding
+  size_t hashCode() const override;  // overriding, not hiding
+  size_t hashCode(const std::string& base_str) const;  // overloading
 
 private:
   std::string m_value;
 };
 
-size_t Derived::hashCode() const {
-  size_t base_code = Base::hashCode();
-  
+size_t hashString(const std::string str) {
   // Java String hash code: s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
   int prime = 31;
   size_t hash = 0;
-  int power = m_value.length() - 1;
+  int power = str.length() - 1;
 
-  for (auto it = m_value.begin(); it != m_value.end(); ++it, --power) {
+  for (auto it = str.begin(); it != str.end(); ++it, --power) {
     hash += static_cast<size_t>(*it) * std::pow(prime, power);
   }
-  
-  return base_code + hash;
+  return hash;
+}
+
+size_t Derived::hashCode() const {
+  size_t base_code = Base::hashCode();
+  return base_code + hashString(m_value);
+}
+
+size_t Derived::hashCode(const std::string& base_str) const {
+  return hashCode() + hashString(base_str);
 }
 
 /* Main */
 // ------------------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 5]: Inheritance 9");
+  DBG("[Lesson 5]: Inheritance 18");
 
   Derived derived;
   derived.getKey();  // inherited method
   derived.getValue();
   
-  derived.hashCode();  // hiding of Base class implementation
-  derived.hashCode(5);
-  derived.hashCode(5, 10);
+  derived.hashCode();  // overriding of Base class implementation
+  // derived.hashCode(5);
+  // derived.hashCode(5, 10);
   
-  std::cout << "Derived hash: " << derived.hashCode() << std::endl;  // Quiz: which version is called here?
+  std::cout << "Derived hash: " << derived.hashCode() << std::endl;
+  std::cout << "Derived hash(str): " << derived.hashCode("ipsum") << std::endl;
 
-  DBG("[Lesson 5]: Inheritance 9 [END]");
+  DBG("[Lesson 5]: Inheritance 18 [END]");
   return 0;
 }

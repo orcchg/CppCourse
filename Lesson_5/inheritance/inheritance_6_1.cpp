@@ -4,7 +4,7 @@
 #include "logger.h"
 
 /**
- * Inheritance: methods overloading but hiding
+ * Inheritance: methods overloading and revealing
  */
 class Base {
 public:
@@ -38,6 +38,7 @@ public:
     return m_value;
   }
   
+  using Base::hashCode;
   size_t hashCode(int base) const;  // overloading, but also hidden
 
 private:
@@ -65,11 +66,11 @@ size_t Derived::hashCode(int base) const {
 /* Main */
 // ------------------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 5]: Inheritance 6");
+  DBG("[Lesson 5]: Inheritance 6.1");
 
   Derived derived(5, "Lorem");
   std::cout << "Key: " << derived.getKey() << ", Value: " << derived.getValue() << ", Hash: " << derived.hashCode() << std::endl;
 
-  DBG("[Lesson 5]: Inheritance 6 [END]");
+  DBG("[Lesson 5]: Inheritance 6.1 [END]");
   return 0;
 }

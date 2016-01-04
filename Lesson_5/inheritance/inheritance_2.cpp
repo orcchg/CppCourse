@@ -2,6 +2,9 @@
 #include <iostream>
 #include "logger.h"
 
+/**
+ * Inheritance: custom ctors, hiding default ctor
+ */
 class Base {
 public:
   Base(int key);

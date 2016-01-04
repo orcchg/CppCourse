@@ -2,6 +2,9 @@
 #include <string>
 #include "logger.h"
 
+/**
+ * Inheritance: ctors, attempt to access Base field
+ */
 class Base {
 public:
   Base() { DBG("Base ctor"); }
@@ -43,12 +46,12 @@ int main(int argc, char** argv) {
   DBG("[Lesson 5]: Inheritance 13");
 
   Derived first;
-  Derived second(5);
+  // Derived second(5);  // not inherited
   Derived third(5, "Lorem");
   
   WRN("Copy operations");
   Derived fourth = first;
-  first = second;
+  first = third;
 
   DBG("[Lesson 5]: Inheritance 13 [END]");
   return 0;

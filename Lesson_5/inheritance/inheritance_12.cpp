@@ -2,6 +2,9 @@
 #include <string>
 #include "logger.h"
 
+/**
+ * Inheritance: ctors, correct initialization of Base subobject
+ */
 class Base {
 public:
   Base() { DBG("Base ctor"); }
@@ -42,12 +45,12 @@ int main(int argc, char** argv) {
   DBG("[Lesson 5]: Inheritance 12");
 
   Derived first;
-  Derived second(5);
+  // Derived second(5);  // not inherited
   Derived third(5, "Lorem");
   
   WRN("Copy operations");
   Derived fourth = first;
-  first = second;
+  first = third;
 
   DBG("[Lesson 5]: Inheritance 12 [END]");
   return 0;

@@ -1,6 +1,9 @@
 #include <string>
 #include "logger.h"
 
+/**
+ * Inheritance syntax
+ */
 class Base {
 public:
   Base() {}

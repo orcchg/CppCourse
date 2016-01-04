@@ -3,7 +3,7 @@
 #include "logger.h"
 
 /**
- * Inheritance: ctors
+ * Inheritance: all inherited ctors
  */
 class Base {
 public:
@@ -27,9 +27,9 @@ protected:
 
 class Derived : public Base {
 public:
-  Derived() { INF("Derived ctor"); }
-  Derived(int base, const std::string& str) : m_key(base), m_value(str) { INF("Derived(%i, %s) ctor", base, str.c_str()); }  // custom ctor
-  ~Derived() { INF("Derived ~dtor"); }
+  // Quiz: what ctors are inherited ?
+  // Derived() { INF("Derived ctor"); }
+  // ~Derived() { INF("Derived ~dtor"); }
 
   inline const std::string& getValue() const {
     return m_value;
@@ -42,16 +42,16 @@ private:
 /* Main */
 // ------------------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 5]: Inheritance 11");
+  DBG("[Lesson 5]: Inheritance 15");
 
   Derived first;
-  // Derived second(5);  // not inherited
-  Derived third(5, "Lorem");
+  Derived second(5);  // NOT inherited
+  Derived third(5, "Lorem");  // unavailable
   
   WRN("Copy operations");
   Derived fourth = first;
   first = third;
 
-  DBG("[Lesson 5]: Inheritance 11 [END]");
+  DBG("[Lesson 5]: Inheritance 15 [END]");
   return 0;
 }

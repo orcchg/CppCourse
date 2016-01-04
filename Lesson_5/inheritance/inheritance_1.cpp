@@ -1,6 +1,9 @@
 #include <string>
 #include "logger.h"
 
+/**
+ * Inheritance: order of ctors invocation
+ */
 class Base {
 public:
   Base() {

@@ -5,7 +5,7 @@
 // @see http://en.cppreference.com/w/cpp/language/using_declaration
 
 /**
- * Inheritance: access to overloaded methods and hiding
+ * Inheritance: access to overloaded methods and overriding
  */
 class Base {
 public:
@@ -19,7 +19,7 @@ protected:
   int m_key;
   
   // overloading
-  size_t hashCode() const;
+  virtual size_t hashCode() const;
   size_t hashCode(int base) const;
   size_t hashCode(int base, int addon) const;
 };
@@ -45,8 +45,7 @@ public:
     return m_value;
   }
   
-  using Base::hashCode;
-  size_t hashCode() const;  // hiding
+  size_t hashCode() const override;  // overriding, not hiding
 
 private:
   std::string m_value;
@@ -70,18 +69,18 @@ size_t Derived::hashCode() const {
 /* Main */
 // ------------------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 5]: Inheritance 9");
+  DBG("[Lesson 5]: Inheritance 17");
 
   Derived derived;
   derived.getKey();  // inherited method
   derived.getValue();
   
-  derived.hashCode();  // hiding of Base class implementation
-  derived.hashCode(5);
-  derived.hashCode(5, 10);
+  derived.hashCode();  // overriding of Base class implementation
+  // derived.hashCode(5);
+  // derived.hashCode(5, 10);
   
   std::cout << "Derived hash: " << derived.hashCode() << std::endl;  // Quiz: which version is called here?
 
-  DBG("[Lesson 5]: Inheritance 9 [END]");
+  DBG("[Lesson 5]: Inheritance 17 [END]");
   return 0;
 }

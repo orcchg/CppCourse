@@ -2,6 +2,9 @@
 #include <iostream>
 #include "logger.h"
 
+/**
+ * Inheritance: same name field in Derived class
+ */
 class Base {
 public:
   Base(int key);

@@ -4,6 +4,9 @@
 
 // @see http://en.cppreference.com/w/cpp/language/using_declaration
 
+/**
+ * Inheritance: access to overloaded methods in Base despite of hiding
+ */
 class Base {
 public:
   Base() {}
