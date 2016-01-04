@@ -1,0 +1,8 @@
+1. Implement your own class HashSet<T>, supply custom template hash function
+and demonstrate how it works with 'int', 'std::string' and 'Node' types.
+Resolve collisions using linked lists.
+
+2. Make a demo with hash set and 'bad' hash function resulting to lots of collisions.
+Use std::unordered_set<T> and compare performance to access N elements sequentially
+in case of default hash function and 'bad' hash function.
+
