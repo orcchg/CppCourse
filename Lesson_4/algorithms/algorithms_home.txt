@@ -1,0 +1,25 @@
+1. Let's imagine that you have only 500 bytes of memory and a large text file ("lorem.txt"),
+which cannot be entirely loaded into memory. Write a program that sorts that file lexicographically
+and writes the sorted output into another file. You should not make lots of temporary files!
+Use std::sort(), std::merge() and std::lexicographical_compare() from <algorithm> header file.
+
+2. Print the words (from "lorem.txt") corresponding to the max and min values of hash codes.
+
+3. Write template class Heap<T> which represents a sequence with a "heap-property".
+It could be eigther minimal heap or maximal heap, set this property as a second template parameter.
+Write methods: begin(), end(), push_heap(), pop_heap(), compare with corresponding methods
+from <algorithm>: std::push_heap(), std::pop_heap(). Use std::is_heap() to test, whether your class
+represents a heap. Write unit-tests.
+
+4. Make class LessComparator:
+
+template <typename T>
+struct LessComparator {
+  static size_t counter;
+  bool operator()(const T& lhs, const T& rhs);
+};
+
+This class is able to compare to objects of type T and counts number of compares.
+Input an array of N integers from stdin and sort it using std::sort() and LessComparator.
+Print number of compares as a function of N.
+
