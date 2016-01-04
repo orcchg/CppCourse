@@ -47,4 +47,3 @@ int main(int argc, char** argv) {
   DBG("[Lesson 5]: Inheritance 1 [END]");
   return 0;
 }
-
