@@ -3,7 +3,12 @@
 
 class Base {
 public:
-  Base() {}
+  Base() {
+    DBG("Base ctor");
+  }
+  ~Base() {
+    ERR("Base ~dtor");
+  }
 
   inline int getKey() const {
     return m_key;
@@ -15,7 +20,12 @@ private:
 
 class Derived : public Base {
 public:
-  Derived() {}
+  Derived() {
+    INF("Derived ctor");
+  }
+  ~Derived() {
+    WRN("Derived ~dtor");
+  }
 
   inline const std::string& getValue() const {
     return m_value;
@@ -28,16 +38,13 @@ private:
 /* Main */
 // ------------------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 5]: Inheritance 0");
-
-  Base base;
-  base.getKey();
+  DBG("[Lesson 5]: Inheritance 1");
 
   Derived derived;
   derived.getKey();  // inherited method
   derived.getValue();
 
-  DBG("[Lesson 5]: Inheritance 0 [END]");
+  DBG("[Lesson 5]: Inheritance 1 [END]");
   return 0;
 }
 

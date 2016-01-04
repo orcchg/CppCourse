@@ -1,4 +1,12 @@
 SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
 SET( SOURCES_0 ${SOURCE_DIR}/inheritance_0.cpp )
+SET( SOURCES_1 ${SOURCE_DIR}/inheritance_1.cpp )
+SET( SOURCES_2 ${SOURCE_DIR}/inheritance_2.cpp )
+SET( SOURCES_3 ${SOURCE_DIR}/inheritance_3.cpp )
+SET( SOURCES_4 ${SOURCE_DIR}/inheritance_4.cpp )
 ADD_EXECUTABLE( inheritance_0 ${SOURCES_0} )
+ADD_EXECUTABLE( inheritance_1 ${SOURCES_1} )
+ADD_EXECUTABLE( inheritance_2 ${SOURCES_2} )
+ADD_EXECUTABLE( inheritance_3 ${SOURCES_3} )
+ADD_EXECUTABLE( inheritance_4 ${SOURCES_4} )
 
