@@ -1,0 +1,34 @@
+1*. Given a C++ inheritance sample:
+
+class A {
+protected:
+  int a;
+
+public:
+  A() {
+    a = 10;
+  }
+
+  virtual void update() {
+    ++a;
+  }
+
+  int access() {
+    update();
+    return a;
+  }
+};
+
+// ----------------------------------------------
+class B: public A {
+public:
+  void update() {
+    --a;
+  }
+};
+
+Here Pure C code fragment can be derived.
+The three C++ member functions of class A are rewritten using out-of-line (standalone) code and collected by address into a struct named A_functable. The data members of A and combined with the function table into a C struct named A.
+
+Implement this technique.
+

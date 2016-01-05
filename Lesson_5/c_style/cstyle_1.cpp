@@ -31,16 +31,20 @@ std::string& Derived::getValue() {
   return value;
 }
 
+// ----------------------------------------------
+size_t hash(Base* ptr) {
+  return static_cast<size_t>(ptr->getKey());
+}
+
 /* Main */
 // ----------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 5]: C Style 0");
+  DBG("[Lesson 5]: C Style 1");
 
   Derived derived;
-  derived.getKey();
-  derived.getValue();
+  hash(&(derived.super));
 
-  DBG("[Lesson 5]: C Style 0 [END]");
+  DBG("[Lesson 5]: C Style 1 [END]");
   return 0;
 }
 

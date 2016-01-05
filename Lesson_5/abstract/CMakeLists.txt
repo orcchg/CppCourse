@@ -1,10 +1,11 @@
 SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
 SET( SOURCES_0 ${SOURCE_DIR}/abstract_0.cpp )
+#SET( SOURCES_0_1 ${SOURCE_DIR}/abstract_0_1.cpp )
 SET( SOURCES_1 ${SOURCE_DIR}/abstract_1.cpp )
 SET( SOURCES_2 ${SOURCE_DIR}/abstract_2.cpp )
 SET( SOURCES_3 ${SOURCE_DIR}/abstract_3.cpp )
 ADD_EXECUTABLE( abstract_0 ${SOURCES_0} )
+#ADD_EXECUTABLE( abstract_0_1 ${SOURCES_0_1} )
 ADD_EXECUTABLE( abstract_1 ${SOURCES_1} )
 ADD_EXECUTABLE( abstract_2 ${SOURCES_2} )
 ADD_EXECUTABLE( abstract_3 ${SOURCES_3} )
-
