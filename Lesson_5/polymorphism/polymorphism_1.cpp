@@ -10,7 +10,7 @@ protected:
 public:
   ~Unit() {}
 
-  void attack() const;
+  virtual void attack() const = 0;
 
 private:
   int m_health;
@@ -33,7 +33,7 @@ class Footman : public Unit {
 public:
   Footman();
 
-  void attack() const;  // hiding
+  void attack() const override;
 };
 
 Footman::Footman() : Unit(420, 7, 21, 270) {}
@@ -47,13 +47,13 @@ class Archer : public Unit {
 public:
   Archer();
 
-  void attack() const;  // hiding
+  void attack() const override;
 };
 
 Archer::Archer() : Unit(235, 4, 17, 280) {}
 
 void Archer::attack() const {
-  INF("Archer attacks");
+  WRN("Archer attacks");
 }
 
 // ----------------------------------------------
@@ -61,13 +61,13 @@ class Knight : public Unit {
 public:
   Knight();
 
-  void attack() const;  // hiding
+  void attack() const override;
 };
 
 Knight::Knight() : Unit(875, 11, 36, 340) {}
 
 void Knight::attack() const {
-  INF("Knight attacks");
+  ERR("Knight attacks");
 }
 
 /* Create army */
@@ -104,7 +104,7 @@ void clear(std::vector<Unit*>* units) {
 /* Main */
 // ----------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 5]: Polymorphism 0");
+  DBG("[Lesson 5]: Polymorphism 1");
 
   std::vector<Unit*> units;
   create(&units);
@@ -115,7 +115,7 @@ int main(int argc, char** argv) {
 
   clear(&units);
 
-  DBG("[Lesson 5]: Polymorphism 0 [END]");
+  DBG("[Lesson 5]: Polymorphism 1 [END]");
   return 0;
 }
 

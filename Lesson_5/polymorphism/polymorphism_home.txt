@@ -1,0 +1,2 @@
+1. Override operator << for each of classes derived from Unit. Make samples.
+
