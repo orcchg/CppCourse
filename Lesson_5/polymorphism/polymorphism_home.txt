@@ -1,2 +1,6 @@
 1. Override operator << for each of classes derived from Unit. Make samples.
 
+2. Generate random enum values in UnitType range and write a Factory class,
+which has a static Unit* create(UnitType type) method. Create an army of units
+using such factory.
+
