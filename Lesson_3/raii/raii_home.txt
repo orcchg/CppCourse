@@ -1,0 +1,6 @@
+1. Supply additional checks whether file exists or can be opened for reading.
+
+2. Open file for writing and implement 'void write(const std::vector<std::string>& lines)' method.
+
+3. Implement class 'SmartPointer' pointing to an array of integers. It should allocate N * sizeof(int) bytes
+in ctor and release them in ~dtor. Make samples.
