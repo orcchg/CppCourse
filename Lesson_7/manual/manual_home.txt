@@ -1,0 +1,5 @@
+1. Make any of the following changes and write down how symbols in object file have changed:
+  - change compiler from 'g++' to 'gcc';
+  - pass std::string by value, by pointer, by reference (remove 'const');
+  - pass args with different primitive types into 'printValue';
+

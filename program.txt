@@ -2,11 +2,13 @@ Basic:
 1. Statements and functions
 2. Symbolic streams, I/O.
 3. Struct and class. Operators.
-4. Templates, algorithms, containers.
+4. Templates, algorithms, containers, STL.
 5. Inheritance and Polymorphism.
 6. Deep into iterators.
-7. //
-8. Build systems, linking, libraries.
+7. Build systems, linking, libraries.
+8. SQLite, google test, google regex, google flags
+
+Advanced:
 9. Exceptions.
 10. Binders, adapters, functors, lambdas.
 11. Smart pointers.
@@ -15,8 +17,9 @@ Basic:
 14. Rvalue references.
 15. Variadic templates, metaprogramming.
 16. Operators new and delete, allocators.
+17. Boost library.
 
-Advanced:
+Extra:
 1. Perfect hashing.
 2. Trees and set unions.
 3. IPC, dbus.
@@ -29,4 +32,5 @@ Advanced:
 10. Machine learning.
 11. Debugging and profiling.
 12. Unit-testing, CI.
+13. GUI with Qt.
 
