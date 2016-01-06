@@ -1,0 +1,40 @@
+1. Implement custom class Iterator in class Array.
+Supply proper category and operations.
+Check correctness via 'advanceIterator()' function.
+
+2. Initialize Array<T> class instance using std::initializer_list and {}-syntax.
+
+3. Move implementation of LinkedList::Iterator all class member-functions out from the class
+and define 'struct std::iterator_traits<typename LinkedList<T>::Iterator>' with necessary typedefs.
+
+4. Define std::iterator_traits<Iterator> for Array<T> class custom iterator.
+
+5. Inherit Array<T>::Iterator from one of standard iterators (what category)? Compare approaches in task 1, 4 and 5.
+
+6. Define std::iterator_traits<T*> template specialization for basic pointer type (T*).
+
+7. Use Array<T>::Iterator and LinkedList<T>::Iterator in std::transform(), std::accumulate(), std::copy_if() algorithms.
+
+8. In class Array<T> and LinkedList<T> define new inner class iterators:
+  - iterator (just rename Iterator to iterator)
+  - const_iterator.
+Define member-functions:
+  - const_iterator begin() const;
+  - const_iterator end(); const;
+
+Use 'const_iterator' to iterate through Array<T> and LinkedList<T> in some function which takes reference to constant instance of any of these classes.
+
+9. In class Array<T> and LinkedList<T> define new inner class iterators:
+  - reverse_iterator;
+  - const_reverse_iterator;
+
+Define all necessary typedefs and category of 'reverse_'-iterators. Also, provide sample with inheritance from std::reverse_iterator or std::const_reverse_iterator. Provide member-functions: ++, ++(int), which advanced such iterator in reversed order and rbegin() and rend() methods, so that:
+
+for (auto it = array.rbegin(); it != array.rend(); ++it) {
+  std::cout << *it << " ";
+}
+
+This code snippet should output the content of Array<T> or LinkedList<T> in reversed order.
+
+10. Implement fully-specified iterator classes (iterator, const_iterator, reverse_iterator, const_reverse_iterator) for Matrix class and methods: begin(), end(), cbegin(), cend(), rbegin(), rend(), crbegin(), crend(), returing such iterators.
+
