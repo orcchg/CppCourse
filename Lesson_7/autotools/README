@@ -1,1 +1,7 @@
 sudo apt-get install autoreconf libtool
+./autogen.sh
+mkdir build
+cd build
+../configure [options]
+make -j
+

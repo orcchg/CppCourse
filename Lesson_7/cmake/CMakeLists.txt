@@ -1,10 +1,10 @@
 cmake_minimum_required( VERSION 2.8 )
-PROJECT( Lesson_5_Inheritance )
+PROJECT( Lesson_7_CMake )
 
 # -----------------------------------------------------------------------------
-INCLUDE_DIRECTORIES( include )
-ADD_DEFINITIONS( -std=c++11 )
+#includes
+#compiler flags
 
 # -----------------------------------------------------------------------------
-ADD_SUBDIRECTORY( src )
+#subdirs
 

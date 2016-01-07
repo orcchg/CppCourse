@@ -1,5 +1,6 @@
 #######################################
 # Build information for each library
+lib_LTLIBRARIES = libprint.la
 
 # Sources for libprint
 libprint_la_SOURCES = libprint.cpp

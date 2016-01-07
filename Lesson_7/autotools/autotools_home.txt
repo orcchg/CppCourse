@@ -1,0 +1,19 @@
+1. Make another library 'libwrite.so' which depends on 'libprint.so'. Use 'libwrite_la_LIBADD' options.
+This library should contain at least one global function, which must use any function from 'libprint.so'.
+Call this function somewhere from main_4.cpp.
+
+2. Move 'libprint.cpp' and 'libwrite.cpp' sources into separate directories 'print' and 'write'.
+Supply Makefile.am for both directories and make all necessary changes in 'configure.ac' and
+throughout the build system.
+
+3. Clone git-repository: 'https://github.com/orcchg/MoneyWatcherAlpha.git".
+Build the project using Autotools, build unit-tests also. Run console (and GUI) main program, run unit-tests.
+What 3rd-party libraries are in use?
+
+{GUI program is not completed, but is actually a working sample based on Qt5.
+If you failed to build GUI program try to figure out, which libraries are missing.
+Qt5 could be missing, so fix such conflict or disable GUI program build at all (removing Qt5 dependency)}
+
+4. Clone git-repository: 'https://github.com/python-git/python.git' - Sources of Python 3.
+Configure and build the project. Run resulting binary executable 'python'. Install it in Linux OS.
+

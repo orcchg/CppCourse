@@ -1,0 +1,2 @@
+1. Fill the stubs in CMakeLists.txt files and make the sample working.
+
