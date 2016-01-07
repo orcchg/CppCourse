@@ -1,0 +1,23 @@
+1. Add funcion checking whether ID exists in Database and invoke it from 'readPerson()' and 'deletePerson()'.
+Use 'WHERE ID == ' clause in selection statement. Check for SQLite documentation by yourself.
+
+2. In 'deletePerson()' and checking whether the Database has become empty or the row with the largest id has been deleted,
+and then update data-member 'm_next_id' properly.
+
+3. Figure out, which member-function in class Database should be 'const' and then re-write client code 'main_0.cpp', using 'const Database&' references instead of 'Database*' pointers where possible.
+
+4. Display the content of Database in 'main_0.cpp' before 'deletePerson()' and right after it.
+
+5. Add Table 'Weather' with the following columns:
+ID, Lattitude (REAL), Longitude (REAL), Date (?), Time (?), Region (TEXT), Name (TEXT).
+
+Each row represents a weather at (lat, lon) gps coordinates at specific date and time.
+Region and Name should have some textual representation of (lat, lon) and kind of weather.
+Name should be one of the following strings:
+  "Sunny", "Cold", "Snow", "Cloudy", "Windy", "Rain", "Volcanic Ash", "Dry", "Fog", "Hot", "Warm", "Frozen",
+so provide a sort of 'enum' struct and represent it's values as these strings.
+Generate data randomly, just add some rows into Table in Database. Display the content of Database.
+
+6. Add column 'Image' (BLOB) into 'Weather' table, representing the weather. Use OpenCV to load image into memory.
+Get images from here: 'https://github.com/beepscore/Sunshine/tree/master/app/src/main/res/drawable-hdpi'
+
