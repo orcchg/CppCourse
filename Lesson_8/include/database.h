@@ -43,7 +43,7 @@ public:
    */
   void deletePerson(long long id);
 
-private:
+protected:
   sqlite3* m_db_handler;
   sqlite3_stmt* m_db_statement;
   std::string m_table_name;

@@ -53,7 +53,6 @@ Person Database::readPerson(long long id) {
   sqlite3_step(m_db_statement);
 
   long long check_id = sqlite3_column_int64(m_db_statement, 0);  // check id
-  DBG("STR: %s", reinterpret_cast<const char*>(sqlite3_column_text(m_db_statement, 1)));
   std::string name(reinterpret_cast<const char*>(sqlite3_column_text(m_db_statement, 1)));
   std::string last_name(reinterpret_cast<const char*>(sqlite3_column_text(m_db_statement, 2)));
   int age = sqlite3_column_int(m_db_statement, 3);
