@@ -1,4 +1,5 @@
 #include <string>
+#include <cstring>  // memcpy
 #include "database_v2.h"
 #include "logger.h"
 
@@ -21,7 +22,7 @@ void DatabaseV2::addPerson(const ImagePerson& person) {
 
   std::string statement = "INSERT INTO '";
   statement += m_table_name;
-  statement += "' VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7);";  // Quiz: compose string from values directly
+  statement += "' VALUES(?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8);";  // Quiz: compose string from values directly
   DBG("Insert statement: %s", statement.c_str());
 
   prepareStatement(statement);
@@ -34,7 +35,7 @@ void DatabaseV2::addPerson(const ImagePerson& person) {
   sqlite3_bind_text(m_db_statement, 5, person.gender.c_str(), person.gender.length(), SQLITE_TRANSIENT);
   sqlite3_bind_int(m_db_statement, 6, person.height);
   sqlite3_bind_double(m_db_statement, 7, person.weight);
-  // TODO: image
+  sqlite3_bind_blob(m_db_statement, 8, person.image, person.image_size, SQLITE_STATIC);
 
   sqlite3_step(m_db_statement);
   sqlite3_finalize(m_db_statement);
@@ -60,12 +61,13 @@ ImagePerson DatabaseV2::readPerson(long long id) {
   std::string gender(reinterpret_cast<const char*>(sqlite3_column_text(m_db_statement, 4)));
   int height = sqlite3_column_int(m_db_statement, 5);
   double weight = sqlite3_column_double(m_db_statement, 6);
-  // TODO: image
+  uint8_t* blob_data = (uint8_t*) sqlite3_column_blob(m_db_statement, 7);  // memory release automatically
+  int blob_size = sqlite3_column_bytes(m_db_statement, 7);
 
   sqlite3_finalize(m_db_statement);
 
   ImagePerson person(name, last_name, age, gender, height, weight);
-  // TODO: person.setImage();
+  person.setImage(blob_data, blob_size, 256, 256);
   return person;
 }
 

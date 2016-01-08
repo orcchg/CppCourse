@@ -18,6 +18,8 @@ struct Person {
     const std::string& gender,
     int height,
     double weight);
+
+  virtual ~Person();
 };
 
 #endif  // PERSON__H__

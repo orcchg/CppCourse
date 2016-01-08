@@ -15,3 +15,6 @@ Person::Person(
   , weight(weight) {
 }
 
+Person::~Person() {
+}
+

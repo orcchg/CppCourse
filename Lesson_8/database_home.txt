@@ -21,3 +21,5 @@ Generate data randomly, just add some rows into Table in Database. Display the c
 6. Add column 'Image' (BLOB) into 'Weather' table, representing the weather. Use libPNG to load image into memory.
 Get images from here: 'https://github.com/beepscore/Sunshine/tree/master/app/src/main/res/drawable-hdpi'
 
+7**. Write CMake-based build system for libPNG sources instead of using Autotools. Integrate it as CMake subproject into root project.
+

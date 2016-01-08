@@ -5,7 +5,7 @@
 #include "image_person.h"
 
 /**
- * Persons:
+ * ImagePersons:
  *  _______________________________________________________________________________
  * |  ID  |  Name  |  LastName  |  Age  |  Gender  |  Height  |  Weight  |  Image  |
  * |------|--------|------------|-------|----------|----------|----------|---------|
@@ -16,6 +16,8 @@
  * |______|________|____________|_______|__________|__________|__________|_________|
  *
  * For SQLite3 data types: @see https://www.sqlite.org/datatype3.html
+ *
+ * BLOB example: http://www.sqlite.org/cvstrac/wiki?p=BlobExample
  */
 
 static const char* DATABASE_NAME = "lesson_8_data_v2.db";  // Quiz: why 'static' is necessary here ?
