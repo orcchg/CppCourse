@@ -1,3 +1,5 @@
+// @see also: http://acm.mipt.ru/twiki/bin/view/Cintro/CIntroTasks1
+
 1. Вывести строку "Hello, World" в стандартный поток вывода.
 
 2. Ввести число int N со стандартного потока ввода.

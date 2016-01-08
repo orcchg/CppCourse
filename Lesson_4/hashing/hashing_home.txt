@@ -6,3 +6,8 @@ Resolve collisions using linked lists.
 Use std::unordered_set<T> and compare performance to access N elements sequentially
 in case of default hash function and 'bad' hash function.
 
+3. Make performance test and compare performance betwee std::set<T> and std::unordered_set<T>:
+  - add lots of items of type T = std::string
+  - add lots of items of type T = std::string with many duplicates
+
+Use 'Java' hash function for std::string in this case.

@@ -1,0 +1,5 @@
+1. Make performance test and compare performance betwee std::set<T> and std::unordered_set<T>:
+  - add lots of items of type T = int
+  - add lots of items of type T = std::string
+  - add lots of items of type T = int with many duplicates
+  - add lots of items of type T = std::string with many duplicates

@@ -1,0 +1,15 @@
+1. Define an abstract class (i.e. interface) called 'Set<T>', which should represent a set of items of the same type T and do not allow any duplicates for T.
+To compare two instance of type T (either primitives or classes) at least the following operators should be defined in T: ==, !=, <.
+
+2*. Make class 'TreeSet<T>' and 'HashSet<T>' inheriting an interface 'Set<T>' defined above.
+'TreeSet<T>' should be base on Binary-Search-Tree (BST), 'HashSet<T>' should represent a hash table with collisions resolving via linked lists.
+Make basic operations: ctor, ~dtor, copy ctor, operator =, insert(T), remove(T), size(), clear(), print() {to output content of set}.
+Make samples.
+
+3. Same task as 1, but make an abstract class called 'Map<K, V>' of key-value pairs. It must not allow any duplicate keys among it's items.
+
+4*. Same task as 2, but make two classes: 'TreeMap<K, V>' and 'HashMap<K, V>' with basic operations. Method 'insert(K, V)' now takes two parameters.
+Make samles.
+
+5. Make unit-tests and check correctness of implementation of 'TreeSet<T>', 'HashSet<T>', 'TreeMap<K, V>', 'HashMap<K, V>' 
+comparing to std::set<T>, std::unordered_set<T>, std::map<K, V>, std::unordered_map<K, V> respectively.
