@@ -18,6 +18,6 @@ Name should be one of the following strings:
 so provide a sort of 'enum' struct and represent it's values as these strings.
 Generate data randomly, just add some rows into Table in Database. Display the content of Database.
 
-6. Add column 'Image' (BLOB) into 'Weather' table, representing the weather. Use OpenCV to load image into memory.
+6. Add column 'Image' (BLOB) into 'Weather' table, representing the weather. Use libPNG to load image into memory.
 Get images from here: 'https://github.com/beepscore/Sunshine/tree/master/app/src/main/res/drawable-hdpi'
 

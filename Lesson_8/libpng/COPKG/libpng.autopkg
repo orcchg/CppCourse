@@ -1,0 +1,105 @@
+@import @"version.inc";
+
+configurations {
+	UserPlatformToolset {
+	    // Needed because autopackage lacks VS2015 support
+        	key = "PlatformToolset";
+        	choices: "v120,v140";
+	};
+}
+
+nuget {
+	nuspec {
+		id = libpng;
+		version : ${package-version};
+		title: libpng;
+		authors: {Guy Eric Schalnat, Andreas Dilger, John Bowler, Glenn Randers-Pehrson, libpng contributors, Vincent Povirk};
+		owners: {CoApp Project, Vincent Povirk};
+		licenseUrl: "http://www.libpng.org/pub/png/src/libpng-LICENSE.txt";
+		projectUrl: "http://github.com/coapp-packages/libpng";
+		iconUrl: "http://www.libpng.org/pub/png/img_png/pnglogo-blk.jpg";
+		requireLicenseAcceptance:false;
+		summary: "libpng is a library for reading and writing PNG images.";
+		description: @"libpng is a library for reading and writing PNG images.
+Homepage: http://www.libpng.org/pub/png/libpng.html";
+		releaseNotes: "Release of libpng 1.6.19 libraries.";
+		copyright: Copyright 2013;
+		tags: { png, native, CoApp };
+
+	};
+
+	files {
+		include: {
+			..\png.h,
+			..\pngconf.h,
+			..\pnglibconf.h,
+			};
+
+		docs: { ..\libpng-manual.txt };
+
+		source += {
+			..\*.c,
+			..\*.h,
+		};
+
+		[Win32,v140,dynamic,release] {
+			lib: { ..\projects\vstudio\v140\win32\Release\libpng16.lib };
+			bin: { ..\projects\vstudio\v140\win32\Release\libpng16.dll };
+			symbols: { ..\projects\vstudio\v140\win32\Release\libpng16.pdb };
+		}
+
+		[Win32,v120,dynamic,release] {
+			lib: { ..\projects\vstudio\v120\win32\Release\libpng16.lib };
+			bin: { ..\projects\vstudio\v120\win32\Release\libpng16.dll };
+			symbols: { ..\projects\vstudio\v120\win32\Release\libpng16.pdb };
+		}
+
+    
+		[x64,v140,dynamic,release] {
+			lib: { ..\projects\vstudio\v140\x64\Release\libpng16.lib };
+			bin: { ..\projects\vstudio\v140\x64\Release\libpng16.dll };
+			symbols: { ..\projects\vstudio\v140\x64\Release\libpng16.pdb };
+		}
+    
+		[x64,v120,dynamic,release] {
+			lib: { ..\projects\vstudio\v120\x64\Release\libpng16.lib };
+			bin: { ..\projects\vstudio\v120\x64\Release\libpng16.dll };
+			symbols: { ..\projects\vstudio\v120\x64\Release\libpng16.pdb };
+		}
+
+		[Win32,v140,dynamic,debug] {
+			lib: { ..\projects\vstudio\v140\win32\Debug\libpng16.lib };
+			bin: { ..\projects\vstudio\v140\win32\Debug\libpng16.dll };
+			symbols: { ..\projects\vstudio\v140\win32\Debug\libpng16.pdb };
+		}
+    
+		[Win32,v120,dynamic,debug] {
+			lib: { ..\projects\vstudio\v120\win32\Debug\libpng16.lib };
+			bin: { ..\projects\vstudio\v120\win32\Debug\libpng16.dll };
+			symbols: { ..\projects\vstudio\v120\win32\Debug\libpng16.pdb };
+		}
+
+		[x64,v140,dynamic,debug] {
+			lib: { ..\projects\vstudio\v140\x64\Debug\libpng16.lib };
+			bin: { ..\projects\vstudio\v140\x64\Debug\libpng16.dll };
+			symbols: { ..\projects\vstudio\v140\x64\Debug\libpng16.pdb };
+		}
+        
+		[x64,v120,dynamic,debug] {
+			lib: { ..\projects\vstudio\v120\x64\Debug\libpng16.lib };
+			bin: { ..\projects\vstudio\v120\x64\Debug\libpng16.dll };
+			symbols: { ..\projects\vstudio\v120\x64\Debug\libpng16.pdb };
+		}
+	};
+
+	dependencies {
+		packages : {
+			zlib/1.2.8.8
+		};
+	}
+
+	targets {
+		Defines += HAS_LIBPNG;
+	};
+}
+
