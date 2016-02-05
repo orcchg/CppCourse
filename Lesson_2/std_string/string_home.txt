@@ -1,5 +1,8 @@
 1. Modify string_3.cpp and trim leading whitespaces as well.
 
-2. Compare performance between std::string and std::vector<char>.
+2. Also, trim all duplicate whitespaces and leave just one between each word, in string_3.cpp.
+Note: use std::unique() function from <algorithm>, but use it wisely!
+
+3. Compare performance between std::string and std::vector<char>.
 Provide lots of push-operations and measures time elapsed.
 
