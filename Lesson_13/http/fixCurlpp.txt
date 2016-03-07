@@ -1,0 +1,12 @@
+sudo apt-get install libcurl4-openssl-dev
+git clone https://github.com/jpbarrette/curlpp
+mkdir build ; cd build ; ../configure
+DUE TO CUSTOM BUILD DIRECTORY (do not allow to build within source dir):
+"add '-I$(top_srcdir)/include' to AM_CPPFLAGS in src/curlpp/Makefile.am and src/curlpp/internal/Makefile.am"
+"replace 'AM_LDFLAGS = -L../src/curlpp/ -lcurlpp -static'
+ with 'AM_LDFLAGS = -L../../src/curlpp/ -lcurlpp -static'
+ in examples/Makefile.am"
+make -j
+sudo make install
+"check: ls /usr/local/include/curlpp/ exists"
+

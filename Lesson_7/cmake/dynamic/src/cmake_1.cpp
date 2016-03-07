@@ -2,12 +2,12 @@
 #include "logger.h"
 
 int main(int argc, char** argv) {
-  DBG("[Lesson 7]: Manual 5");
+  DBG("[Lesson 7]: CMake 1");
 
   lib::printString("Lorem ipsum");
   printValue(10);
 
-  DBG("[Lesson 7]: Manual 5 [END]");
+  DBG("[Lesson 7]: CMake 1 [END]");
   return 0;
 }
 

@@ -1,0 +1,12 @@
+Brief theory:
+0. Headers and sources, translation unit
+1. How linker works
+2. Build static and shared library, -fPIC for shared libs, text relocations
+3. Link executable to static and shared library
+4. Find symbols manually during run-time using symbol table
+5. Compiler flags and options
+6. Linker flags and options
+7. Programs: ldd, readelf
+8. Autotools configure
+9. CMake rules
+
