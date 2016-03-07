@@ -1,0 +1,4 @@
+Brief theory:
+1. Http protocol, Url and Port
+2. Request and response, XML and Json
+

@@ -1,2 +1,4 @@
-1. Fill the stubs in CMakeLists.txt files and make the sample working.
+1. Provide global project-scope variable to set type of library (STATIC or SHARED) in one place.
+
+2. Add -fPIC definition for SHARED library libprint.so
 
