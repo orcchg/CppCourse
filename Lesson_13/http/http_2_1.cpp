@@ -14,6 +14,7 @@
 #include "rapidjson/stringbuffer.h"
 
 /// @see Json Parser: https://github.com/miloyip/rapidjson
+/// @see Documentation: http://rapidjson.org/md_doc_tutorial.html
 /// @see Example: https://github.com/miloyip/rapidjson/blob/master/example/tutorial/tutorial.cpp
 /// @see http://jsonplaceholder.typicode.com/
 
