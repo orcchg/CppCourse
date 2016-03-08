@@ -41,7 +41,7 @@ std::ostream& operator << (std::ostream& out, const Image& image) {
 /* Main */
 // ------------------------------------------------------------------------------------------------
 int main(int args, char** argv) {
-  DBG("[Lesson 13]: Http 1.1");
+  DBG("[Lesson 13]: Http 1.2");
 
   std::fstream fout;
   fout.open(FILENAME_XML, std::fstream::out);
@@ -61,7 +61,7 @@ int main(int args, char** argv) {
 
   std::copy(images.begin(), images.end(), std::ostream_iterator<Image>(std::cout, "\n"));
 
-  DBG("[Lesson 13]: Http 1.1 END");
+  DBG("[Lesson 13]: Http 1.2 END");
   return 0;
 }
 
