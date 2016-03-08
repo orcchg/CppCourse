@@ -27,8 +27,8 @@ struct Image {
   std::string source_url;
 };
 
-void processXmlDocument(TiXmlDocument& document, std::vector<Image>* images);
-Image processImage(TiXmlElement* image);
+void processXmlDocument(TiXmlHandle& handler, std::vector<Image>* images);
+Image processImage(TiXmlHandle& image);
 
 std::ostream& operator << (std::ostream& out, const Image& image) {
   out << "Image {\n\turl=" << image.url
@@ -54,7 +54,8 @@ int main(int args, char** argv) {
   bool result = document.LoadFile();
   if (result) {
     INF("TinyXML: Result is OK");
-    processXmlDocument(document, &images);
+    TiXmlHandle handler(&document);
+    processXmlDocument(handler, &images);
   } else {
     ERR("TinyXML: failed to load file %s", FILENAME_XML);
   }
@@ -67,66 +68,32 @@ int main(int args, char** argv) {
 
 /* Process XML document */
 // ------------------------------------------------------------------------------------------------
-void processXmlDocument(TiXmlDocument& document, std::vector<Image>* array) {
-  TiXmlElement* root = document.FirstChildElement("response");
-  if (root != nullptr) {
-    TiXmlElement* data = root->FirstChildElement("data");
-    if (data != nullptr) {
-      TiXmlElement* images = data->FirstChildElement("images");
-      if (images != nullptr) {
-        TiXmlElement* item_1 = images->FirstChildElement("image");
-        if (item_1 != nullptr) {
-          Image image_1 = processImage(item_1);
-          array->push_back(image_1);
-          TiXmlElement* item_2 = item_1->NextSiblingElement("image");
-          if (item_2 != nullptr) {
-            Image image_2 = processImage(item_2);
-            array->push_back(image_2);
-            TiXmlElement* item_3 = item_2->NextSiblingElement("image");
-            if (item_3 != nullptr) {
-              Image image_3 = processImage(item_3);
-              array->push_back(image_3);
-              // stop
-            } else {
-              ERR("No sibling element: image");
-            }
-          } else {
-            ERR("No sibling element: image");
-          }
-        } else {
-          ERR("No sibling element: image");
-        }
-      } else {
-        ERR("No child element: images");
-      }
-    } else {
-      ERR("No child element: data");
-    }
-  } else {
-    ERR("No child element: response");
-  }
+void processXmlDocument(TiXmlHandle& handler, std::vector<Image>* array) {
+  TiXmlHandle images = handler.FirstChild("response").FirstChild("data").FirstChild("images");
+
+  TiXmlHandle item_1 = images.Child("image", 0);
+  TiXmlHandle item_2 = images.Child("image", 1);
+  TiXmlHandle item_3 = images.Child("image", 2);
+
+  Image image_1 = processImage(item_1);
+  Image image_2 = processImage(item_2);
+  Image image_3 = processImage(item_3);
+
+  array->push_back(image_1);
+  array->push_back(image_2);
+  array->push_back(image_3);
 }
 
-Image processImage(TiXmlElement* item) {
+Image processImage(TiXmlHandle& item) {
+  // Quiz: rewite with FirstChild(<name>) instead
+  TiXmlElement* url = item.Child(0).ToElement();
+  TiXmlElement* id = item.Child(1).ToElement();
+  TiXmlElement* source_url = item.Child(2).ToElement();
+
   Image image;
-  TiXmlElement* url = item->FirstChildElement("url");
-  if (url != nullptr) {
-    image.url = std::string(url->GetText());
-    TiXmlElement* id = url->NextSiblingElement("id");
-    if (id != nullptr) {
-      image.id = std::string(id->GetText());
-      TiXmlElement* source_url = id->NextSiblingElement("source_url");
-      if (source_url != nullptr) {
-        image.source_url = std::string(source_url->GetText());
-      } else {
-        ERR("No sibling element: source_url");
-      }
-    } else {
-      ERR("No sibling element: id");
-    }
-  } else {
-    ERR("No child element: url");
-  }
+  image.url = std::string(url->GetText());
+  image.id = std::string(id->GetText());
+  image.source_url = std::string(source_url->GetText());
   return image;
 }
 
