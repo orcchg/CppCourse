@@ -1,4 +1,12 @@
 Brief theory:
 1. Http protocol, Url and Port
-2. Request and response, XML (DOM) and Json
+2. Data Object Model (DOM)
+3. Request and response, XML and Json
+
+0. http GET request [0*]
+1. http XML response [1*, 1_3 - exercise]
+2. http Json response [2*]
+3. http download image [3*]
+4. http POST request [4*]
+5. http upload image (multipart) [5*]
 

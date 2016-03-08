@@ -1,0 +1,21 @@
+0. Loop over all nodes until it terminates, rewrite 'http_1_2.cpp' accordingly.
+This should support arbitrary (instead of hardcoded one) number of items in XML response.
+(see 'http_1_3.cpp' for solution).
+
+1. Rewrite 'http_1_2.cpp', use FirstChild("name") instead of Child(index) member-function.
+For url pass "url", for id pass "id", for source_url pass "source_url".
+
+2. This image url has denien access: url='http://25.media.tumblr.com/tumblr_lokcmz6izk1qz7hmlo1_500.jpg'
+Write a program which handles it with error logs.
+
+3. Make request to URL_CATAPI which returns a list of all the active categories.
+Read API documentation carefully. Write a class representing a single response model.
+
+4. For URL_CATAPI retrieve an API_KEY and make the following requests:
+  - favourite an image
+  - get all the favourites
+  - get your account's overview
+
+5*. Replace TinyXML with RapidXML (see 'http://rapidxml.sourceforge.net/' for details).
+Provide necessary build scripts and rewrite 'http_1_3.cpp' to it.
+
