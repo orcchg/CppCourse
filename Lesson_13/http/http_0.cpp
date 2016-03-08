@@ -6,7 +6,8 @@
 #include <curlpp/Options.hpp>
 
 /// @see http://www.curlpp.org/
-/// @documentation: https://github.com/jpbarrette/curlpp/blob/master/doc/guide.pdf
+/// @see Documentation: https://github.com/jpbarrette/curlpp/blob/master/doc/guide.pdf
+/// @see Examples: https://github.com/jpbarrette/curlpp/tree/master/examples
 
 int main(int args, char** argv) {
   DBG("[Lesson 13]: Http 0");
