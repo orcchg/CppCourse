@@ -19,3 +19,7 @@ Read API documentation carefully. Write a class representing a single response m
 5*. Replace TinyXML with RapidXML (see 'http://rapidxml.sourceforge.net/' for details).
 Provide necessary build scripts and rewrite 'http_1_3.cpp' to it.
 
+6. Process Json with 100 posts in a loop and print a list of their ids and first 5 words from body.
+(see 'http_2_2.cpp for solution). Also, rewrite it using 'Value::ConstValueIterator' iterators
+instead of integer indices; use iterators to loop over a Post object (see 'http_2_3.cpp' for solution).
+
