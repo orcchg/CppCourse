@@ -23,3 +23,8 @@ Provide necessary build scripts and rewrite 'http_1_3.cpp' to it.
 (see 'http_2_2.cpp for solution). Also, rewrite it using 'Value::ConstValueIterator' iterators
 instead of integer indices; use iterators to loop over a Post object (see 'http_2_3.cpp' for solution).
 
+7. Request a list of users from JSON_PLACEHOLDER_API and record them into User model.
+
+8. Write a unit-test and test 'convertToJson(Post)' function in 'http_4.cpp' using RapidJson.
+Make sure all fields are present and have correct types and values, compare it to any item from response.
+

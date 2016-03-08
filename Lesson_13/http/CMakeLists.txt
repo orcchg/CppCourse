@@ -47,9 +47,11 @@ TARGET_LINK_LIBRARIES( http_2_2 curl curlpp )
 ADD_EXECUTABLE( http_2_3 ${SOURCES_2_3} )
 TARGET_LINK_LIBRARIES( http_2_3 curl curlpp )
 
+# Download large file
 ADD_EXECUTABLE( http_3 ${SOURCES_3} )
 TARGET_LINK_LIBRARIES( http_3 curl curlpp )
 
+# POST Json
 ADD_EXECUTABLE( http_4 ${SOURCES_4} )
 TARGET_LINK_LIBRARIES( http_4 curl curlpp )
 
