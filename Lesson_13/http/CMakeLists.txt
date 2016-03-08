@@ -13,6 +13,7 @@ SET( SOURCES_2_2 ${SOURCE_DIR}/http_2_2.cpp )
 SET( SOURCES_2_3 ${SOURCE_DIR}/http_2_3.cpp )
 SET( SOURCES_3 ${SOURCE_DIR}/http_3.cpp )
 SET( SOURCES_4 ${SOURCE_DIR}/http_4.cpp )
+SET( SOURCES_4_1 ${SOURCE_DIR}/http_4_1.cpp )
 SET( SOURCES_5 ${SOURCE_DIR}/http_5.cpp )
 SET( SOURCES_6 ${SOURCE_DIR}/http_6.cpp )
 SET( SOURCES_7 ${SOURCE_DIR}/http_7.cpp )
@@ -27,7 +28,7 @@ TARGET_LINK_LIBRARIES( http_0_1 curl curlpp )
 ADD_EXECUTABLE( http_0_2 ${SOURCES_0_2} )
 TARGET_LINK_LIBRARIES( http_0_2 curl curlpp )
 
-# XML response
+# GET XML response
 ADD_EXECUTABLE( http_1 ${SOURCES_1} )
 TARGET_LINK_LIBRARIES( http_1 curl curlpp )
 ADD_EXECUTABLE( http_1_1 ${SOURCES_1_1} )
@@ -37,7 +38,7 @@ TARGET_LINK_LIBRARIES( http_1_2 tinyxml curl curlpp )
 ADD_EXECUTABLE( http_1_3 ${SOURCES_1_3} )
 TARGET_LINK_LIBRARIES( http_1_3 tinyxml curl curlpp )
 
-# Json response
+# GET Json response
 ADD_EXECUTABLE( http_2 ${SOURCES_2} )
 TARGET_LINK_LIBRARIES( http_2 curl curlpp )
 ADD_EXECUTABLE( http_2_1 ${SOURCES_2_1} )
@@ -51,9 +52,11 @@ TARGET_LINK_LIBRARIES( http_2_3 curl curlpp )
 ADD_EXECUTABLE( http_3 ${SOURCES_3} )
 TARGET_LINK_LIBRARIES( http_3 curl curlpp )
 
-# POST Json
+# POST, PUT, DELETE Json response
 ADD_EXECUTABLE( http_4 ${SOURCES_4} )
 TARGET_LINK_LIBRARIES( http_4 curl curlpp )
+ADD_EXECUTABLE( http_4_1 ${SOURCES_4_1} )
+TARGET_LINK_LIBRARIES( http_4_1 curl curlpp )
 
 ADD_EXECUTABLE( http_5 ${SOURCES_5} )
 TARGET_LINK_LIBRARIES( http_5 curl curlpp )
