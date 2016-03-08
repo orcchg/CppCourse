@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstring>
 #include "logger.h"
 
 #include <curlpp/cURLpp.hpp>
@@ -13,6 +14,8 @@
 
 const char* URL = "http://jsonplaceholder.typicode.com/posts";
 
+char* GLOBAL_BUFFER = nullptr;
+
 struct Post {
   int id;
   int user_id;
@@ -23,6 +26,7 @@ struct Post {
 Post createPost();
 std::string convertToJson(const Post& post);
 void upload(const std::string& body);
+void clearBuffer();
 
 std::ostream& operator << (std::ostream& out, const Post& post) {
   out << "Post {\n\tid=" << post.id
@@ -36,14 +40,16 @@ std::ostream& operator << (std::ostream& out, const Post& post) {
 /* Main */
 // ------------------------------------------------------------------------------------------------
 int main(int args, char** argv) {
-  DBG("[Lesson 13]: Http 4");
+  DBG("[Lesson 13]: Http 4.1");
 
   // POST - create a new Post
   Post post = createPost();
   std::string request_body = convertToJson(post);
   upload(request_body);
 
-  DBG("[Lesson 13]: Http 4 END");
+  clearBuffer();
+
+  DBG("[Lesson 13]: Http 4.1 END");
   return 0;
 }
 
@@ -78,19 +84,37 @@ std::string convertToJson(const Post& post) {  // Quiz: write unit-test to check
   return oss.str();
 }
 
+size_t readData(char *buffer, size_t size, size_t nitems) {
+  strncpy(buffer, GLOBAL_BUFFER, size * nitems);
+  return size * nitems;
+}
+
+/// @see https://curl.haxx.se/libcurl/c/CURLOPT_UPLOAD.html
 void upload(const std::string& body) {
+  GLOBAL_BUFFER = new char[body.size()];
+  strncpy(GLOBAL_BUFFER, body.c_str(), body.size());
+
   curlpp::Easy request;
-    
-  request.setOpt(new curlpp::options::Url(URL)); 
-  request.setOpt(new curlpp::options::Verbose(true)); 
-    
-  std::list<std::string> header; 
-  header.push_back("Content-Type: application/json"); 
-    
+
+  request.setOpt(new curlpp::options::Url(URL));
+  request.setOpt(new curlpp::options::Verbose(true));
+  request.setOpt(new curlpp::options::Upload(true));
+
+  char buf[50];
+  std::list<std::string> header;
+  header.push_back("Content-Type: application/json");
+  sprintf(buf, "Content-Length: %zu", body.size()); 
+  header.push_back(buf);
+
   request.setOpt(new curlpp::options::HttpHeader(header)); 
-  request.setOpt(new curlpp::options::PostFields(body.c_str()));
-  request.setOpt(new curlpp::options::PostFieldSize(body.size()));
-    
-  request.perform(); 
+  request.setOpt(new curlpp::options::ReadFunction(curlpp::types::ReadFunctionFunctor(readData)));
+  request.setOpt(new curlpp::options::InfileSize(body.size()));
+
+  request.perform();
+}
+
+void clearBuffer() {
+  delete [] GLOBAL_BUFFER;
+  GLOBAL_BUFFER = nullptr;
 }
 
