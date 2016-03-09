@@ -29,5 +29,5 @@ instead of integer indices; use iterators to loop over a Post object (see 'http_
 Make sure all fields are present and have correct types and values, compare it to any item from response.
 
 9. Update yet existing Post making a PUT with json-body request to JSON_PLACEHOLDER_API.
-(see 'http_4_1.cpp' for solution).
+(see 'http_4_1.cpp' for solution). Same for DELETE request (see 'http_4_2.cpp' for solution).
 
