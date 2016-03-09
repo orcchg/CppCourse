@@ -12,7 +12,7 @@
 /// @see Examples: https://github.com/jpbarrette/curlpp/tree/master/examples
 /// @see cURL Options: https://curl.haxx.se/libcurl/c/curl_easy_setopt.html
 
-const char* URL = "http://jsonplaceholder.typicode.com/posts";
+const char* URL = "http://jsonplaceholder.typicode.com/posts/1";
 
 char* GLOBAL_BUFFER = nullptr;
 
@@ -42,7 +42,7 @@ std::ostream& operator << (std::ostream& out, const Post& post) {
 int main(int args, char** argv) {
   DBG("[Lesson 13]: Http 4.1");
 
-  // POST - create a new Post
+  // PUT - update Post
   Post post = createPost();
   std::string request_body = convertToJson(post);
   upload(request_body);
@@ -75,12 +75,12 @@ Post createPost() {
  */
 std::string convertToJson(const Post& post) {  // Quiz: write unit-test to check correctness
   std::ostringstream oss;
-  oss << "{\n"
+  oss << "{"
       << "\"userId\": " << post.user_id << ","
       << "\"id\": " << post.id << ","
       << "\"title\": \"" << post.title << "\","
       << "\"body\": \"" << post.body << "\""
-      << "\n}";
+      << "}";
   return oss.str();
 }
 
