@@ -1,0 +1,4 @@
+1. Fix 'threads_4.cpp' providing mutual exclusion (see 'mutex_2.cpp' for solution).
+
+2. Fix 'threads_5.cpp' providing mutual exclusion (see 'mutex_2_1.cpp' for solution).
+

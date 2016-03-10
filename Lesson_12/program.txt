@@ -7,7 +7,7 @@ Brief theory:
 
 1. threads [0..5]
 2. atomic [1]
-3. mutex [
+3. mutex [1..9; 2, 2_1 - exercises]
 4. condition_variable [
 5. event_listener [
 6. asynchronous [
