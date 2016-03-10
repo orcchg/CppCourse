@@ -1,3 +1,4 @@
+#include <chrono>
 #include <thread>
 #include <cstdio>
 #include "logger.h"
@@ -5,6 +6,7 @@
 void print(int size, char ch) {
   for (int i = 0; i < size; ++i) {
     printf("%c", ch);
+    std::this_thread::yield();
   }
   printf("\n");
 }
