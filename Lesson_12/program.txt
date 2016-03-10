@@ -1,12 +1,13 @@
 Brief theory:
 1. About threads memory model within the same process
+2. Mutual exclusion, semaphore, wait and notify
 
 1. threads [0..5]
 2. atomic [1]
-3. mutex
-4. condition_variable
-5. event_listener
-6. asynchronous
+3. mutex [
+4. condition_variable [
+5. event_listener [
+6. asynchronous [
 
 Advanced:
 7. atomic [2..5]
