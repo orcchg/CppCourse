@@ -1,6 +1,9 @@
 Brief theory:
 1. About threads memory model within the same process
 2. Mutual exclusion, semaphore, wait and notify
+3. Condition variable, lockable types, shared locking
+4. Asynchronous programming, shared storage
+5. Event-Listener pattern
 
 1. threads [0..5]
 2. atomic [1]

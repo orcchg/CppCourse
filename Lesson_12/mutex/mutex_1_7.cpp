@@ -9,16 +9,20 @@ struct DivisionByZeroException {};
 std::mutex mutex;
 
 /**
- * std::lock_guard<M> implements RAII idiom on mutex resource.
+ * std::unique_lock<M> implements RAII idiom on mutex resource.
  *
- * Note though that the lock_guard object does not manage 
+ * Note though that the unique_lock object does not manage 
  * the lifetime of the mutex object in any way: the duration of the mutex object 
  * shall extend at least until the destruction of the lock_guard that locks it.
  *
+ * std::unique_lock<M> constructor: http://www.cplusplus.com/reference/mutex/unique_lock/unique_lock/
+ *
+ * See the difference between std::lock_guard<M> and std::unique_lock<M> here:
+ * https://geidav.wordpress.com/2014/01/09/mutex-lock-guards-in-c11/
  */
 void randomCalculate(int size, char ch) {
   try {
-    std::lock_guard<std::mutex> lock(mutex);  // enter critical section
+    std::unique_lock<std::mutex> lock(mutex);  // enter critical section
     for (int i = 0; i < size; ++i) {
       int numerator = rand() % 10;
       int denominator = rand() % 10;
@@ -35,7 +39,7 @@ void randomCalculate(int size, char ch) {
 }
 
 int main(int argc, char** argv) {
-  DBG("[Lesson 12]: Mutex 1.6");
+  DBG("[Lesson 12]: Mutex 1.7");
   srand(239);
 
   std::thread t1(randomCalculate, 25, '*');
@@ -44,7 +48,7 @@ int main(int argc, char** argv) {
   t1.join();
   t2.join();
 
-  DBG("[Lesson 12]: Mutex 1.6 [END]");
+  DBG("[Lesson 12]: Mutex 1.7 [END]");
   return 0;
 }
 
