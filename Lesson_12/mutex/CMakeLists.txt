@@ -41,6 +41,7 @@ ADD_EXECUTABLE( mutex_2_1 ${SOURCES_2_1} )
 # Try lock by time or condition, re-lock mutex
 ADD_EXECUTABLE( mutex_3 ${SOURCES_3} )
 
+# Readers-Writers problem
 ADD_EXECUTABLE( mutex_4 ${SOURCES_4} )
 ADD_EXECUTABLE( mutex_5 ${SOURCES_5} )
 
