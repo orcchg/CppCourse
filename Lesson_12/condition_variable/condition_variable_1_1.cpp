@@ -1,3 +1,4 @@
+#include <condition_variable>
 #include <mutex>
 #include <thread>
 #include "logger.h"
@@ -5,6 +6,7 @@
 int BIG_PIE = 1000000;
 
 std::mutex mutex;
+std::condition_variable cond;
 
 bool stopped = false;
 
@@ -15,15 +17,16 @@ void tick() {
 
 void eat(int* part) {
   while (!stopped) {
-    std::lock_guard<std::mutex> lock(mutex);
+    std::unique_lock<std::mutex> lock(mutex);
     BIG_PIE -= 100;
     *part += 100;
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    cond.notify_one();
+    cond.wait_for(lock, std::chrono::milliseconds(100));
   }
 }
 
 int main(int argc, char** argv) {
-  DBG("[Lesson 12]: Condition Variable 1");
+  DBG("[Lesson 12]: Condition Variable 1.1");
 
   int part_1, part_2;
   
@@ -38,7 +41,7 @@ int main(int argc, char** argv) {
   INF("Thread 1 ate: %i", part_1);
   INF("Thread 2 ate: %i", part_2);
 
-  DBG("[Lesson 12]: Condition Variable 1 [END]");
+  DBG("[Lesson 12]: Condition Variable 1.1 [END]");
   return 0;
 }
 

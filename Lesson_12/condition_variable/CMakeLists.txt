@@ -1,10 +1,15 @@
 SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
 SET( SOURCES_1 ${SOURCE_DIR}/condition_variable_1.cpp )
+SET( SOURCES_1_1 ${SOURCE_DIR}/condition_variable_1_1.cpp )
 SET( SOURCES_2 ${SOURCE_DIR}/condition_variable_2.cpp )
 SET( SOURCES_3 ${SOURCE_DIR}/condition_variable_3.cpp )
 SET( SOURCES_4 ${SOURCE_DIR}/condition_variable_4.cpp )
 SET( SOURCES_5 ${SOURCE_DIR}/condition_variable_5.cpp )
+
+# sleep vs wait
 ADD_EXECUTABLE( condition_variable_1 ${SOURCES_1} )
+ADD_EXECUTABLE( condition_variable_1_1 ${SOURCES_1_1} )
+
 ADD_EXECUTABLE( condition_variable_2 ${SOURCES_2} )
 ADD_EXECUTABLE( condition_variable_3 ${SOURCES_3} )
 ADD_EXECUTABLE( condition_variable_4 ${SOURCES_4} )

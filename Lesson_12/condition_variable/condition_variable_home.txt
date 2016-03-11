@@ -1,0 +1,2 @@
+1. Eliminate active waiting in 'mutex_2_2.cpp' and use condition variable instead.
+
