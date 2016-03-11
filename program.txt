@@ -13,24 +13,17 @@ Advanced:
 10. Binders, adapters, functors, lambdas.
 11. Smart pointers.
 12. Threads, events.
-13. Multiple inheritance. RTTI.
-14. Rvalue references.
-15. Variadic templates, metaprogramming.
-16. Operators new and delete, allocators.
-17. Boost library.
-
-Extra:
-1. Perfect hashing.
-2. Trees and set unions.
-3. IPC, dbus.
-4. Network, AV streaming.
-5. OpenGL, 2D and 3D graphics.
-6. Reactive programming.
-7. Design patterns.
-8. Android Native Development.
-9. Search algorithms.
-10. Machine learning.
-11. Debugging and profiling.
-12. Unit-testing, CI.
-13. GUI with Qt.
+13. Network, client-server, AV streaming.
+14. Multiple inheritance. RTTI.
+15. Rvalue references.
+16. Variadic templates, metaprogramming.
+17. Operators new and delete, allocators.
+18. Boost library.
+19. Debugging and profiling, unit-testing, CI.
+20. IPC, dbus, ibus.
+21. GUI with Qt.
+22. Design patterns.
+23. OpenGL, 2D and 3D graphics.
+24. Reactive programming, RxCpp.
+25. Summary.
 
