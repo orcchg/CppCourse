@@ -84,6 +84,9 @@ void Philosopher::run() {
 
 // ----------------------------------------------
 void Philosopher::think() {
+  if (m_random_factor == 0) {
+    return;
+  }
   int value = rand() % 250 + 10;
   std::this_thread::sleep_for(std::chrono::milliseconds(value));
 }
@@ -95,12 +98,16 @@ void Philosopher::eat() {
 /* Main */
 // ----------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 12]: Condition Variable 3");
+  DBG("[Lesson 12]: Condition Variable 3.1");
 
   Stick sticks[NUM_PHILOS];
   std::vector<Philosopher> philosophers;
   for (int i = 0; i < NUM_PHILOS; ++i) {
-    philosophers.emplace_back(i, RAND_FACTOR, sticks[i], sticks[(i + 1) % NUM_PHILOS]);
+    if (i < NUM_PHILOS - 1) {
+      philosophers.emplace_back(i, RAND_FACTOR, sticks[i], sticks[i + 1]);
+    } else {
+      philosophers.emplace_back(i, RAND_FACTOR, sticks[0], sticks[i]);
+    }
   }
 
   std::vector<std::thread> threads;
@@ -116,7 +123,7 @@ int main(int argc, char** argv) {
     threads[i].join();
   }
 
-  DBG("[Lesson 12]: Condition Variable 3 [END]");
+  DBG("[Lesson 12]: Condition Variable 3.1 [END]");
   return 0;
 }
 

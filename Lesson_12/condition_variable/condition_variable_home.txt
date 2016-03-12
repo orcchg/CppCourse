@@ -1,2 +1,4 @@
 1. Eliminate active waiting in 'mutex_2_2.cpp' and use condition variable instead.
 
+2. Fix deadlock in 'condition_variable_2.cpp' (see 'condition_variable_2_1.cpp' for solution).
+
