@@ -18,6 +18,7 @@ int fibonacci(int N) {
   return answer;  // return value is ignored
 }
 
+/// @see http://stackoverflow.com/questions/22803600/when-should-i-use-stdthreaddetach
 int main(int argc, char** argv) {
   DBG("[Lesson 12]: Threads 2");
 
