@@ -17,7 +17,11 @@ ADD_EXECUTABLE( condition_variable_2 ${SOURCES_2} )
 ADD_EXECUTABLE( condition_variable_2_1 ${SOURCES_2_1} )
 
 # dinning philosophers
+<<<<<<< HEAD
 ADD_EXECUTABLE( condition_variable_3 ${SOURCES_3} )
+=======
+ADD_EXECUTABLE( condition_variable_3 ${SOURCES_3} )  # deadlock
+>>>>>>> Dinning philospohers
 ADD_EXECUTABLE( condition_variable_3_1 ${SOURCES_3_1} )
 
 ADD_EXECUTABLE( condition_variable_4 ${SOURCES_4} )

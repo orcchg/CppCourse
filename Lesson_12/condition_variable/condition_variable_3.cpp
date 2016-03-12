@@ -67,6 +67,8 @@ Philosopher::Philosopher(int id, int factor, Stick& left, Stick& right)
   srand(m_random_factor * 119 + 1);
 }
 
+/// Deadlock reason:
+/// @see http://adit.io/posts/2013-05-11-The-Dining-Philosophers-Problem-With-Ron-Swanson.html
 void Philosopher::run() {
   while (!stopped) {
     DBG("Philosopher[%i]: Thinking...", m_id);
