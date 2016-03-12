@@ -103,11 +103,7 @@ int main(int argc, char** argv) {
   Stick sticks[NUM_PHILOS];
   std::vector<Philosopher> philosophers;
   for (int i = 0; i < NUM_PHILOS; ++i) {
-    if (i < NUM_PHILOS - 1) {
-      philosophers.emplace_back(i, RAND_FACTOR, sticks[i], sticks[i + 1]);
-    } else {
-      philosophers.emplace_back(i, RAND_FACTOR, sticks[0], sticks[i]);
-    }
+    philosophers.emplace_back(i, RAND_FACTOR, sticks[i], sticks[(i + 1) % NUM_PHILOS]);
   }
 
   std::vector<std::thread> threads;
