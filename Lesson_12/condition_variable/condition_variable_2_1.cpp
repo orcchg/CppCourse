@@ -34,14 +34,19 @@ private:
   bool m_cake_ready;  // TODO[Quiz]: Should we use std::atomic_bool instead ?
   std::condition_variable m_cond;
   std::mutex m_mutex;
+  std::mutex m_sync_mutex;
 };
 
+// TODO[Quiz]: Why don't use std::lock_guard<M> in condition_variable ?
+// @see http://stackoverflow.com/questions/13099660/c11-why-does-stdcondition-variable-use-stdunique-lock
 void Pie::cakeReady() {
+  std::lock_guard<std::mutex> lock(m_sync_mutex);
   m_cake_ready = true;
   m_cond.notify_all();
 }
 
 void Pie::jamSpread() {
+  std::lock_guard<std::mutex> lock(m_sync_mutex);
   m_cake_ready = false;
   m_cond.notify_all();
 }
@@ -85,7 +90,7 @@ void spreadJam(Pie* pie) {
 /* Main */
 // ----------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 12]: Condition Variable 2");
+  DBG("[Lesson 12]: Condition Variable 2.1");
 
   Pie pie;
 
@@ -97,7 +102,7 @@ int main(int argc, char** argv) {
   t1.join();
   t2.join();
 
-  DBG("[Lesson 12]: Condition Variable 2 [END]");
+  DBG("[Lesson 12]: Condition Variable 2.1 [END]");
   return 0;
 }
 
