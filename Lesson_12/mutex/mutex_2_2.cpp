@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <functional>  // plus
+#include <mutex>
 #include <numeric>  // accumulate
 #include <iterator>
 #include <queue>
@@ -22,7 +23,7 @@ public:
 
   size_t size() const;
   bool empty() const;
-  const std::string top() const;  // Quiz: why don't we return by reference ?
+  const std::string top();  // Quiz: why don't we return by reference ?
   void enqueue(const std::string& word);
   void dequeue();
 
@@ -32,6 +33,9 @@ public:
 private:
   bool is_underflow;
   std::queue<std::string> words;
+
+public:
+  std::mutex mutex;
 };
 
 std::string Storage::emptyString = "";
@@ -48,7 +52,7 @@ bool Storage::empty() const {
   return words.empty();
 }
 
-const std::string Storage::top() const {
+const std::string Storage::top() {
   if (empty()) {
     return emptyString;
   }
@@ -97,7 +101,8 @@ void process(Storage& storage, int id, int64_t* sum, int* count) {
       std::this_thread::yield();
     }
     {
-      const std::string& word = storage.top();
+      std::lock_guard<std::mutex> lock(storage.mutex);
+      const std::string word = storage.top();
       if (!word.empty()) {
         int64_t value = hash(word);
         *sum += value;
@@ -120,7 +125,7 @@ void process(Storage& storage, int id, int64_t* sum, int* count) {
  */
 // ----------------------------------------------------------------------------
 int main(int args, char** argv) {
-  DBG("[Lesson 12]: Threads 6");
+  DBG("[Lesson 12]: Mutex 2.2");
 
   // make storage
   Storage storage;
@@ -169,7 +174,7 @@ int main(int args, char** argv) {
   checksum = std::accumulate(values,  values + NUM_THREADS, checksum, std::plus<int64_t>());
   WRN("Checksum: %li", checksum);
 
-  DBG("[Lesson 12]: Threads 6 END");
+  DBG("[Lesson 12]: Mutex 2.2 END");
   return 0;
 }
 

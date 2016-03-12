@@ -2,3 +2,10 @@
 
 2. Fix 'threads_5.cpp' providing mutual exclusion (see 'mutex_2_1.cpp' for solution).
 
+3. Fix 'threads_6.cpp' providing thread-safely access to Storage (see 'mutex_2_2.cpp' for solution).
+
+4. Compare time performance between single-threaded Storage access in 'threads_6.cpp' (set NUM_THREADS to 1)
+and multi-threaded concurrent access in 'mutex_2_2.cpp'. Try different number of threads.
+
+5. Produce words from file stream in detached thread instead of main thread, in 'threads_6.cpp' (fixed version).
+
