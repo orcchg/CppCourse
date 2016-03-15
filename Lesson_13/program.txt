@@ -7,7 +7,7 @@ Brief theory:
 1. http XML response [1*; 1_3 - exercise]
 2. http Json response [2*; 2_2, 2_3 - exercises]
 3. http asynchronous response [3*]
-4. http POST, PUT, DELETE requests [4*; 4_1 - exercises]
+4. http POST, PUT, DELETE requests [4*; 4_1, 4_2 - exercises]
 5. http download image [5*]
 6. http upload image (multipart) [5*]
 
