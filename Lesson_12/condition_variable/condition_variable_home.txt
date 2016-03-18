@@ -2,3 +2,9 @@
 
 2. Fix deadlock in 'condition_variable_2.cpp' (see 'condition_variable_2_1.cpp' for solution).
 
+3. Use detached thread to stop N-Readers-1-Writer (see 'condition_variable_4.cpp') problem execution in 5 seconds.
+
+4. Implement the barber-customers (see 'condition_variable_5.cpp') problem (see 'condition_variable_5_1.cpp' for solution).
+
+5. Fix deadlock in 'condition_variable_5_1.cpp' and ordering problem (see 'condition_variable_5_2.cpp' for solution).
+
