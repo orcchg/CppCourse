@@ -65,7 +65,7 @@ struct Barber {
 };
 
 void Barber::run() {
-  while (true) {
+  while (!stopped) {
     customers_count.down();
     {
       std::lock_guard<std::mutex> lock(mutex);
@@ -109,12 +109,28 @@ void Customer::getHairCut() {
 
 /* Main */
 // ----------------------------------------------------------------------------
+const int NUM_CUSTOMERS = 10;
+
 int main(int argc, char** argv) {
-  DBG("[Lesson 12]: Condition Variable 5");
+  DBG("[Lesson 12]: Condition Variable 5.1");
 
-  // TODO[Quiz]: Implement the problem.
+  Barber barber;
+  std::thread barber_t(&Barber::run, barber);
 
-  DBG("[Lesson 12]: Condition Variable 5 [END]");
+  std::vector<Customer> customers(NUM_CUSTOMERS);
+  std::vector<std::thread> customers_t;
+  for (int i = 0; i < NUM_CUSTOMERS; ++i) {
+    customers_t.emplace_back(&Customer::run, customers[i]);
+  }
+
+  std::thread t3(tick);
+  t3.detach();
+  for (int i = 0; i < NUM_CUSTOMERS; ++i) {
+    customers_t[i].join();
+  }
+  barber_t.join();
+
+  DBG("[Lesson 12]: Condition Variable 5.1 [END]");
   return 0;
 }
 
