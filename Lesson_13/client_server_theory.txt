@@ -1,0 +1,43 @@
+[Quiz]: What are Client and Server programs?
+
+Server is a process running on host machine. It receives requests from a Client and send responses to it.
+Client is a program which send requests to Server and waits for responds.
+There could be a middleware between Server and Client, this provides security, authentication and load balancing.
+
+/*************************************************************************************************
+ *                              Unix Socket system                                               *
+ *************************************************************************************************/
+/// @see http://www.tutorialspoint.com/unix_sockets/index.htm
+
+In UNIX any I/O action is done through reading / writing a file descriptor.
+Socket is a special file descriptor for network communication between different processes.
+Once upon a connection between Server and Client is established, it is bound to a socket, which is
+used to send / receive messages between these processes.
+
+Most popular socket types: Stream Socket and Datagram Socket.
+Stream Socket uses TCP protocol to guarantee the delivery of data packages in network with correct ordering.
+Connection should be kept opened for data transmission, transmission is duplex - for data and confirmation packages.
+
+Datagram Socket uses UDP protocol, delivery is not guaranteed.
+Connection could be closes just after the data has been sent, there is no confirmation packages back to client.
+
+Terminal computer could have a static IP address xxx.xxx.xxx.xxx. Server process is identified by a 'port' number
+on host machine (which server program is running on), both for TCP and UDP protocols.
+
+Client:
+1. Creates a socket of some type using 'socket()' system call.
+2. Fills 'sockaddr' structure with 'IP address' and 'port' of a destination Server.
+3. Establishes connection (in case of TCP) via socket using 'connect()' system call.
+4. Sends data via socket using 'write() / send()' system calls, receives data via socket using 'read() / receive() {blocking}' system calls.
+
+Server:
+1. Creates a socket of some type using 'socket()' system call.
+2. Fills 'sockaddr' structure with 'port' which Server process is bound to.
+3. Binds the socket with that 'port' using 'bind()' system call.
+4. Starts listening for connections coming on that 'port' using 'listen()' system call.
+5. Incoming connections are queued by OS in a special queue. Server should make an 'accept()' system call to get HEAD of that queue or block until the connection is coming.
+6. Sends data via socket using 'write() / send()' system calls, receives data via socket using 'read() / receive() {blocking}' system calls.
+
+An 'IP address' and 'port' are stored in 'sockaddr' structure in Network Byte Order (Big-Endian). It could be transformed to host-specific byte order
+using 'ntohs(), ntonl(), htons(), htonl()' functions.
+
