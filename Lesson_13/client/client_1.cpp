@@ -1,3 +1,4 @@
+#include <thread>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -17,6 +18,12 @@ static void usage() {
  *
  * client_id#dest_client_id\0   ; length - up to 32 bytes
  */
+
+static void receiverThread(int sockfd) {
+  char buffer[1024];
+  recv(sockfd, buffer, 1024, 0);
+  printf("message: %s\n", buffer);
+}
 
 /* Main */
 // ----------------------------------------------------------------------------
@@ -62,9 +69,15 @@ int main(int argc, char** argv) {
   recv(sockfd, buffer, 1024, 0);
   INF("Received from Server: %s", buffer);
 
-  bzero(buffer, 1024);
-  fgets(buffer, 1024, stdin);
-  send(sockfd, buffer, strlen(buffer), 0);
+  // listen for incoming messages
+  std::thread t(receiverThread, sockfd);
+  t.detach();
+
+  do {
+    bzero(buffer, 1024);
+    fgets(buffer, 1024, stdin);
+    send(sockfd, buffer, strlen(buffer), 0);
+  } while (strlen(buffer) > 1);
 
   close(sockfd);
 
