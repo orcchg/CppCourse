@@ -161,7 +161,7 @@ int main(int argc, char** argv) {
   SingleThreadServer server(port, duration);
   server.run();
 
-  DBG("[Lesson 13]: Server 0");
+  DBG("[Lesson 13]: Server 0 END");
   return 0;
 }
 
