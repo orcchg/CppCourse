@@ -6,26 +6,25 @@
 #include "protocol_0.h"
 
 int main(int argc, char** argv) {
-  std::chrono::system_clock::time_point point = std::chrono::system_clock::now();
-  std::time_t time = std::chrono::system_clock::to_time_t(point);
-  std::ostringstream oss;
-  oss << std::ctime(&time);
+  auto now = std::chrono::system_clock::now();
+  auto duration = now.time_since_epoch();
+  auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
 
   Protocol protocol;
   protocol.src_id = 789;
   protocol.dest_id = 1234;
-  protocol.timestamp = std::atoi(oss.str().c_str());
+  protocol.timestamp = millis;
   protocol.name = "Maxim";
   protocol.message = "Hello, World!";
 
-  oss.str("");
+  std::ostringstream oss;
   oss << protocol;
   DBG("Init: %s", oss.str().c_str());
 
-  char* buffer = nullptr;
-  serialize(protocol, buffer);
+  char* buffer = serialize(protocol);
 
   Protocol output = deserialize(buffer);
+
   if (output == protocol) {
     INF("Test passed: OK");
   } else {
