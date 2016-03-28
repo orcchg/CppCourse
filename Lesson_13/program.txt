@@ -2,7 +2,7 @@
 1. http XML response [1*; 1_3 - exercise]
 2. http Json response [2*; 2_2, 2_3 - exercises]
 3. http POST, PUT, DELETE requests [4*; 4_1, 4_2 - exercises]
-4. Client-Server socket communication [0, 1]
+4. Client-Server socket communication [0 - 2]
 
 ?. http asynchronous response [3*]
 ?. http download image [5*]
