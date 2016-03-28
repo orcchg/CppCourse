@@ -50,17 +50,19 @@ struct ClientException {};
 /* Worker thread */
 // ----------------------------------------------------------------------------
 static void receiverThread(int sockfd) {
-  char buffer[MESSAGE_SIZE];
-  recv(sockfd, buffer, MESSAGE_SIZE, 0);
-  Protocol proto = deserialize(buffer);
+  while (true) {
+    char buffer[MESSAGE_SIZE];
+    recv(sockfd, buffer, MESSAGE_SIZE, 0);
+    Protocol proto = deserialize(buffer);
 
-  std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-  std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
 
-  std::ostringstream oss;
-  oss << std::ctime(&end_time);
+    std::ostringstream oss;
+    oss << std::ctime(&end_time);
 
-  printf("%s :: %s: %s\n", oss.str().c_str(), proto.name.c_str(), proto.message.c_str());
+    printf("%s :: %s: %s\n", oss.str().c_str(), proto.name.c_str(), proto.message.c_str());
+  }
 }
 
 /* Client */
@@ -130,12 +132,11 @@ void Client::run() {
   t.detach();
 
   // send messages loop
-  char message[MESSAGE_SIZE];
+  std::string message;
   do {
-    bzero(message, MESSAGE_SIZE);
-    fgets(message, MESSAGE_SIZE, stdin);
-    send(m_socket, message, strlen(message), 0);
-  } while (strlen(message) > 1);
+    std::cin >> message;
+    send(m_socket, message.c_str(), message.length(), 0);
+  } while (message.length() > 0);
 }
 
 // ----------------------------------------------
@@ -179,9 +180,6 @@ int main(int argc, char** argv) {
     char buffer[256];
     strncpy(buffer, argv[1], strlen(argv[1]));
     config_file = std::string(buffer);
-  } else {
-    usage();
-    return 1;
   }
   DBG("Configuration from file: %s", config_file.c_str());
 
