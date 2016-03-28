@@ -1,0 +1,9 @@
+SET( TARGET protocol )
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+SET( SOURCES ${SOURCE_DIR}/protocol_0.cpp )
+ADD_LIBRARY( ${TARGET} SHARED ${SOURCES} )
+
+SET( SOURCES_TEST ${SOURCE_DIR}/protocol_test.cpp )
+ADD_EXECUTABLE( protocol_test ${SOURCES_TEST} )
+TARGET_LINK_LIBRARIES( protocol_test protocol )
+

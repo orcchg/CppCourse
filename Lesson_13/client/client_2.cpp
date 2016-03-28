@@ -1,14 +1,14 @@
 #include "logger.h"
 
-/* Server */
+/* Client */
 // ----------------------------------------------------------------------------
 
 /* Main */
 // ----------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 13]: Server 2");
+  DBG("[Lesson 13]: Client 2");
 
-  DBG("[Lesson 13]: Server 2 END");
+  DBG("[Lesson 13]: Client 2 END");
   return 0;
 }
 

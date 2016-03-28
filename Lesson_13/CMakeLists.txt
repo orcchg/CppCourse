@@ -15,5 +15,6 @@ endif()
 ADD_SUBDIRECTORY( http )
 ADD_SUBDIRECTORY( client )
 ADD_SUBDIRECTORY( server )
+ADD_SUBDIRECTORY( protocol )
 ADD_SUBDIRECTORY( tinyxml )
 
