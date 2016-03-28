@@ -7,7 +7,7 @@
 struct Protocol {
   int src_id;
   int dest_id;
-  int timestamp;
+  long long timestamp;
   std::string name;
   std::string message;
 
@@ -17,7 +17,7 @@ struct Protocol {
 
 struct SerializeException {};
 
-void serialize(const Protocol& message, char* output);
+char* serialize(const Protocol& message);
 Protocol deserialize(char* input);
 
 std::ostream& operator << (std::ostream& out, const Protocol& message);
