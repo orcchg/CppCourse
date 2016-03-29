@@ -105,7 +105,7 @@ void Server::run() {
     Protocol proto = getIncomingMessage(peer_socket);
 
     // register incoming Client if not already registered
-    if (!registerClientIfNeed(proto, peer_socket, peer_address_structure)) {
+    if (registerClientIfNeed(proto, peer_socket, peer_address_structure)) {
       // process message in separate thread
       std::thread worker_thread(&Server::processMessages, this, peer_socket);
       worker_thread.detach();
@@ -160,6 +160,7 @@ bool Server::registerClientIfNeed(const Protocol& proto, int socket, sockaddr_in
 void Server::processMessages(int socket) {
   Protocol proto;
   while ((proto = getIncomingMessage(socket)) != EMPTY_MESSAGE) {
+    // DBG("Received message: %s", proto.message.c_str());
     // broadcast message to all existing peers (one-channel chat)
     for (auto it = m_peers.begin(); it != m_peers.end(); ++it) {
       if (it->first != proto.src_id) {
