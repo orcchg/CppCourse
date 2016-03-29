@@ -1,0 +1,11 @@
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+
+SET( SOURCES_2 ${SOURCE_DIR}/mutex_2.cpp )
+SET( SOURCES_2_1 ${SOURCE_DIR}/mutex_2_1.cpp )
+SET( SOURCES_2_2 ${SOURCE_DIR}/mutex_2_2.cpp )
+
+# Fix concurrency samples
+ADD_EXECUTABLE( mutex_2 ${SOURCES_2} )
+ADD_EXECUTABLE( mutex_2_1 ${SOURCES_2_1} )
+ADD_EXECUTABLE( mutex_2_2 ${SOURCES_2_2} )
+
