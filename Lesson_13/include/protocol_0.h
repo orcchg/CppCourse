@@ -15,6 +15,8 @@ struct Protocol {
   bool operator != (const Protocol& rhs) const;
 };
 
+static Protocol EMPTY_MESSAGE;
+
 struct SerializeException {};
 
 char* serialize(const Protocol& message);

@@ -59,7 +59,7 @@ char* serialize(const Protocol& message) {
 
   output -= 5 + src_id_src.length() + dest_id_src.length() + ts_src.length() + message.name.length() + message.message.length();
 
-  MSG("Serialized: %s", output);
+  // MSG("Serialized: %s", output);
   return output;
 }
 
@@ -69,7 +69,7 @@ Protocol deserialize(char* input) {
     throw SerializeException();
   }
 
-  MSG("Deserialize: %s", input);
+  // MSG("Deserialize: %s", input);
 
   std::string wrap(input);
   int i1 = wrap.find_first_of('#');
