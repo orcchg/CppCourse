@@ -9,3 +9,11 @@ E	1111	         240.0.0.0	255.255.255.255
 
 Calculate the noumber of different adresses within each class of network.
 
+2. Make some refactoring for 'server_2.cpp' implementing non-blocking main thread Server.
+This Server should receive user commands in main thread and send terminating signal to all peers.
+(see 'server_2_1.cpp' for solution).
+
+3. Create multi-channel chat server.
+
+4. Use http protocol instead of hand-written protocol in 'server_2.cpp' or 'server_2_1.cpp'.
+
