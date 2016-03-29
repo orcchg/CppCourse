@@ -1,3 +1,4 @@
+#include <chrono>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -17,6 +18,7 @@
 #include "protocol_0.h"
 
 #define MESSAGE_SIZE 4096
+#define END_STRING "!@#$\0"
 
 /* Tools */
 // ----------------------------------------------------------------------------
@@ -45,6 +47,13 @@ static std::string enterName() {
   return name;
 }
 
+long long getCurrentTime() {
+  auto now = std::chrono::system_clock::now();
+  auto duration = now.time_since_epoch();
+  auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+  return millis;
+}
+
 struct ClientException {};
 
 /* Worker thread */
@@ -53,6 +62,13 @@ static void receiverThread(int sockfd) {
   while (true) {
     char buffer[MESSAGE_SIZE];
     recv(sockfd, buffer, MESSAGE_SIZE, 0);
+
+    // check for termination
+    if (strncmp(buffer, END_STRING, strlen(END_STRING)) == 0) {
+      INF("Server: connection closed");
+      return;  // Server has sent end signal
+    }
+
     Protocol proto = deserialize(buffer);
 
     std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
@@ -133,10 +149,17 @@ void Client::run() {
 
   // send messages loop
   std::string message;
-  do {
-    std::cin >> message;
-    send(m_socket, message.c_str(), message.length(), 0);
-  } while (message.length() > 0);
+  while (getline(std::cin, message)) {
+    Protocol proto;
+    proto.src_id = m_id;
+    proto.timestamp = getCurrentTime();
+    proto.name = m_name;
+    proto.message = message;
+
+    char* raw_proto = serialize(proto);
+    send(m_socket, raw_proto, strlen(raw_proto), 0);
+    delete [] raw_proto;
+  }
 }
 
 // ----------------------------------------------
