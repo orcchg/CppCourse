@@ -13,9 +13,6 @@ SET( SOURCES_1_7 ${SOURCE_DIR}/mutex_1_7.cpp )
 SET( SOURCES_1_8 ${SOURCE_DIR}/mutex_1_8.cpp )
 SET( SOURCES_1_9 ${SOURCE_DIR}/mutex_1_9.cpp )
 SET( SOURCES_1_10 ${SOURCE_DIR}/mutex_1_10.cpp )
-SET( SOURCES_2 ${SOURCE_DIR}/mutex_2.cpp )
-SET( SOURCES_2_1 ${SOURCE_DIR}/mutex_2_1.cpp )
-SET( SOURCES_2_2 ${SOURCE_DIR}/mutex_2_2.cpp )
 SET( SOURCES_3 ${SOURCE_DIR}/mutex_3.cpp )
 SET( SOURCES_4 ${SOURCE_DIR}/mutex_4.cpp )
 SET( SOURCES_5 ${SOURCE_DIR}/mutex_5.cpp )
@@ -36,11 +33,6 @@ ADD_EXECUTABLE( mutex_1_8 ${SOURCES_1_8} )
 ADD_EXECUTABLE( mutex_1_9 ${SOURCES_1_9} )
 # Try lock
 ADD_EXECUTABLE( mutex_1_10 ${SOURCES_1_10} )
-
-# Fix concurrency samples
-ADD_EXECUTABLE( mutex_2 ${SOURCES_2} )
-ADD_EXECUTABLE( mutex_2_1 ${SOURCES_2_1} )
-ADD_EXECUTABLE( mutex_2_2 ${SOURCES_2_2} )
 
 # Try lock by time or condition, re-lock mutex
 ADD_EXECUTABLE( mutex_3 ${SOURCES_3} )
