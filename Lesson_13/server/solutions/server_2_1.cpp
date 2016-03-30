@@ -18,8 +18,19 @@
 #define MESSAGE_SIZE 4096
 #define END_STRING "!@#$\0"
 
+bool is_stopped = false;
+
 /* Tools */
 // ----------------------------------------------------------------------------
+static void printHelp() {
+  printf("Commands:\n\thelp - print this help \
+                   \n\tstop - send terminate signal to all peers and stop server\n");
+}
+
+static void stopServer() {
+  is_stopped = true;
+}
+
 struct Peer {
   int id;
   int socket;
@@ -27,6 +38,23 @@ struct Peer {
 };
 
 struct ServerException {};
+
+/* Interface */
+// ----------------------------------------------------------------------------
+const char* HELP = "help";
+const char* STOP = "stop";
+
+bool evaluate(char* command) {
+  if (strcmp(HELP, command) == 0) {
+    printHelp();
+  } else if (strcmp(STOP, command) == 0) {
+    stopServer();
+    return false;
+  } else {
+    WRN("Undefined command: %s", command);
+  }
+  return true;
+}
 
 /* Server */
 // ----------------------------------------------------------------------------
@@ -40,6 +68,8 @@ public:
 private:
   int m_socket;
   std::unordered_map<int, Peer> m_peers;
+
+  void runListener();
 
   void printClientInfo(sockaddr_in& peeraddr);
   Protocol getIncomingMessage(int socket);
@@ -90,7 +120,21 @@ Server::~Server() {
 }
 
 void Server::run() {
-  while (true) {  // server loop
+  std::thread t(&Server::runListener, this);
+  t.detach();
+
+  printHelp();
+
+  // evaluate user commands
+  char command[5];
+  do {
+    printf("server@server:");
+    scanf("%s", command);
+  } while (evaluate(command));
+}
+
+void Server::runListener() {
+  while (!is_stopped) {  // server loop
     sockaddr_in peer_address_structure;
     socklen_t peer_address_structure_size = sizeof(peer_address_structure);
 
@@ -159,7 +203,7 @@ bool Server::registerClientIfNeed(const Protocol& proto, int socket, sockaddr_in
 
 void Server::processMessages(int socket) {
   Protocol proto;
-  while ((proto = getIncomingMessage(socket)) != EMPTY_MESSAGE) {
+  while (!is_stopped && (proto = getIncomingMessage(socket)) != EMPTY_MESSAGE) {
     // DBG("Received message: %s", proto.message.c_str());
     // broadcast message to all existing peers (one-channel chat)
     for (auto it = m_peers.begin(); it != m_peers.end(); ++it) {
