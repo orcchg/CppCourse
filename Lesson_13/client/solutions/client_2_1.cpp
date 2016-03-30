@@ -20,6 +20,8 @@
 #define MESSAGE_SIZE 4096
 #define END_STRING "!@#$\0"
 
+bool is_stopped = false;
+
 /* Tools */
 // ----------------------------------------------------------------------------
 static void usage() {
@@ -66,6 +68,7 @@ static void receiverThread(int sockfd) {
     // check for termination
     if (strncmp(buffer, END_STRING, strlen(END_STRING)) == 0) {
       INF("Server: connection closed");
+      is_stopped = true;  // stop main loop
       return;  // Server has sent end signal
     }
 
@@ -149,7 +152,7 @@ void Client::run() {
 
   // send messages loop
   std::string message;
-  while (getline(std::cin, message)) {
+  while (!is_stopped && getline(std::cin, message)) {
     Protocol proto;
     proto.src_id = m_id;
     proto.timestamp = getCurrentTime();
@@ -196,7 +199,7 @@ bool Client::readConfiguration(const std::string& config_file) {
 /* Main */
 // ----------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 13]: Client 2");
+  DBG("[Lesson 13]: Client 2.1");
 
   std::string config_file = "../data/server.cfg";
   if (argc >= 2) {
@@ -213,7 +216,7 @@ int main(int argc, char** argv) {
   client.init(config_file);
   client.run();
 
-  DBG("[Lesson 13]: Client 2 END");
+  DBG("[Lesson 13]: Client 2.1 END");
   return 0;
 }
 
