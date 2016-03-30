@@ -11,9 +11,14 @@ Calculate the noumber of different adresses within each class of network.
 
 2. Make some refactoring for 'server_2.cpp' implementing non-blocking main thread Server.
 This Server should receive user commands in main thread and send terminating signal to all peers.
-(see 'server_2_1.cpp' for solution).
+(see 'server_2_1.cpp' for solution). I will probably need some minor changes in 'client_2.cpp'
+(see 'client_2_1.cpp' for such changes).
 
-3. Create multi-channel chat server.
+3. Use function 'getaddrinfo()' to fill 'sockaddr' structure instead of manual filling
+(see 'server_2_2.cpp' and 'client_2_2.cpp' for solutions).
 
-4. Use http protocol instead of hand-written protocol in 'server_2.cpp' or 'server_2_1.cpp'.
+4. Create multi-channel chat server (see 'server_2_3.cpp' for solution).
+
+5. Use http protocol instead of hand-written one in multi-channel chat server
+(see 'server_3_1.cpp' for solution).
 
