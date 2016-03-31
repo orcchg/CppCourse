@@ -24,3 +24,5 @@ ADD_EXECUTABLE( condition_variable_3_2 ${SOURCES_3_2} )
 # sleeping barber
 ADD_EXECUTABLE( condition_variable_5 ${SOURCES_5} )
 
+ADD_SUBDIRECTORY( solutions )
+

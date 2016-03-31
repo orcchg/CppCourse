@@ -61,3 +61,5 @@ TARGET_LINK_LIBRARIES( http_8 curl curlpp )
 ADD_EXECUTABLE( http_9 ${SOURCES_9} )
 TARGET_LINK_LIBRARIES( http_9 curl curlpp )
 
+ADD_SUBDIRECTORY( solutions )
+

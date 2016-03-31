@@ -12,3 +12,5 @@ TARGET_LINK_LIBRARIES( server_2 protocol )
 ADD_EXECUTABLE( server_3 ${SOURCES_3} )
 TARGET_LINK_LIBRARIES( server_3 protocol )
 
+ADD_SUBDIRECTORY( solutions )
+
