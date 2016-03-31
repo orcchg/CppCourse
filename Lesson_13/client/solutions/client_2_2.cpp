@@ -139,7 +139,7 @@ void Client::init(const std::string& config_file) {
   // establish connection
   addrinfo* ptr = server_info;
 
-  for (; ptr != nullptr; ptr = server_info->ai_next) {  // loop through all the results
+  for (; ptr != nullptr; ptr = ptr->ai_next) {  // loop through all the results
     if ((m_socket = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
       continue;  // failed to get connection socket
     }

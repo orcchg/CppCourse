@@ -38,7 +38,7 @@ TARGET_LINK_LIBRARIES( http_2 curl curlpp )
 ADD_EXECUTABLE( http_2_1 ${SOURCES_2_1} )
 TARGET_LINK_LIBRARIES( http_2_1 curl curlpp )
 
-# Download large file
+# http sample exchange
 ADD_EXECUTABLE( http_3 ${SOURCES_3} )
 TARGET_LINK_LIBRARIES( http_3 curl curlpp )
 

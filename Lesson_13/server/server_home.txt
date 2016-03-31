@@ -9,6 +9,9 @@ E	1111	         240.0.0.0	255.255.255.255
 
 Calculate the noumber of different adresses within each class of network.
 
+1.5. Try to use 'server_1.cpp' with older 'client_0.cpp'; 'server_2.cpp' (or variations) with older
+'client_0.cpp' or 'client_1.cpp' and vice versa.
+
 2. Make some refactoring for 'server_2.cpp' implementing non-blocking main thread Server.
 This Server should receive user commands in main thread and send terminating signal to all peers.
 (see 'server_2_1.cpp' for solution). I will probably need some minor changes in 'client_2.cpp'
@@ -16,6 +19,9 @@ This Server should receive user commands in main thread and send terminating sig
 
 3. Use function 'getaddrinfo()' to fill 'sockaddr' structure instead of manual filling
 (see 'server_2_2.cpp' and 'client_2_2.cpp' for solutions).
+
+3.1. Loop through linked list returned with 'getaddrinfo()' in 'server_2_2.cpp' sample
+and choose the first valid connection instead of just the first one.
 
 4. Create multi-channel chat server (see 'server_2_3.cpp' for solution).
 
