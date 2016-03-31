@@ -9,19 +9,21 @@
 #include <unistd.h>
 #include "logger.h"
 
-const char* URL_CATAPI = "http://thecatapi.com/api/images/get?format=xml&results_per_page=3";
+// const char* URL_CATAPI = "http://thecatapi.com/api/images/get?format=xml&results_per_page=3";
+
+/// @see http://www.tutorialspoint.com/http/http_message_examples.htm
 
 static char* prepareHttpRequest() {
   char* request = new char[2048];
 
-  std::string text = "GET /api/images/get?format=xml&results_per_page=3 HTTP/1.1\r\n \
-                      Host: www.thecatapi.com\r\n \
-                      From: orcchg@yandex.ru\r\n \
-                      User-Agent: CppCourse_Lesson_13_Http_3/1.1\r\n \
-                      \r\n\0";
+  // TODO[Quiz]: make some http requests manually
+
+  std::string text = "GET /http/http_message_examples.htm HTTP/1.1\r\nHost: www.tutorialspoint.com\r\nFrom: orcchg@yandex.ru\r\nUser-Agent: CppCourse_Lesson_13_Http_3/1.1\r\nAccept-Language: en-us\r\nAccept-Encoding: gzip, deflate\r\nConnection: Keep-Alive\r\n\r\n";
+
+  // std::string text = "GET /wiki/HTTP HTTP/1.0\r\nHost: ru.wikipedia.org\r\n\r\n";
 
   strncpy(request, text.c_str(), text.length());
-  MSG("Request:\n%s", request);
+  MSG("Request: %s", request);
 
   return request;
 }
@@ -38,7 +40,7 @@ int main(int argc, char** argv) {
   hints.ai_family = AF_INET;
   hints.ai_socktype = SOCK_STREAM;
 
-  int status = getaddrinfo("thecatapi.com", "http", &hints, &server_info);  // http - default port 80, because port is not specified
+  int status = getaddrinfo("www.tutorialspoint.com", "http", &hints, &server_info);  // http - default port 80, because port is not specified
   if (status != 0) {
     ERR("Failed to prepare address structure: %s", gai_strerror(status));
     return 1;

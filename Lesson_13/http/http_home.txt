@@ -31,9 +31,11 @@ Make sure all fields are present and have correct types and values, compare it t
 9. Update yet existing Post making a PUT with json-body request to JSON_PLACEHOLDER_API.
 (see 'http_4_1.cpp' for solution). Same for DELETE request (see 'http_4_2.cpp' for solution).
 
-10. Make a simple HTTP request to the 'thecatapi.com' as described in URL_CATAPI.
-Do not use curlpp or something - make a low-level TCP/IP connection, send a request wrapped into HTTP block
-and receive a response, print out it with the body if presents (see 'http_3.cpp' for solution).
+10. Make a simple HTTP request to the 'www.thecatapi.com' as described in URL_CATAPI.
+Do not use 'curlpp' or something - make a low-level TCP/IP connection, send a request wrapped into HTTP block
+and receive a response, print out it with the body if presents (see 'http_3_1.cpp' for solution).
 
 10.1. Re-write 'http_3.cpp' filling raw 'sockaddr_in' structure instead of use of 'getaddrinfo()' function.
+
+10.2. Solve task 10 and write unit-test making request and retrieving response via 'curlpp'.
 
