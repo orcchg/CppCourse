@@ -18,9 +18,14 @@
  *
  * @see https://www.jmarshall.com/easy/http/
  *
- * HTTP is a stateless protocol - it not maintaining any connection information
+ * HTTP 1.0 is a stateless protocol - it not maintaining any connection information
  * between transactions. HTTP Client opens a new connection each time it needs to
  * send a request to the HTTP Server (HTTP transaction).
+ *
+ * HTTP 1.1 supports persistent connections by default. But Client's request
+ * could contain 'Connection: close' header and such connection will be closed
+ * after the corresponding response. Server's response may also contain such
+ * headers and this means it closes connection after sending a response.
  */
 
 /* Main */

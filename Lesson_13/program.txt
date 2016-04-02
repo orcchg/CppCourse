@@ -2,7 +2,7 @@
 1. http GET request [http: 0*]
 2. http XML response [http: 1*; 1_3 - exercise]
 3. http Json response [http: 2*; 2_2, 2_3 - exercises]
-4. http sample exchange [http: 3; 3_1 - exercise]
+4. http sample exchange [http: 3]
 5. HTTP Client and HTTP Server [client / server: 3*]
 6. http POST, PUT, DELETE requests [http: 4*; 4_1, 4_2 - exercises]
 

@@ -13,6 +13,7 @@ endif()
 
 # -----------------------------------------------------------------------------
 ADD_SUBDIRECTORY( http )
+ADD_SUBDIRECTORY( http_parser )
 ADD_SUBDIRECTORY( client )
 ADD_SUBDIRECTORY( server )
 ADD_SUBDIRECTORY( protocol )
