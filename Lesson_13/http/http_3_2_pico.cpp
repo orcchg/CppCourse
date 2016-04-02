@@ -55,6 +55,8 @@ void PicoParser::parseResponse(char* http, size_t nbytes) {
     for (int i = 0; i < number_headers; ++i) {
       INF("Header[%i]: %.*s: %.*s", i, (int) headers[i].name_len, headers[i].name, (int) headers[i].value_len, headers[i].value);
     }
+    // jump to body
+    INF("Body: %s", headers[number_headers - 1].value + headers[number_headers - 1].value_len + 2);
   }
 }
 
