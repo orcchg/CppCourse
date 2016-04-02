@@ -9,6 +9,7 @@ ADD_EXECUTABLE( server_1 ${SOURCES_1} )
 ADD_EXECUTABLE( server_2 ${SOURCES_2} )
 TARGET_LINK_LIBRARIES( server_2 protocol )
 
+# http Server
 ADD_EXECUTABLE( server_3 ${SOURCES_3} )
 TARGET_LINK_LIBRARIES( server_3 protocol )
 

@@ -25,6 +25,9 @@ and choose the first valid connection instead of just the first one.
 
 4. Create multi-channel chat server (see 'server_2_3.cpp' for solution).
 
-5. Use http protocol instead of hand-written one in multi-channel chat server
+5. Run 'server_3.cpp' and try to connect to it using either console client ('client_3.cpp' for example)
+or Web-browser. Compare request data received by server.
+
+6. Use http protocol instead of hand-written one in multi-channel chat server
 (see 'server_3_1.cpp' for solution).
 

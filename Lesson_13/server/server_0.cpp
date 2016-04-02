@@ -68,7 +68,7 @@ SingleThreadServer::SingleThreadServer(int port, int duration)
     throw ServerException();
   }
   memset(&m_address_structure, 0, sizeof(sockaddr_in));
-  m_address_structure.sin_family = AF_INET;  // Quiz: what are relations between AF_INET and PF_INET ?
+  m_address_structure.sin_family = AF_INET;  // TODO[Quiz]: what are relations between AF_INET and PF_INET ?
   m_address_structure.sin_addr.s_addr = htonl(INADDR_ANY);
   m_address_structure.sin_port = htons(m_port);
 

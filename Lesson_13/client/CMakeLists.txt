@@ -9,8 +9,9 @@ ADD_EXECUTABLE( client_1 ${SOURCES_1} )
 ADD_EXECUTABLE( client_2 ${SOURCES_2} )
 TARGET_LINK_LIBRARIES( client_2 protocol )
 
+# http Client
 ADD_EXECUTABLE( client_3 ${SOURCES_3} )
-TARGET_LINK_LIBRARIES( client_3 protocol )
+TARGET_LINK_LIBRARIES( client_3 curl curlpp )
 
 ADD_SUBDIRECTORY( solutions )
 

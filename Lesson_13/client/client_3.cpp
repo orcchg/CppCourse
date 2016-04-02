@@ -1,4 +1,4 @@
-#include "logger.h"
+#include "all.h"
 
 /**
  * HTTP Protocol
@@ -32,6 +32,11 @@
 // ----------------------------------------------------------------------------
 int main(int argc, char** argv) {
   DBG("[Lesson 13]: Client 3");
+
+  std::ostringstream sout;
+  sout << curlpp::options::Url("http://127.0.0.1/hello");
+
+  INF("Response: %s", sout.str().c_str());
 
   DBG("[Lesson 13]: Client 3 END");
   return 0;
