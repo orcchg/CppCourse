@@ -33,9 +33,12 @@ Make sure all fields are present and have correct types and values, compare it t
 
 10. Make a simple HTTP request to the 'www.thecatapi.com' as described in URL_CATAPI.
 Do not use 'curlpp' or something - make a low-level TCP/IP connection, send a request wrapped into HTTP block
-and receive a response, print out it with the body if presents (see 'http_3_1.cpp' for solution).
+and receive a response, print out it with the body if presents (see 'http_3_2.cpp' for solution).
 
 10.1. Re-write 'http_3.cpp' filling raw 'sockaddr_in' structure instead of use of 'getaddrinfo()' function.
 
 10.2. Solve task 10 and write unit-test making request and retrieving response via 'curlpp'.
+
+10.3. Re-write 'http_3_1.cpp' using C++ wrapper for 'http-parser' C-library (see 'https://github.com/AndreLouisCaron/httpxx').
+Bake this library into Project's build system providing all necessary CMake bindings.
 

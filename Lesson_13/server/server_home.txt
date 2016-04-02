@@ -7,7 +7,7 @@ C	110x	         192.0.0.0	223.255.255.255
 D	1110	         224.0.0.0	239.255.255.255
 E	1111	         240.0.0.0	255.255.255.255
 
-Calculate the noumber of different adresses within each class of network.
+Calculate the number of different adresses within each class of network.
 
 1.5. Try to use 'server_1.cpp' with older 'client_0.cpp'; 'server_2.cpp' (or variations) with older
 'client_0.cpp' or 'client_1.cpp' and vice versa.
@@ -26,8 +26,11 @@ and choose the first valid connection instead of just the first one.
 4. Create multi-channel chat server (see 'server_2_3.cpp' for solution).
 
 5. Run 'server_3.cpp' and try to connect to it using either console client ('client_3.cpp' for example)
-or Web-browser. Compare request data received by server.
+or Web-browser. Compare request data received by server and how Web-browser interpretes response body.
+
+5.1. Extract method from GET request start line on Server side and pass it to response's body providing
+the following string: "Hello, <method>" (omit angle brackets). Do not forget to adjust 'Content-length' header as well.
 
 6. Use http protocol instead of hand-written one in multi-channel chat server
-(see 'server_3_1.cpp' for solution).
+(see 'server_???.cpp' for solution).
 

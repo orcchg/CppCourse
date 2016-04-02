@@ -11,6 +11,3 @@ TARGET_LINK_LIBRARIES( server_2_2 protocol )
 ADD_EXECUTABLE( server_2_3 ${SOURCES_2_3} )
 TARGET_LINK_LIBRARIES( server_2_3 protocol )
 
-ADD_EXECUTABLE( server_3_1 ${SOURCES_3_1} )
-TARGET_LINK_LIBRARIES( server_3_1 protocol )
-

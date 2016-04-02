@@ -3,6 +3,7 @@ SET( SOURCES_0 ${SOURCE_DIR}/server_0.cpp )
 SET( SOURCES_1 ${SOURCE_DIR}/server_1.cpp )
 SET( SOURCES_2 ${SOURCE_DIR}/server_2.cpp )
 SET( SOURCES_3 ${SOURCE_DIR}/server_3.cpp )
+SET( SOURCES_3_1 ${SOURCE_DIR}/server_3_1.cpp )
 ADD_EXECUTABLE( server_0 ${SOURCES_0} )
 ADD_EXECUTABLE( server_1 ${SOURCES_1} )
 
@@ -11,7 +12,9 @@ TARGET_LINK_LIBRARIES( server_2 protocol )
 
 # http Server
 ADD_EXECUTABLE( server_3 ${SOURCES_3} )
-TARGET_LINK_LIBRARIES( server_3 protocol )
+TARGET_LINK_LIBRARIES( server_3 )
+ADD_EXECUTABLE( server_3_1 ${SOURCES_3_1} )
+TARGET_LINK_LIBRARIES( server_3_1 http_parser )
 
 ADD_SUBDIRECTORY( solutions )
 
