@@ -45,7 +45,6 @@ public:
   void parse(char* http, int nbytes);
 
 private:
-  int m_socket;
   http_parser* m_parser;
   http_parser_settings m_settings;
 };

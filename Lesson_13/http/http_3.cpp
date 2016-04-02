@@ -80,3 +80,49 @@ int main(int argc, char** argv) {
   return 0;
 }
 
+// --------------------------------------------------------------------------------------------------------------------
+/**
+ * Response:
+
+"Response: HTTP/1.1 200 OK
+Access-Control-Allow-Headers: X-Requested-With
+Access-Control-Allow-Origin: *
+Content-Type: text/html; charset=UTF-8
+Date: Sat, 02 Apr 2016 19:21:00 GMT
+Server: Apache/2.4.6 (CentOS) PHP/5.4.16
+Vary: User-Agent
+X-Powered-By: PHP/5.4.16
+Transfer-Encoding: chunked
+
+480
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>HTTP Message Examples</title>
+<meta name="description" content="HTTP Message Examples - Learn HTTP Protocol (Hypertext, Transfer, Protocol based on RFC 2616) in simple and easy steps starting from its simple overview, protocol parameters, message architecture, requests, responses, connection, caching, status codes, header fields, security  and methods like GET, POST, HEAD, PUT along with suitable examples." />
+<meta name="keywords" content="Hypertext, Transfer, Protocol, HTTP, Tutorial, Message Codes, HTTP Header, Response, Client , Server, Request Line, Message Body, HTTP Example, Methods, GET, POST, HEAD, PUT, Proxies, Version, RFC 2616" />
+<base href="http://www.tutorialspoint.com/" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="
+1699
+website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="/theme/css/style-min.css">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css`@"
+
+**/
+
