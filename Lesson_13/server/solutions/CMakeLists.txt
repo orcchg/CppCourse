@@ -8,6 +8,6 @@ ADD_EXECUTABLE( server_2_1 ${SOURCES_2_1} )
 TARGET_LINK_LIBRARIES( server_2_1 protocol )
 ADD_EXECUTABLE( server_2_2 ${SOURCES_2_2} )
 TARGET_LINK_LIBRARIES( server_2_2 protocol )
-#ADD_EXECUTABLE( server_2_3 ${SOURCES_2_3} )
-#TARGET_LINK_LIBRARIES( server_2_3 protocol_mc )
+ADD_EXECUTABLE( server_2_3 ${SOURCES_2_3} )
+TARGET_LINK_LIBRARIES( server_2_3 protocol_mc )
 

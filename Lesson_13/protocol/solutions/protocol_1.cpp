@@ -2,8 +2,33 @@
 #include "logger.h"
 #include "solutions/protocol_1.h"
 
+MCProtocol::MCProtocol()
+  : Protocol() {
+}
+
+MCProtocol::MCProtocol(const Protocol& rhs)
+  : Protocol(rhs) {
+}
+
+bool MCProtocol::operator == (const Protocol& rhs) const {
+    return ((src_id == rhs.src_id) &&
+         (dest_id == rhs.dest_id) &&
+         (timestamp == rhs.timestamp) &&
+         (name == rhs.name) &&
+         (message == rhs.message));
+}
+
 bool MCProtocol::operator == (const MCProtocol& rhs) const {
-  return Protocol::operator == (rhs) && (channel == rhs.channel);
+  return ((src_id == rhs.src_id) &&
+       (dest_id == rhs.dest_id) &&
+       (channel == rhs.channel) &&
+       (timestamp == rhs.timestamp) &&
+       (name == rhs.name) &&
+       (message == rhs.message));
+}
+
+bool MCProtocol::operator != (const Protocol& rhs) const {
+  return !(*this == rhs);
 }
 
 bool MCProtocol::operator != (const MCProtocol& rhs) const {

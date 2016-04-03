@@ -8,7 +8,12 @@
 struct MCProtocol : public Protocol {
   int channel;
 
+  MCProtocol();
+  MCProtocol(const Protocol& rhs);
+
+  bool operator == (const Protocol& rhs) const;
   bool operator == (const MCProtocol& rhs) const;
+  bool operator != (const Protocol& rhs) const;
   bool operator != (const MCProtocol& rhs) const;
 };
 

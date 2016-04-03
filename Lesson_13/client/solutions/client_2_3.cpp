@@ -50,6 +50,13 @@ static std::string enterName() {
   return name;
 }
 
+static int selectChannel() {
+  printf("Select channel: ");
+  int channel = 0;
+  std::cin >> channel;
+  return channel;
+}
+
 long long getCurrentTime() {
   auto now = std::chrono::system_clock::now();
   auto duration = now.time_since_epoch();
@@ -89,7 +96,7 @@ static void receiverThread(int sockfd) {
 // ----------------------------------------------------------------------------
 class Client {
 public:
-  Client(long long id, const std::string& name);
+  Client(long long id, const std::string& name, int channel);
   ~Client();
 
   void init(const std::string& config_file);
@@ -98,6 +105,7 @@ public:
 private:
   long long m_id;
   std::string m_name;
+  int m_channel;
 
   std::string m_ip_address;
   std::string m_port;
@@ -108,9 +116,9 @@ private:
   bool readConfiguration(const std::string& config_file);
 };
 
-Client::Client(long long id, const std::string& name)
-  : m_id(id), m_name(name) {
-  MSG("Initialized client with name %s and id %lli", name.c_str(), id);
+Client::Client(long long id, const std::string& name, int channel)
+  : m_id(id), m_name(name), m_channel(channel) {
+  MSG("Initialized client with name %s and id %lli on channel %i", name.c_str(), id, channel);
 }
 
 Client::~Client() {
@@ -161,8 +169,9 @@ void Client::init(const std::string& config_file) {
 
   if (m_is_connected) {
     // register to Server
-    Protocol proto;
+    MCProtocol proto;
     proto.src_id = m_id;
+    proto.channel = m_channel;
     proto.name = m_name;
     char* raw_proto = serialize_mc(proto);
     send(m_socket, raw_proto, strlen(raw_proto), 0);
@@ -188,8 +197,9 @@ void Client::run() {
   // send messages loop
   std::string message;
   while (!is_stopped && getline(std::cin, message)) {
-    Protocol proto;
+    MCProtocol proto;
     proto.src_id = m_id;
+    proto.channel = m_channel;  // message is intented for the specified channel
     proto.timestamp = getCurrentTime();
     proto.name = m_name;
     proto.message = message;
@@ -247,7 +257,9 @@ int main(int argc, char** argv) {
   std::string name = enterName();
   long long id = hash(name);
 
-  Client client(id, name);
+  int channel = selectChannel();
+
+  Client client(id, name, channel);
   client.init(config_file);
   client.run();
 

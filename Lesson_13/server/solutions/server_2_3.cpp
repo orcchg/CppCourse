@@ -35,6 +35,7 @@ static void stopServer() {
 
 struct Peer {
   int id;
+  int channel;  // chat channel
   int socket;
   std::string name;
 };
@@ -74,8 +75,8 @@ private:
   void runListener();
 
   void printClientInfo(sockaddr_in& peeraddr);
-  Protocol getIncomingMessage(int socket);
-  bool registerClientIfNeed(const Protocol& proto, int socket, sockaddr_in address_structure);
+  MCProtocol getIncomingMessage(int socket);
+  bool registerClientIfNeed(const MCProtocol& proto, int socket, sockaddr_in address_structure);
   void processMessages(int socket);
 };
 
@@ -159,7 +160,7 @@ void Server::runListener() {
     }
 
     // get incoming message
-    Protocol proto = getIncomingMessage(peer_socket);
+    MCProtocol proto = getIncomingMessage(peer_socket);
 
     // register incoming Client if not already registered
     if (registerClientIfNeed(proto, peer_socket, peer_address_structure)) {
@@ -180,10 +181,10 @@ void Server::printClientInfo(sockaddr_in& peeraddr) {
         ntohs(peeraddr.sin_port));
 }
 
-Protocol Server::getIncomingMessage(int socket) {
+MCProtocol Server::getIncomingMessage(int socket) {
   char buffer[MESSAGE_SIZE];
   int read_bytes = recv(socket, buffer, MESSAGE_SIZE, 0);
-  Protocol proto = EMPTY_MESSAGE;  // empty message
+  MCProtocol proto = EMPTY_MESSAGE;  // empty message
   if (read_bytes != 0) {
     proto = deserialize_mc(buffer);
     std::cout << proto << std::endl;
@@ -191,7 +192,7 @@ Protocol Server::getIncomingMessage(int socket) {
   return proto;
 }
 
-bool Server::registerClientIfNeed(const Protocol& proto, int socket, sockaddr_in address_structure) {
+bool Server::registerClientIfNeed(const MCProtocol& proto, int socket, sockaddr_in address_structure) {
   bool result = false;
   auto it_peer = m_peers.find(proto.src_id);
 
@@ -201,6 +202,7 @@ bool Server::registerClientIfNeed(const Protocol& proto, int socket, sockaddr_in
 
     Peer peer;
     peer.id = proto.src_id;
+    peer.channel = proto.channel;  // register client on channel
     peer.socket = socket;
     peer.name = proto.name;
     m_peers.insert(it_peer, std::pair<int, Peer>(proto.src_id, peer));
@@ -215,17 +217,15 @@ bool Server::registerClientIfNeed(const Protocol& proto, int socket, sockaddr_in
 }
 
 void Server::processMessages(int socket) {
-  Protocol proto;
+  MCProtocol proto;
   while (!is_stopped && (proto = getIncomingMessage(socket)) != EMPTY_MESSAGE) {
     // DBG("Received message: %s", proto.message.c_str());
     // broadcast message to all peers on the same channel (multi-channel chat)
     for (auto it = m_peers.begin(); it != m_peers.end(); ++it) {
-      if (it->first != proto.src_id) {
+      if (it->first != proto.src_id && it->second.channel == proto.channel) {
         char* raw_message = serialize_mc(proto);
         send(it->second.socket, raw_message, strlen(raw_message), 0);
         delete [] raw_message;
-      } else {
-        // ignore message from same peer
       }
     }
   }
