@@ -7,3 +7,5 @@ SET( SOURCES_TEST ${SOURCE_DIR}/protocol_test.cpp )
 ADD_EXECUTABLE( protocol_test ${SOURCES_TEST} )
 TARGET_LINK_LIBRARIES( protocol_test protocol )
 
+ADD_SUBDIRECTORY( solutions )
+

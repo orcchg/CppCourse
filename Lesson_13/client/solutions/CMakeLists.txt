@@ -1,13 +1,16 @@
 SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
 SET( SOURCES_2_1 ${SOURCE_DIR}/client_2_1.cpp )
 SET( SOURCES_2_2 ${SOURCE_DIR}/client_2_2.cpp )
+SET( SOURCES_2_3 ${SOURCE_DIR}/client_2_3.cpp )
 SET( SOURCES_3_1 ${SOURCE_DIR}/client_3_1.cpp )
 
 ADD_EXECUTABLE( client_2_1 ${SOURCES_2_1} )
 TARGET_LINK_LIBRARIES( client_2_1 protocol )
 ADD_EXECUTABLE( client_2_2 ${SOURCES_2_2} )
 TARGET_LINK_LIBRARIES( client_2_2 protocol )
+#ADD_EXECUTABLE( client_2_3 ${SOURCES_2_3} )
+#TARGET_LINK_LIBRARIES( client_2_3 protocol_mc )
 
 ADD_EXECUTABLE( client_3_1 ${SOURCES_3_1} )
-TARGET_LINK_LIBRARIES( client_3_1 protocol )
+TARGET_LINK_LIBRARIES( client_3_1 )
 

@@ -24,6 +24,7 @@ This Server should receive user commands in main thread and send terminating sig
 and choose the first valid connection instead of just the first one.
 
 4. Create multi-channel chat server (see 'server_2_3.cpp' for solution).
+Modify protocol accordingly (see 'protocol_1.h' and 'protocol_1.cpp' for solution).
 
 5. Run 'server_3.cpp' and try to connect to it using either console client ('client_3.cpp' for example)
 or Web-browser. Compare request data received by server and how Web-browser interpretes response body.

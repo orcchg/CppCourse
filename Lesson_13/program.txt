@@ -4,6 +4,8 @@
    c) client_2, server_2 - broadcast unichannel chat.
    d) client_2_1, server_2_1 - non-blocking server with user menu, pass commands back to clients.
    e) client_2_2, server_2_2 - same, but with getaddrinfo().
+   f) client_2_3, server_2_3 - same, but multichannel chat.
+   ===== Note: client_2* has configure file =====
 
 1. http GET request [http: 0* - using 'curlpp']
 
