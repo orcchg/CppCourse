@@ -1,10 +1,37 @@
 0. Client-Server socket communication [client / server: 0 - 2; 2_*, 3_* - exercises]
-1. http GET request [http: 0*]
+   a) client_0, server_0 - simple client-server communication.
+   b) client_1, server_1 - chat with peer-to-peer communication.
+   c) client_2, server_2 - broadcast unichannel chat.
+   d) client_2_1, server_2_1 - non-blocking server with user menu, pass commands back to clients.
+   e) client_2_2, server_2_2 - same, but with getaddrinfo().
+
+1. http GET request [http: 0* - using 'curlpp']
+
 2. http XML response [http: 1*; 1_3 - exercise]
+   a) http_1 - get XML body into file.
+   b) http_1_1 - get and parse XML body with 'tinyxml'.
+   c) http_1_2 - same, but in more convenient way.
+   d) http_1_3 - same, but parse all body until it ends.
+
 3. http Json response [http: 2*; 2_2, 2_3 - exercises]
+   a) http_2 - get Json body into file.
+   b) http_2_1 - get and parse single Json object.
+   c) http_2_2 - get and parse multiple Json object.
+   d) http_2_3 - same, but iterate over json array using iterators instead of integer indices.
+
 4. http make request manually and parse response [http: 3 - just request, 3_* - parse response]
+   a) http_3 - http request in a raw form sent via socket to some host.
+   b) http_3_1 - same, but parse server's response with http_parser (http_3_1_pico - with 'picohttpparser').
+   c) http_3_2 - same, but make request to 'thecatapi.com' and parse response to extract a body.
+
 5. HTTP Client and HTTP Server [client 3 - send http request with curl / server: 3 - get request, 3_* - parse request]
-6. http POST, PUT, DELETE requests [http: 4*; 4_1, 4_2 - exercises]
+   a) client_3 (or Web-browser), server_3 - send http request to the server, respond as http.
+   b) server_3_1 - parse http request and respond as http.
+
+6. http POST, PUT, DELETE requests [http: 4; 4_1, 4_2 - exercises]
+   a) http_4 - POST json data
+   b) http_4_1 - PUT json data
+   c) http_4_2 - DELETE request
 
 ?. http asynchronous response [http: ]
 ?. http download image [http: ]
