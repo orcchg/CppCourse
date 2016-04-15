@@ -33,5 +33,5 @@ or Web-browser. Compare request data received by server and how Web-browser inte
 the following string: "Hello, <method>" (omit angle brackets). Do not forget to adjust 'Content-length' header as well.
 
 6. Use http protocol instead of hand-written one in multi-channel chat server
-(see 'server_???.cpp' for solution).
+(see 'server_4.cpp' for solution).
 
