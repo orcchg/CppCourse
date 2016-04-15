@@ -1,6 +1,6 @@
 #include "all.h"
 #include "solutions/protocol_1.h"
-#include "solutions/x_my_parser.h"
+#include "my_parser.h"
 
 #define PORT_NUMBER 80
 #define MESSAGE_SIZE 4096
@@ -57,6 +57,7 @@ public:
 private:
   int m_socket;
   std::unordered_map<int, Peer> m_peers;
+  MyParser m_parser;
 
   void runListener();
 
@@ -172,10 +173,14 @@ MCProtocol Server::getIncomingMessage(int socket) {
   char buffer[MESSAGE_SIZE];
   int read_bytes = recv(socket, buffer, MESSAGE_SIZE, 0);
   MCProtocol proto = EMPTY_MESSAGE;  // empty message
-  if (read_bytes != 0) {
-    proto = deserialize_mc(buffer);
-    std::cout << proto << std::endl;
+
+  try {
+    Request request = m_parser.parseRequest(buffer, read_bytes);
+    // TODO: extract peer info from body
+  } catch (ParseException exception) {
+    ERR("Parse error: bad request");
   }
+
   return proto;
 }
 
