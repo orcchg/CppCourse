@@ -33,7 +33,7 @@ public:
 
   Request parseRequest(char* http, int nbytes);
 
-private:
+protected:
   StartLine parseStartLine(const std::string& start_line) const;
   bool isHeader(const std::string& header_line) const;
   Header parseHeader(const std::string& header_line) const;

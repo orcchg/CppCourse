@@ -16,3 +16,5 @@ SET( SOURCES_MY_TEST ${SOURCE_DIR}/my_parser_test.cpp )
 ADD_EXECUTABLE( my_parser_test ${SOURCES_MY_TEST} )
 TARGET_LINK_LIBRARIES( my_parser_test my_parser )
 
+ADD_SUBDIRECTORY( solutions )
+
