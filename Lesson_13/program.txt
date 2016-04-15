@@ -21,7 +21,7 @@
    c) http_2_2 - get and parse multiple Json object.
    d) http_2_3 - same, but iterate over json array using iterators instead of integer indices.
 
-4. http make request manually and parse response [http: 3 - just request, 3_* - parse response]
+4. http make request manually and parse response [http: 3 - just request, 3_* - parse response; 3_2_my - exercise]
    a) http_3 - http request in a raw form sent via socket to some host.
    b) http_3_1 - same, but parse server's response with http_parser (http_3_1_pico - with 'picohttpparser').
    c) http_3_2 - same, but make request to 'thecatapi.com' and parse response to extract a body.
