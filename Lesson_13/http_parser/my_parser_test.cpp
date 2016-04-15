@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cstdio>
 #include "logger.h"
 #include "my_parser.h"
@@ -26,9 +27,12 @@ int main(int argc, char** argv) {
 
   MyParser parser;
 
-  parser.parseRequest(request, 0);
+  Request parsed = parser.parseRequest(request, 0);
   printf("\n----------------------------------------------\n");
-  parser.parseRequest(body_request, 0);
+  Request parsed_body = parser.parseRequest(body_request, 0);
+
+  std::cout << parsed << std::endl;
+  std::cout << parsed_body << std::endl;
 
   return 0;
 }
