@@ -7,7 +7,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "my_parser.h"
+#include "solutions/x_my_parser.h"
 #include "logger.h"
 
 #define BUFFER_LENGTH 80 * 1024
@@ -70,14 +70,14 @@ int main(int argc, char** argv) {
   send(sockfd, request, strlen(request), 0);
   delete [] request;
 
-  MyParser parser;
+  XMyParser parser;
 
   char response[BUFFER_LENGTH];
   int nbytes = recv(sockfd, response, BUFFER_LENGTH, 0);
   INF("Response: %s", response);
 
   try {
-    // TODO[Quiz]: implement function:  parser.parseResponse(response, nbytes);
+    parser.parseResponse(response, nbytes);
   } catch (ParseException exception) {
     WRN("Failed to parse a response, go on and close connection");
   }
