@@ -1,6 +1,4 @@
-client_3_1.cpp - empty
 http_3_1.cpp, http_3_2.cpp - bad parse
-http_3_2_exp.cpp - remove
 server_3_1.cpp - bad parse
 server_3_1_pico.cpp - bad parse
 
