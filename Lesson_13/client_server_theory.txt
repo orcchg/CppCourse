@@ -25,19 +25,26 @@ Terminal computer could have a static IP address xxx.xxx.xxx.xxx. Server process
 on host machine (which server program is running on), both for TCP and UDP protocols.
 
 Client:
-1. Creates a socket of some type using 'socket()' system call.
+1. Creates a socket of some type using 'socket()' system call. Socket is unconnected.
 2. Fills 'sockaddr' structure with 'IP address' and 'port' of a destination Server.
 3. Establishes connection (in case of TCP) via socket using 'connect()' system call.
 4. Sends data via socket using 'write() / send()' system calls, receives data via socket using 'read() / receive() {blocking}' system calls.
+5. Close connection on socket using 'close()' system call.
 
 Server:
-1. Creates a socket of some type using 'socket()' system call.
+1. Creates a socket of some type using 'socket()' system call. Socket is unconnected.
 2. Fills 'sockaddr' structure with 'port' which Server process is bound to.
 3. Binds the socket with that 'port' using 'bind()' system call.
-4. Starts listening for connections coming on that 'port' using 'listen()' system call.
-5. Incoming connections are queued by OS in a special queue. Server should make an 'accept()' system call to get HEAD of that queue or block until the connection is coming.
-6. Sends data via socket using 'write() / send()' system calls, receives data via socket using 'read() / receive() {blocking}' system calls.
+4. Starts listening for connections coming on that 'port' using 'listen()' system call. Socket is called 'passive' now.
+5. Incoming connections (for that passive socket) are then queued by OS in a special queue ('backlog'). 
+   Server should make an 'accept()' system call to get HEAD of that queue or block until the connection is coming.
+6. Sends data via socket using 'write() / send()' system calls, receives data via socket using 'read() / recv() {blocking}' system calls.
+7. Close connection on socket using 'close()' system call.
 
 An 'IP address' and 'port' are stored in 'sockaddr' structure in Network Byte Order (Big-Endian). It could be transformed to host-specific byte order
 using 'ntohs(), ntonl(), htons(), htonl()' functions.
+
+System calls 'recv()' (or 'recvfrom()' for UDP) are blocking until data arrives for that socket. There is 'select()' system call, which allows
+to select one of currently free sockets if any while the others are busy with reading / writing or error pending.
+
 
