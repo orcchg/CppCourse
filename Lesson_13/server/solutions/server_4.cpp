@@ -6,6 +6,8 @@
 #define MESSAGE_SIZE 4096
 #define END_STRING "!@#$\0"
 
+struct ParseException {};
+
 bool is_stopped = false;
 
 /* Tools */

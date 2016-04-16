@@ -34,5 +34,13 @@ the following string: "Hello, <method>" (omit angle brackets). Do not forget to 
 
 6. Use http protocol instead of hand-written one in multi-channel chat server
 (see 'server_4.cpp' for solution), send messages and registration requests from client using http protocol
-(see 'client_4.cpp' for solution).
+(see 'client_4.cpp' for solution). Use JSON to wrap message info before sending / receiving.
+Provide all necessary convertions between resulting JSON and the structure you use to store peer messages
+(you can re-use 'Protocol' or 'MCProtocol' structures, convert them to / from JSON accordingly,
+see 'convert_json.cpp' for solution). Parse it with 'rapidjson' or any other convenient library.
+
+6.1. Instead of JSON, use XML to send / receive messages' body via http protocol.
+Provide all necessary convertions between resulting XML and the structure you use to store peer messages
+(you can re-use 'Protocol' or 'MCProtocol' structures, convert them to / from XML accordingly,
+see 'convert_xml.cpp' for solution). Parse it with 'tinyxml' or any other convenient library.
 
