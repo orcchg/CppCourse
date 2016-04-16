@@ -1,4 +1,5 @@
 #include "all.h"
+#include "solutions/convert_json.h"
 #include "solutions/protocol_1.h"
 #include "my_parser.h"
 
@@ -116,7 +117,7 @@ Server::~Server() {
   for (auto it = m_peers.begin(); it != m_peers.end(); ++it) {
     char end_signal[MESSAGE_SIZE];
     strncpy(end_signal, END_STRING, strlen(END_STRING));
-    send(it->second.socket, end_signal, strlen(end_signal), 0);  // TODO: send stop signal via HTTP protocol
+    send(it->second.socket, end_signal, strlen(end_signal), 0);
     close(it->second.socket);
   }
   close(m_socket);
@@ -171,14 +172,13 @@ void Server::printClientInfo(sockaddr_in& peeraddr) {
 }
 
 MCProtocol Server::getIncomingMessage(int socket) {
-  // TODO: re-write message receiving using HTTP protocol
   char buffer[MESSAGE_SIZE];
   int read_bytes = recv(socket, buffer, MESSAGE_SIZE, 0);
   MCProtocol proto = EMPTY_MESSAGE;  // empty message
 
   try {
     Request request = m_parser.parseRequest(buffer, read_bytes);
-    // TODO: extract peer info from body
+    proto = fromJson(request.body);
   } catch (ParseException exception) {
     ERR("Parse error: bad request");
   }
@@ -217,9 +217,8 @@ void Server::processMessages(int socket) {
     // broadcast message to all peers on the same channel (multi-channel chat)
     for (auto it = m_peers.begin(); it != m_peers.end(); ++it) {
       if (it->first != proto.src_id && it->second.channel == proto.channel) {
-        char* raw_message = serialize_mc(proto);
-        send(it->second.socket, raw_message, strlen(raw_message), 0);  // TODO: forward message via HTTP protocol
-        delete [] raw_message;
+        std::string json = toJson(proto);
+        send(it->second.socket, json.c_str(), json.length(), 0);
       }
     }
   }

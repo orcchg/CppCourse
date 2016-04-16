@@ -12,5 +12,5 @@ TARGET_LINK_LIBRARIES( server_2_2 protocol )
 ADD_EXECUTABLE( server_2_3 ${SOURCES_2_3} )
 TARGET_LINK_LIBRARIES( server_2_3 protocol_mc )
 ADD_EXECUTABLE( server_4 ${SOURCES_4} )
-TARGET_LINK_LIBRARIES( server_4 my_parser protocol_mc )
+TARGET_LINK_LIBRARIES( server_4 my_parser protocol_mc convert_json )
 
