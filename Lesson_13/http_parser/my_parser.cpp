@@ -1,7 +1,10 @@
+#include <algorithm>
 #include <sstream>
 #include <cstdlib>
+#include <cstring>
 #include "logger.h"
 #include "my_parser.h"
+#include <iostream>
 
 MyParser::MyParser() {
 }
@@ -12,12 +15,13 @@ MyParser::~MyParser() {
 Request MyParser::parseRequest(char* http, int nbytes) {
   const char* CRLF = "\r\n";
   std::istringstream iss(http);
+  //MSG("Input: %s", iss.str().c_str());
   Request request;
 
   // start line
   std::string start_line;
   std::getline(iss, start_line);
-  MSG("start=%s", start_line.c_str());
+  //MSG("start=%s", start_line.c_str());
   request.startline = parseStartLine(start_line);
 
   // headers
@@ -28,7 +32,7 @@ Request MyParser::parseRequest(char* http, int nbytes) {
     if (isHeader(header_line)) {
       Header header = parseHeader(header_line);
       headers.push_back(header);
-      MSG("header=%s", header_line.c_str());
+      //MSG("header=%s", header_line.c_str());
     } else {
       break;
     }
@@ -36,23 +40,14 @@ Request MyParser::parseRequest(char* http, int nbytes) {
   request.headers = headers;
 
   // body
-  int body_index = iss.tellg();
-  MSG("body index=%i", body_index);
-  iss.seekg(0, iss.end);
-  int body_length = iss.tellg();
-  body_length -= body_index;
-  
-  if (body_length > 0) {
-    iss.seekg(body_index);
-    MSG("length=%i", body_length);
-    char* buffer = new char[body_length];
-    iss.read(buffer, body_length);
-    std::string body(buffer);
-    delete [] buffer;
-    MSG("body=%s", body.c_str());
-    request.body = body;
-  } else {
-    MSG("No body");
+  std::string ending = "";
+  request.body = "";
+  std::string line;
+  while (std::getline(iss, line)) {
+    line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
+    request.body.append(ending);
+    request.body.append(line);
+    ending = "\n";
   }
 
   return request;  

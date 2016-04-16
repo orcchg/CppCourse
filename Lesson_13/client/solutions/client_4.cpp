@@ -1,3 +1,4 @@
+#include <sstream>
 #include "all.h"
 #include "solutions/convert_json.h"
 #include "solutions/protocol_1.h"
@@ -133,14 +134,22 @@ void Client::init(const std::string& config_file) {
 
   freeaddrinfo(server_info);  // release address stucture and remove from linked list
 
+  std::ostringstream oss;
   if (m_is_connected) {
     // register to Server
     MCProtocol proto;
     proto.src_id = m_id;
     proto.channel = m_channel;
     proto.name = m_name;
+
+    // compose http request
     std::string json = toJson(proto);
-    send(m_socket, json.c_str(), json.length(), 0);
+    oss << "POST /register HTTP/1.1\r\n"
+        << "Host: " << m_ip_address << "\r\n\r\n"
+        << json << "\r\n";
+    send(m_socket, oss.str().c_str(), oss.str().length(), 0);
+    oss.str("");
+    oss.flush();
   }
 }
 
@@ -152,14 +161,15 @@ void Client::run() {
 
   // get response from Server
   char buffer[256];
-  recv(m_socket, buffer, 256, 0);
-  INF("Server response: %s", buffer);
+  int read_bytes = recv(m_socket, buffer, 256, 0);
+  INF("Server response: %.*s", (int) read_bytes, buffer);
 
   // run message receiver thread
   std::thread t(receiverThread, this, m_socket);
   t.detach();
 
   // send messages loop
+  std::ostringstream oss;
   std::string message;
   while (!is_stopped && getline(std::cin, message)) {
     MCProtocol proto;
@@ -169,8 +179,15 @@ void Client::run() {
     proto.name = m_name;
     proto.message = message;
 
+    // compose http request
     std::string json = toJson(proto);
-    send(m_socket, json.c_str(), json.length(), 0);
+    oss << "POST /message HTTP/1.1\r\n"
+        << "Host: " << m_ip_address << "\r\n\r\n"
+        << json << "\r\n";
+    send(m_socket, oss.str().c_str(), oss.str().length(), 0);
+    //MSG("Out[%zu]: %s", oss.str().length(), oss.str().c_str());
+    oss.str("");
+    oss.flush();
   }
 }
 
@@ -190,7 +207,7 @@ bool Client::readConfiguration(const std::string& config_file) {
     m_ip_address = line.substr(i1 + 1);
     DBG("IP address: %s", m_ip_address.c_str());
 
-    // port is 80
+    // port is http (80)
     fs.close();
   } else {
     ERR("Failed to open configure file: %s", config_file.c_str());
@@ -205,6 +222,7 @@ bool Client::readConfiguration(const std::string& config_file) {
 static void receiverThread(Client* client, int sockfd) {
   while (true) {
     char buffer[MESSAGE_SIZE];
+    memset(buffer, 0, MESSAGE_SIZE);
     int nbytes = recv(sockfd, buffer, MESSAGE_SIZE, 0);
 
     // check for termination
@@ -223,6 +241,7 @@ static void receiverThread(Client* client, int sockfd) {
     oss << std::ctime(&end_time);
 
     MCProtocol proto = fromJson(response.body);
+    //std::cout << response << std::endl << proto << std::endl;
 
     printf("%s :: %s: %s\n", oss.str().c_str(), proto.name.c_str(), proto.message.c_str());
   }

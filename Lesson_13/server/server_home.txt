@@ -41,6 +41,6 @@ see 'convert_json.cpp' for solution). Parse it with 'rapidjson' or any other con
 
 6.1. Instead of JSON, use XML to send / receive messages' body via http protocol.
 Provide all necessary convertions between resulting XML and the structure you use to store peer messages
-(you can re-use 'Protocol' or 'MCProtocol' structures, convert them to / from XML accordingly,
-see 'convert_xml.cpp' for solution). Parse it with 'tinyxml' or any other convenient library.
+(you can re-use 'Protocol' or 'MCProtocol' structures, convert them to / from XML accordingly).
+Parse it with 'tinyxml' or any other convenient library.
 

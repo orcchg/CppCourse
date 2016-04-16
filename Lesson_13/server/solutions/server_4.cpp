@@ -1,3 +1,4 @@
+#include <sstream>
 #include "all.h"
 #include "solutions/convert_json.h"
 #include "solutions/protocol_1.h"
@@ -10,6 +11,10 @@
 struct ParseException {};
 
 bool is_stopped = false;
+
+enum class Method : int {
+  UNKNOWN = -1, MESSAGE = 0, REGISTER = 1
+};
 
 /* Tools */
 // ----------------------------------------------------------------------------
@@ -65,7 +70,7 @@ private:
   void runListener();
 
   void printClientInfo(sockaddr_in& peeraddr);
-  MCProtocol getIncomingMessage(int socket);
+  MCProtocol getIncomingMessage(int socket, Method* method);
   bool registerClientIfNeed(const MCProtocol& proto, int socket, sockaddr_in address_structure);
   void processMessages(int socket);
 };
@@ -150,18 +155,40 @@ void Server::runListener() {
     }
 
     // get incoming message
-    MCProtocol proto = getIncomingMessage(peer_socket);
-
-    // register incoming Client if not already registered
-    if (registerClientIfNeed(proto, peer_socket, peer_address_structure)) {
-      // process message in separate thread
-      std::thread worker_thread(&Server::processMessages, this, peer_socket);
-      worker_thread.detach();
+    Method method;
+    MCProtocol proto = getIncomingMessage(peer_socket, &method);
+    switch (method) {
+      case Method::MESSAGE:
+        INF("Message");
+        // forward to detached thread
+        break;
+      case Method::REGISTER:
+        INF("Registration");
+        // register incoming Client if not already registered
+        if (registerClientIfNeed(proto, peer_socket, peer_address_structure)) {
+          // process message in separate thread
+          std::thread worker_thread(&Server::processMessages, this, peer_socket);
+          worker_thread.detach();
+        }
+        break;
+      default:
+        WRN("Unknown");
+        break;
     }
   }
 }
 
 // ----------------------------------------------
+Method parseMethod(const std::string& path) {
+  MSG("Path to parse: %s", path.c_str());
+  if (strcmp(path.c_str(), "/message") == 0) {
+    return Method::MESSAGE;
+  } else if (strcmp(path.c_str(), "/register") == 0) {
+    return Method::REGISTER;
+  }
+  return Method::UNKNOWN;
+}
+
 void Server::printClientInfo(sockaddr_in& peeraddr) {
   printf("Connection from IP %d.%d.%d.%d, port %d\n",
         (ntohl(peeraddr.sin_addr.s_addr) >> 24) & 0xff, // High byte of address
@@ -171,18 +198,23 @@ void Server::printClientInfo(sockaddr_in& peeraddr) {
         ntohs(peeraddr.sin_port));
 }
 
-MCProtocol Server::getIncomingMessage(int socket) {
+MCProtocol Server::getIncomingMessage(int socket, Method* method) {
   char buffer[MESSAGE_SIZE];
+  memset(buffer, 0, MESSAGE_SIZE);
   int read_bytes = recv(socket, buffer, MESSAGE_SIZE, 0);
+  DBG("Incoming message: %.*s", (int) read_bytes, buffer);
   MCProtocol proto = EMPTY_MESSAGE;  // empty message
 
   try {
     Request request = m_parser.parseRequest(buffer, read_bytes);
     proto = fromJson(request.body);
+    *method = parseMethod(request.startline.path);
+    std::cout << request << std::endl;
   } catch (ParseException exception) {
     ERR("Parse error: bad request");
   }
 
+  std::cout << proto << std::endl;
   return proto;
 }
 
@@ -202,8 +234,8 @@ bool Server::registerClientIfNeed(const MCProtocol& proto, int socket, sockaddr_
     m_peers.insert(it_peer, std::pair<int, Peer>(proto.src_id, peer));
     INF("Peer registered: id = %i, name = %s", peer.id, peer.name.c_str());
 
-    // send confirmation to Client
-    std::string confirm_message = "HTTP/1.0 200 Peer registered\r\n\r\n\0";
+    // send confirmation to Client in http
+    std::string confirm_message = "HTTP/1.0 200 Peer registered\r\n\r\n";
     send(socket, confirm_message.c_str(), confirm_message.length(), 0);
   }
 
@@ -211,17 +243,29 @@ bool Server::registerClientIfNeed(const MCProtocol& proto, int socket, sockaddr_
 }
 
 void Server::processMessages(int socket) {
+  std::ostringstream oss;
   MCProtocol proto;
-  while (!is_stopped && (proto = getIncomingMessage(socket)) != EMPTY_MESSAGE) {
+  Method method;
+  while (!is_stopped && (proto = getIncomingMessage(socket, &method)) != EMPTY_MESSAGE) {
+    if (method != Method::MESSAGE) {
+      continue;
+    }
     // DBG("Received message: %s", proto.message.c_str());
     // broadcast message to all peers on the same channel (multi-channel chat)
     for (auto it = m_peers.begin(); it != m_peers.end(); ++it) {
       if (it->first != proto.src_id && it->second.channel == proto.channel) {
+        // compose http response
         std::string json = toJson(proto);
-        send(it->second.socket, json.c_str(), json.length(), 0);
+        std::cout << json << std::endl;
+        oss << "HTTP/1.1 200 Message received\r\n\r\n"
+            << json << "\r\n";
+        send(it->second.socket, oss.str().c_str(), oss.str().length(), 0);
+        oss.str("");
+        oss.flush();
       }
     }
   }
+  DBG("Background processing thread has finished");
 }
 
 /* Main */

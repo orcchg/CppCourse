@@ -1,5 +1,7 @@
+#include <algorithm>
 #include <sstream>
 #include <cstdlib>
+#include <cstring>
 #include "logger.h"
 #include "solutions/x_my_parser.h"
 
@@ -12,12 +14,13 @@ XMyParser::~XMyParser() {
 Response XMyParser::parseResponse(char* http, int nbytes) {
   const char* CRLF = "\r\n";
   std::istringstream iss(http);
+  //MSG("Input: %s", iss.str().c_str());
   Response response;
 
   // code line
   std::string code_line;
   std::getline(iss, code_line);
-  MSG("code=%s", code_line.c_str());
+  //MSG("code=%s", code_line.c_str());
   response.codeline = parseCodeLine(code_line);
 
   // headers
@@ -28,7 +31,7 @@ Response XMyParser::parseResponse(char* http, int nbytes) {
     if (isHeader(header_line)) {
       Header header = parseHeader(header_line);
       headers.push_back(header);
-      MSG("header=%s", header_line.c_str());
+      //MSG("header=%s", header_line.c_str());
     } else {
       break;
     }
@@ -36,23 +39,14 @@ Response XMyParser::parseResponse(char* http, int nbytes) {
   response.headers = headers;
 
   // body
-  int body_index = iss.tellg();
-  MSG("body index=%i", body_index);
-  iss.seekg(0, iss.end);
-  int body_length = iss.tellg();
-  body_length -= body_index;
-  
-  if (body_length > 0) {
-    iss.seekg(body_index);
-    MSG("length=%i", body_length);
-    char* buffer = new char[body_length];
-    iss.read(buffer, body_length);
-    std::string body(buffer);
-    delete [] buffer;
-    MSG("body=%s", body.c_str());
-    response.body = body;
-  } else {
-    MSG("No body");
+  std::string ending = "";
+  response.body = "";
+  std::string line;
+  while (std::getline(iss, line)) {
+    line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
+    response.body.append(ending);
+    response.body.append(line);
+    ending = "\n";
   }
 
   return response;
