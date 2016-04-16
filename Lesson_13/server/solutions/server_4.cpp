@@ -203,8 +203,8 @@ bool Server::registerClientIfNeed(const MCProtocol& proto, int socket, sockaddr_
     INF("Peer registered: id = %i, name = %s", peer.id, peer.name.c_str());
 
     // send confirmation to Client
-    std::string confirm_message = "Server: peer registered\n\0";
-    send(socket, confirm_message.c_str(), confirm_message.length(), 0);  // TODO: send confirmation via HTTP protocol
+    std::string confirm_message = "HTTP/1.0 200 Peer registered\r\n\r\n\0";
+    send(socket, confirm_message.c_str(), confirm_message.length(), 0);
   }
 
   return result;

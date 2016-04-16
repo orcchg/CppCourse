@@ -1,4 +1,5 @@
 #include "all.h"
+#include "solutions/convert_json.h"
 #include "solutions/protocol_1.h"
 #include "solutions/x_my_parser.h"
 
@@ -52,32 +53,6 @@ long long getCurrentTime() {
 
 struct ClientException {};
 
-/* Worker thread */
-// ----------------------------------------------------------------------------
-static void receiverThread(int sockfd) {
-  while (true) {
-    char buffer[MESSAGE_SIZE];
-    recv(sockfd, buffer, MESSAGE_SIZE, 0);  // TODO: get via HTTP
-
-    // check for termination
-    if (strncmp(buffer, END_STRING, strlen(END_STRING)) == 0) {
-      INF("Server: connection closed");
-      is_stopped = true;  // stop main loop
-      return;  // Server has sent end signal
-    }
-
-    Protocol proto = deserialize_mc(buffer);
-
-    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-
-    std::ostringstream oss;
-    oss << std::ctime(&end_time);
-
-    printf("%s :: %s: %s\n", oss.str().c_str(), proto.name.c_str(), proto.message.c_str());
-  }
-}
-
 /* Client */
 // ----------------------------------------------------------------------------
 class Client {
@@ -88,19 +63,24 @@ public:
   void init(const std::string& config_file);
   void run();
 
+  inline XMyParser getParser() { return m_parser; }
+
 private:
   long long m_id;
   std::string m_name;
   int m_channel;
 
   std::string m_ip_address;
-  std::string m_port;
 
   int m_socket;
   bool m_is_connected;
 
+  XMyParser m_parser;
+
   bool readConfiguration(const std::string& config_file);
 };
+
+static void receiverThread(Client* client, int sockfd);
 
 Client::Client(long long id, const std::string& name, int channel)
   : m_id(id), m_name(name), m_channel(channel) {
@@ -124,7 +104,7 @@ void Client::init(const std::string& config_file) {
   hints.ai_family = AF_INET;
   hints.ai_socktype = SOCK_STREAM;
 
-  int status = getaddrinfo(m_ip_address.c_str(), m_port.c_str(), &hints, &server_info);
+  int status = getaddrinfo(m_ip_address.c_str(), "http", &hints, &server_info);
   if (status != 0) {
     ERR("Failed to prepare address structure: %s", gai_strerror(status));  // see error message
     throw ClientException();
@@ -159,9 +139,8 @@ void Client::init(const std::string& config_file) {
     proto.src_id = m_id;
     proto.channel = m_channel;
     proto.name = m_name;
-    char* raw_proto = serialize_mc(proto);
-    send(m_socket, raw_proto, strlen(raw_proto), 0);  // TODO: send via HTTP
-    delete [] raw_proto;
+    std::string json = toJson(proto);
+    send(m_socket, json.c_str(), json.length(), 0);
   }
 }
 
@@ -173,11 +152,11 @@ void Client::run() {
 
   // get response from Server
   char buffer[256];
-  recv(m_socket, buffer, 256, 0);  // TODO: get via HTTP
+  recv(m_socket, buffer, 256, 0);
   INF("Server response: %s", buffer);
 
   // run message receiver thread
-  std::thread t(receiverThread, m_socket);
+  std::thread t(receiverThread, this, m_socket);
   t.detach();
 
   // send messages loop
@@ -190,9 +169,8 @@ void Client::run() {
     proto.name = m_name;
     proto.message = message;
 
-    char* raw_proto = serialize_mc(proto);
-    send(m_socket, raw_proto, strlen(raw_proto), 0);  // TODO: send via HTTP
-    delete [] raw_proto;
+    std::string json = toJson(proto);
+    send(m_socket, json.c_str(), json.length(), 0);
   }
 }
 
@@ -212,12 +190,7 @@ bool Client::readConfiguration(const std::string& config_file) {
     m_ip_address = line.substr(i1 + 1);
     DBG("IP address: %s", m_ip_address.c_str());
 
-    // port
-    std::getline(fs, line);
-    int i2 = line.find_first_of(' ');
-    m_port = line.substr(i2 + 1);
-    DBG("Port: %s", m_port.c_str());
-
+    // port is 80
     fs.close();
   } else {
     ERR("Failed to open configure file: %s", config_file.c_str());
@@ -225,6 +198,34 @@ bool Client::readConfiguration(const std::string& config_file) {
   }
 
   return result;
+}
+
+/* Worker thread */
+// ----------------------------------------------------------------------------
+static void receiverThread(Client* client, int sockfd) {
+  while (true) {
+    char buffer[MESSAGE_SIZE];
+    int nbytes = recv(sockfd, buffer, MESSAGE_SIZE, 0);
+
+    // check for termination
+    if (strncmp(buffer, END_STRING, strlen(END_STRING)) == 0) {
+      INF("Server: connection closed");
+      is_stopped = true;  // stop main loop
+      return;  // Server has sent end signal
+    }
+
+    Response response = client->getParser().parseResponse(buffer, nbytes);
+
+    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+    std::ostringstream oss;
+    oss << std::ctime(&end_time);
+
+    MCProtocol proto = fromJson(response.body);
+
+    printf("%s :: %s: %s\n", oss.str().c_str(), proto.name.c_str(), proto.message.c_str());
+  }
 }
 
 /* Main */
