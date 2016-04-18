@@ -56,11 +56,11 @@ int main(int args, char** argv) {
 
 Customer createCustomer() {
   Customer customer;
-  customer.customer_id = 600;
+  customer.customer_id = 601;
   customer.store_id = 1;
   customer.address_id = 5;
-  customer.first_name = "Mary";
-  customer.last_name="Smith";
+  customer.first_name = "Maxim";
+  customer.last_name="Alov";
   customer.email = "mary.smith@sakilacustomer.org";
   customer.create_date = "2006-02-14";
   customer.last_update = "2013-05-26 14:49:45.738";
