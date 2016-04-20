@@ -56,7 +56,9 @@ void Server::run() {
       continue;  // skip failed connection
     }
 
-    std::string text = "HTTP/1.1 200 OK\r\nContent-length: 73\r\nContent-Type: text/html\r\nConnection: Closed\r\n\r\n<html>\n\t<body><a href=\"http://client.mamba.ru/real/5555\">OpenMambaApp!</a></body>\n</html>\r\n";
+    //std::string text = "HTTP/1.1 200 OK\r\nContent-length: 73\r\nContent-Type: text/html\r\nConnection: Closed\r\n\r\n<html>\n\t<body><a href=\"http://client.mamba.ru/real/5555\">OpenMambaApp!</a></body>\n</html>\r\n";
+    //std::string text = "HTTP/1.1 200 OK\r\nContent-length: 72\r\nContent-Type: text/html\r\nConnection: Closed\r\n\r\n<html>\n\t<body><a href=\"http://love.yonja.com/real/5555\">OpenMambaApp!</a></body>\n</html>\r\n";
+    std::string text = "HTTP/1.1 200 OK\r\nContent-length: 131\r\nContent-Type: text/html\r\nConnection: Closed\r\n\r\n<html>\n\t<body><a href=\"http://android.mamba.ru/real/5555\">Mamba</a>\n\n\n<a href=\"http://android.yonja.com/real/5555\">Yonja</a></body>\n</html>\r\n";
     send(data_transfer_socket, text.c_str(), text.length(), 0);
   }
 }
