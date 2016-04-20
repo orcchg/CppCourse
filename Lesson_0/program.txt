@@ -1,0 +1,9 @@
+1. types
+2. visibility_scope
+3. statements
+4. functions
+5. pointers
+6. arrays
+7. strings
+8. io
+

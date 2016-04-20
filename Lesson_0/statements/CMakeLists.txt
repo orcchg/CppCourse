@@ -1,0 +1,6 @@
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+
+SET( SOURCES_0 ${SOURCE_DIR}/statements_0.cpp )
+
+ADD_EXECUTABLE( statements_0 ${SOURCES_0} )
+
