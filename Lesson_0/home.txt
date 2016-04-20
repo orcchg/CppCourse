@@ -1,0 +1,5 @@
+1. Write program calculating scalar product of two arrays of integers.
+
+2. Write program calculating N-th partial sum of harmonic serie.
+
+3. Write program calculating sine on double argument and compare it with sin() function from standard library.

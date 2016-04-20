@@ -13,7 +13,6 @@ endif()
 
 # -----------------------------------------------------------------------------
 ADD_SUBDIRECTORY( types )
-ADD_SUBDIRECTORY( visibility_scope )
 ADD_SUBDIRECTORY( statements )
 ADD_SUBDIRECTORY( functions )
 ADD_SUBDIRECTORY( pointers )

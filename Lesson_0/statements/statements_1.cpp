@@ -1,10 +1,10 @@
 #include <cstdio>
 
+#define FLAG 1
+
 int main(int argc, char** argv) {
 
-  bool flag = true;
-
-  if (flag) {
+  if (FLAG) {
     printf("flag is true\n");
   } else {
     printf("flag is false\n");
