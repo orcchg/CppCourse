@@ -1,9 +1,9 @@
 types
 visibility_scope (see Lesson_1/visibility_scope)
-statements
-functions
-pointers
-arrays
+statements + Lesson_1/statements
+functions (see Lesson_1/functions)
+pointers (see Lesson_1/pointers)
+arrays (see Lesson_1/arrays)
 strings
 io
 
