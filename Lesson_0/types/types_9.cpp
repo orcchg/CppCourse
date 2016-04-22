@@ -2,7 +2,7 @@
 
 int main(int argc, char** argv) {
   
-  bool flag = false;
+  bool flag = true;
 
   int a = flag ? 1 : 0;
 
