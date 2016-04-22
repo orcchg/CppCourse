@@ -1,5 +1,26 @@
 1. Write program calculating scalar product of two arrays of integers.
 
-2. Write program calculating N-th partial sum of harmonic serie.
+2. Write program calculating N-th partial sum of harmonic serie, i.e the sum like: 1 + 1/2 + 1/3 + ... + 1/N. Try N = 10, 100, 1000, 10000.
 
-3. Write program calculating sine on double argument and compare it with sin() function from standard library.
+3. Write program calculating sine on double argument and compare it with sin() function from standard library (#include <cmath> for sin()).
+
+4. Given two square matrices A and B of size NxN, write a program calculating matrix C of size NxN such that C = A * B.
+Store matrix using 2-dimensional arrays, for example in case N == 4:
+
+int N = 4;
+int A[][N] = { {4, 8, -1, 2},
+               {5, 0, 1, -5},
+               {-7, 4, 3, 2},
+               {6, -9, 3, 5} };
+
+int B[][N] = { {1, 2, 6, -8},
+               {4, -2, -3, 0},
+               {1, 1, 5, -5},
+               {-1, 4, 9, 3} };
+
+int C[][N] = { {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0} };
+
+Calculate each element for C matrix according to the A * B matrix multiplication formula and print the result.
+
+Try N == 3, 4, 5;
+
