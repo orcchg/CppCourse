@@ -25,5 +25,5 @@ Advanced:
 22. Design patterns.
 23. OpenGL, 2D and 3D graphics.
 24. Reactive programming, RxCpp.
-25. Summary.
+25. Android NDK.
 

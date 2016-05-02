@@ -1,5 +1,5 @@
 cmake_minimum_required( VERSION 2.8 )
-PROJECT( Lesson_14_Multiple_Inheritance )
+PROJECT( Lesson_10_Functional )
 
 # -----------------------------------------------------------------------------
 # --------------------------- Common header -----------------------------------
@@ -12,3 +12,7 @@ if( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX )
 endif()
 
 # -----------------------------------------------------------------------------
+ADD_SUBDIRECTORY( class_member_ptr )
+ADD_SUBDIRECTORY( functors )
+ADD_SUBDIRECTORY( binders )
+ADD_SUBDIRECTORY( adapters )

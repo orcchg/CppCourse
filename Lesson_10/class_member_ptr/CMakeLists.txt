@@ -1,0 +1,7 @@
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+SET( SOURCES_0 ${SOURCE_DIR}/class_member_ptr_0.cpp )
+SET( SOURCES_1 ${SOURCE_DIR}/class_member_ptr_1.cpp )
+SET( SOURCES_2 ${SOURCE_DIR}/class_member_ptr_2.cpp )
+ADD_EXECUTABLE( class_member_ptr_0 ${SOURCES_0} )
+ADD_EXECUTABLE( class_member_ptr_1 ${SOURCES_1} )
+ADD_EXECUTABLE( class_member_ptr_2 ${SOURCES_2} )

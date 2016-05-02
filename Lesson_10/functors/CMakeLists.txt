@@ -1,0 +1,7 @@
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+SET( SOURCES_0 ${SOURCE_DIR}/functors_0.cpp )
+SET( SOURCES_1 ${SOURCE_DIR}/functors_1.cpp )
+SET( SOURCES_2 ${SOURCE_DIR}/functors_2.cpp )
+ADD_EXECUTABLE( functors_0 ${SOURCES_0} )
+ADD_EXECUTABLE( functors_1 ${SOURCES_1} )
+ADD_EXECUTABLE( functors_2 ${SOURCES_2} )

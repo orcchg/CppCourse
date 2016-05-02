@@ -1,5 +1,5 @@
 cmake_minimum_required( VERSION 2.8 )
-PROJECT( Lesson_14_Multiple_Inheritance )
+PROJECT( Lesson_11_Smart_Pointers )
 
 # -----------------------------------------------------------------------------
 # --------------------------- Common header -----------------------------------
