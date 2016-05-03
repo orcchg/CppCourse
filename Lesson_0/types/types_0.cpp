@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
   printf("sum: %i\n", sum);
   printf("dif: %i\n", dif);
   printf("mul: %i\n", mul);
-  printf("div: %lf\n", div);
+  printf("div: %i\n", div);
   //printf("res: %i\n", res);
 
   return 0;
