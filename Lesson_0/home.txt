@@ -1,3 +1,27 @@
+01. Given a square equation "ax^2 + bx + c = 0" write a function which calculates and prints the roots x1 and x2 of this equation. One can use standard function 'dobule sqrt(double x)' from <cmath> header file in order
+to calculate the square root of x:
+
+void solve(double a, double b, double c) {
+  ...
+}
+
+Demonstrate how it works on several sample values of a, b, c.
+
+02. Given an integer value N write a function which prints binary representation of it:
+
+void decToBin(int N) {
+  ...
+}
+
+You will probably need a loop. Use the following statement:
+
+while (expression) {
+  iteration
+}
+
+This is the standard 'while-loop'. The 'expression' evaluates as boolean value (of type 'bool', which could be either 'true' or 'false'). If it evaluates to 'false', loop doesn't start, otherwise and 'iteration' (body of the loop) is executed and then 'expression' evaluates again. This loop performs until 'expression' evaluates to 'false'.
+
+-------------------------------------------------------------------------------
 1. Write program calculating scalar product of two arrays of integers.
 
 2. Write program calculating N-th partial sum of harmonic serie, i.e the sum like: 1 + 1/2 + 1/3 + ... + 1/N. Try N = 10, 100, 1000, 10000.
