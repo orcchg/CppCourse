@@ -1,4 +1,3 @@
-Basic:
 1. Statements and functions
 2. Symbolic streams, I/O.
 3. Struct and class. Operators.
@@ -7,8 +6,6 @@ Basic:
 6. Deep into iterators.
 7. Build systems, linking, libraries.
 8. SQLite, google test, google regex, google flags
-
-Advanced:
 9. Exceptions.
 10. Binders, adapters, functors, lambdas.
 11. Smart pointers.
