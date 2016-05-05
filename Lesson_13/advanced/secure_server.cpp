@@ -5,6 +5,8 @@ SecureServer::SecureServer() {
   SSL_load_error_strings();  // load human-readable error strings
   auto method = SSLv23_method();  // choose protocol version
   m_context = SSL_CTX_new(method);
+  SSL_CTX_use_certificate_file(m_context, "path", type);  // own certificate
+  //
 }
 
 SecureServer::~SecureServer() {
