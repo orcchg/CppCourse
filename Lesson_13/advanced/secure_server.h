@@ -14,6 +14,7 @@ public:
 
 private:
   SSL_CTX* m_context;
+  SSL* m_ssl;
 };
 
 #endif  // SECURE_SERVER__H__
