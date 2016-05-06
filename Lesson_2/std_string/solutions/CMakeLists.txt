@@ -1,0 +1,10 @@
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+SET( SOURCES_1 ${SOURCE_DIR}/string_solutions_1.cpp )
+SET( SOURCES_2 ${SOURCE_DIR}/string_solutions_2.cpp )
+SET( SOURCES_2_1 ${SOURCE_DIR}/string_solutions_2_1.cpp )
+SET( SOURCES_3 ${SOURCE_DIR}/string_solutions_3.cpp )
+ADD_EXECUTABLE( string_solutions_1 ${SOURCES_1} )
+ADD_EXECUTABLE( string_solutions_2 ${SOURCES_2} )
+ADD_EXECUTABLE( string_solutions_2_1 ${SOURCES_2_1} )
+ADD_EXECUTABLE( string_solutions_3 ${SOURCES_3} )
+
