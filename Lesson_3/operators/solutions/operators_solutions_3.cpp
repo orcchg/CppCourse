@@ -2,6 +2,8 @@
 #include "square_matrix.h"
 #include "utility.h"
 
+#define SIZE 5
+
 int main(int argc, char** argv) {
   DBG("[Lesson 3]: Operators: Solutions 3");
 

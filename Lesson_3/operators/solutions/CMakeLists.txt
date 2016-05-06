@@ -1,0 +1,10 @@
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+SET( SOURCES_1 ${SOURCE_DIR}/operators_solutions_1.cpp )
+SET( SOURCES_2 ${SOURCE_DIR}/operators_solutions_2.cpp )
+SET( SOURCES_3 ${SOURCE_DIR}/operators_solutions_3.cpp ${SOURCE_DIR}/square_matrix.cpp ${SOURCE_DIR}/utility.cpp )
+SET( SOURCES_4 ${SOURCE_DIR}/operators_solutions_4.cpp ${SOURCE_DIR}/monomial.cpp ${SOURCE_DIR}/polynomial.cpp)
+ADD_EXECUTABLE( operators_solutions_1 ${SOURCES_1} )
+ADD_EXECUTABLE( operators_solutions_2 ${SOURCES_2} )
+ADD_EXECUTABLE( operators_solutions_3 ${SOURCES_3} )
+ADD_EXECUTABLE( operators_solutions_4 ${SOURCES_4} )
+
