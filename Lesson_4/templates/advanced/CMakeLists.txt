@@ -1,0 +1,12 @@
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+SET( SOURCES_5 ${SOURCE_DIR}/templates_5.cpp )
+SET( SOURCES_6 ${SOURCE_DIR}/templates_6.cpp )
+SET( SOURCES_7 ${SOURCE_DIR}/templates_7.cpp )
+SET( SOURCES_8 ${SOURCE_DIR}/templates_8.cpp )
+SET( SOURCES_9 ${SOURCE_DIR}/templates_9.cpp )
+ADD_EXECUTABLE( templates_5 ${SOURCES_5} )
+ADD_EXECUTABLE( templates_6 ${SOURCES_6} )
+ADD_EXECUTABLE( templates_7 ${SOURCES_7} )
+ADD_EXECUTABLE( templates_8 ${SOURCES_8} )
+ADD_EXECUTABLE( templates_9 ${SOURCES_9} )
+
