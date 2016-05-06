@@ -1,0 +1,10 @@
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+SET( SOURCES_binary ${SOURCE_DIR}/binary_search.cpp )
+SET( SOURCES_3 ${SOURCE_DIR}/sortings_solutions_3.cpp )
+SET( SOURCES_4 ${SOURCE_DIR}/sortings_solutions_4.cpp )
+SET( SOURCES_5 ${SOURCE_DIR}/sortings_solutions_5.cpp )
+ADD_EXECUTABLE( binary_search ${SOURCES_binary} )
+ADD_EXECUTABLE( sortings_solutions_3 ${SOURCES_3} )
+ADD_EXECUTABLE( sortings_solutions_4 ${SOURCES_4} )
+ADD_EXECUTABLE( sortings_solutions_5 ${SOURCES_5} )
+

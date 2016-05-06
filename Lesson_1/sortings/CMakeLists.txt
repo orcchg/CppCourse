@@ -1,0 +1,18 @@
+SET( SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} )
+SET( SOURCES_ins ${SOURCE_DIR}/insertion_sort.cpp )
+SET( SOURCES_ins_bug ${SOURCE_DIR}/insertion_sort_bug.cpp )
+SET( SOURCES_merge ${SOURCE_DIR}/merge_sort.cpp )
+SET( SOURCES_quick ${SOURCE_DIR}/quick_sort.cpp )
+SET( SOURCES_1 ${SOURCE_DIR}/standard_sort_1.cpp )
+SET( SOURCES_2 ${SOURCE_DIR}/standard_sort_2.cpp )
+SET( SOURCES_3 ${SOURCE_DIR}/standard_sort_3.cpp )
+ADD_EXECUTABLE( insertion_sort ${SOURCES_ins} )
+ADD_EXECUTABLE( insertion_sort_bug ${SOURCES_ins_bug} )
+ADD_EXECUTABLE( merge_sort ${SOURCES_merge} )
+ADD_EXECUTABLE( quick_sort ${SOURCES_quick} )
+ADD_EXECUTABLE( standard_sort_1 ${SOURCES_1} )
+ADD_EXECUTABLE( standard_sort_2 ${SOURCES_2} )
+ADD_EXECUTABLE( standard_sort_3 ${SOURCES_3} )
+
+ADD_SUBDIRECTORY( solutions )
+

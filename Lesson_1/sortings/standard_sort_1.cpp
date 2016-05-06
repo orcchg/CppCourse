@@ -2,6 +2,8 @@
 #include <random>
 #include "logger.h"
 
+#define SIZE 100
+
 namespace sort {
 
 /* Quick sort */

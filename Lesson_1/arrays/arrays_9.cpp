@@ -3,6 +3,8 @@
 #include <cstring>
 #include "logger.h"
 
+#define SIZE 5
+
 /* Queue */
 // ----------------------------------------------------------------------------
 int head = 0;

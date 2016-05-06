@@ -2,6 +2,8 @@
 #include <cstring>
 #include "logger.h"
 
+#define SIZE 5
+
 /* Stack */
 // ----------------------------------------------------------------------------
 int head = 0;
