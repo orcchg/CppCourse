@@ -23,3 +23,24 @@ This class is able to compare to objects of type T and counts number of compares
 Input an array of N integers from stdin and sort it using std::sort() and LessComparator.
 Print number of compares as a function of N.
 
+✶ ✹ ✷ ✸ ✺ ✽ ✻ ✼ ✾ ✶✵
+5*. (LIS) Given 1 <= N <= 1000 and sequence of signed integer values a0, a1, a2, ..., aN  (|ai| <= 10^9)
+find and print the longest increasing subsequence b0, b1, b2, ..., bk, such that b0 <= b1 <= b2 <= ... <= bk.
+If there exist everal LIS, print those where b0 is ai1, such that i1 is minimal. If there exist everal LIS with
+equal i1, print those where i2 is minimal, etc.
+
+For example:
+1 4 2 3 5 8 6 7 9 10   -->  2 3 5 8
+1 2 3 4 5              -->  1 2 3 4 5
+100                    -->  100
+
+5**. (LAS) Same a above, but find and print the longest altering subsequense b0, b1, b2, ..., bk, such that
+for any three adjacent elements bi-1, bi, bi+1 either bi-1 < bi and bi > bi+1 or bi-1 > bi and bi < bi+1.
+
+For example:
+1 4 2 3 5 8 6 7 9 10   -->  1 4 2 8 6 7
+1 2 3 4 5              -->  1 2
+100                    -->  100
+
+Highlight the subsequense as shown in 'algorithms_10.cpp'.
+
