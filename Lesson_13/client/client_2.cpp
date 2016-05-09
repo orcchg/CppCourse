@@ -140,6 +140,7 @@ void Client::init(const std::string& config_file) {
 void Client::run() {
   // get response from Server
   char buffer[256];
+  memset(buffer, 0, 256);
   recv(m_socket, buffer, 256, 0);
   INF("Server response: %s", buffer);
 

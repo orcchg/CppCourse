@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
   connect(sockfd, reinterpret_cast<sockaddr*>(&address_structure), sizeof(address_structure));
 
   char buffer[1024];
+  memset(buffer, 0, 1024);
   recv(sockfd, buffer, 1024, 0);
   INF("Received from Server: %s", buffer);
 

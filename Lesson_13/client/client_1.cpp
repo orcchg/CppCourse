@@ -66,6 +66,7 @@ int main(int argc, char** argv) {
   send(sockfd, payload.c_str(), payload.size(), 0);
 
   char buffer[1024];
+  memset(buffer, 0, 1024);
   recv(sockfd, buffer, 1024, 0);
   INF("Received from Server: %s", buffer);
 

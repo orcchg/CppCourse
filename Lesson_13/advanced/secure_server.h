@@ -12,7 +12,10 @@ public:
   SecureServer();
   virtual ~SecureServer();
 
+  void run();
+
 private:
+  BIO* m_bio;
   SSL_CTX* m_context;
   SSL* m_ssl;
 };
