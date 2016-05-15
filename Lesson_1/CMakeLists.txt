@@ -14,6 +14,7 @@ endif()
 # -----------------------------------------------------------------------------
 ADD_SUBDIRECTORY( arrays )
 ADD_SUBDIRECTORY( functions )
+ADD_SUBDIRECTORY( logging )
 ADD_SUBDIRECTORY( pointers )
 ADD_SUBDIRECTORY( sortings )
 ADD_SUBDIRECTORY( statements )
