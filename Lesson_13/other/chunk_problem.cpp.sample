@@ -1,0 +1,163 @@
+class SymmetricalCoder {
+public:
+	bytevector encode(bytevector const &M, bytevector const &K,
+	bytevector const &IV) = 0;
+	bytevector decode(bytevector const &M, bytevector const &K,
+	bytevector const &IV) = 0;
+	uint32 getKeySize() const = 0;
+	uint32 getIVSize() const = 0;
+};
+
+#define A_KEY_SIZE 256
+#define HASH_SIZE 128
+
+class AsymmetricalCoder {
+public:
+  struct KeyPair {
+    bytevector priv, pub;
+  };
+
+	KeyPair createPair(int bits) = 0;
+	bytevector encode(bytevector const &M, bytevector const &K) = 0;
+	bytevector decode(bytevector const &M, bytevector const &K) = 0;
+};
+
+class HashCoder {
+public:
+  void init() = 0;
+  void update(void *addr, size_t size) = 0;
+	bytevector final() = 0;
+};
+
+class CryptoRandomGenerator {
+  bytevector getRand(size_t bytes) = 0;
+};
+
+class Serializer {
+  void add(any_type) = 0;
+  void add(bytevector) = 0;
+  bytevector getBody() = 0;
+};
+
+class Deserializer {
+  type1 getType1() = 0;
+  //...
+  bytevector getBytevector() = 0;
+};
+
+//-----------------------------------------------------------------------------------------------------------------
+bytevector E = CryptoRandomGenerator(sym_coder.getKeySize());  //# Maxim: create unique key E
+
+/**
+ * Passing chunk from user A to user B
+ *
+ * N - number of users sharing the same chunk, could be calculated by offsetting through chunk
+ * by step sizeof(E) until gets to HASH_SIZE-length region, corresponding to the check_value.
+ */
+bytevector getChunkBodyAtUser(const bytevector& chunk, const bytevector& privateKey) {
+  for (size_t position = 0; position < chunk.size(); position += sizeof(E)) {
+    bytevector decrypted_E = tryToDecrypt(chunk.subvector(position, position + sizeof(E));
+    if (decrypted_E != nullptr) {  // found one of appropriate encrypted keys E
+      SymmetricalCoder sym_coder;
+      bytevector IV = CryptoRandomGenerator(sym_coder.getIVSize());
+      bytevector data = sym_coder.decode(chunk.subvector(N * sizeof(E) + HASH_SIZE + HASH_SIZE), decrypted_E, IV);
+      bytevector random = sym_coder.decode(chunk.subvector(N * sizeof(E) + HASH_SIZE), decrypted_E, IV);
+      bytevector check_value = sym_coder.decode(chunk.subvector(N * sizeof(E), decrypted_E, IV);
+     
+      HashCoder hasher;
+      hasher.init();
+      hasher.update(data, data.size());
+      bytevector hash = hasher.final();
+      bytevector new_check_value = hash + random;
+      if (new_check_value == check_value) {
+        // data decrypted successfully
+      }
+      break;
+  }
+}
+
+/**
+ *  [E1] + [E][check_value][body]  ==  [E1][E][check_value][body]
+ */
+bytevector ChunkAddUser(bytevector const &oldChunk, bytevector const &pubKey) {
+  AsymmetricalCoder a_coder;
+  bytevector crypted_E = a_coder.encode(E, pubKey);
+  bytevector newChunk = oldChunk.push_front(crypted_E);
+  return newChunk;
+}
+
+/**
+ *  Chunk format:
+ *
+ *  [E][check_value][random][body]   - all body and check_value are encrypted with E,
+ *                                     E is encrypted with public key of the very first user.
+ *
+ *  sizes:
+ *
+ *  sizeof(E) == SymmetricalCoder::getKeySize();
+ *  sizeof(check_value) == HASH_SIZE;
+ *  sizeof(random) == HASH_SIZE;
+ *  sizeof(body) == bytevector::size();
+ */
+bytevector ChunkCreate(bytevector const &chunkBody) {
+  SymmetricalCoder sym_coder;
+  bytevector IV = CryptoRandomGenerator(sym_coder.getIVSize());
+  bytevector crypted_chunkBody = sym_coder.encode(chunkBody, E, IV);
+
+  AsymmetricalCoder a_coder;
+  AsymmetricalCoder.KeyPair pair = a_coder.createPair(A_KEY_SIZE);
+  bytevector crypted_E = a_coder.encode(E, pair.pub);
+  
+  HashCoder hasher;
+  hasher.init();
+  hasher.update(chunkBody, chunkBody.size());  // let's assume hash value is HASH_SIZE-bytes long
+  bytevector hash_of_chunkBody = hasher.final();
+  bytevector random = CryptoRandomGenerator(HASH_SIZE);
+  bytevector check_value = hash_of_chunkBody + random;
+  bytevector crypted_check_value = sym_coder.encode(check_value, E, IV);
+  bytevector crypted_random = sym_coder.encode(random, E, IV);
+
+  Serializer serializer;
+  serializer.add(crypted_E);
+  serializer.add(crypted_check_value);
+  serializer.add(crypted_random);
+  serializer.add(crypted_chunkBody);
+  bytevector chunk = serializer.getBody();
+  return chunk;
+}
+
+bytevector ChunkChange(bytevector const &oldChunk, bytevector const &newBody) {
+  //1.
+  HashCoder.hasher;
+  hasher.init();
+  hasher.update(newBody, newBody.size())
+  bytevector hash = hasher.final();
+  //2. 
+  bytevector random = CryptoRandomGenerator(HASH_SIZE);
+  bytevector check_value = hash + random; 
+  //3. 
+  SymmetricalCoder sym_coder;
+  bytevector IV = CryptoRandomGenerator(sym_coder.getIVSize());
+  bytevector crypted_newBody = sym_coder.encode(newBody, E, IV);
+  bytevector crypted_random = sym_coder.encode(random, E, IV);
+  bytevector crypted_check_value = sym_coder.encode(check_value, E, IV);
+
+  // #Maxim: To know position of E, one can write it to the chunk right after each block of data
+  /**
+   *   [En]...[E2][E1][E][check_value][random][body]
+   *                  |
+   *             position of E
+   */
+  Deserializer deserializer;
+  bytevector crypted_E = deserializer.getBytevector(oldChunk.subvector(/* position of E */);
+
+  Serializer serializer;
+  serializer.add(crypted_newBody);
+  serializer.add(crypted_random);
+  serializer.add(crypted_check_value);
+  serializer.add(crypted_E);
+  bytevector newChunk = serializer.getBody();
+  return newChunk;
+
+
+}
