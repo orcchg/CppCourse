@@ -1,0 +1,49 @@
+What is variable declaration ?
+
+What is variable definition ?
+
+What is function declaration ?
+
+What is functino definition ?
+
+What is function call ?
+
+What is function prototype ?
+
+What is array declaration ?
+
+What is array definition ?
+
+What is ‘main’ function definition ?
+
+What is ‘main’ function declaration ?
+
+Write ‘for’ loop prototype;
+
+Write ‘while’ loop prototype;
+
+Write ‘if’ statement prototype; 
+
+Declare pointer of type T.
+
+Allocate memory enough to store N objects of type T. Defite the pointer with start address.
+
+How to get value by some address in memory stored in pointer?
+
+Define array of integers.
+
+How to access an i-th element in that array?
+
+Where are local variables stored in memory?
+
+Define array of integers stored in heap, get a pointer to it.
+
+How to access an i-th element in that array stored in heap, through pointer?
+
+The name of array could be used as a pointer to it’s beginning, isn’t it? Using that pointer, access an i-th element in that array.
+
+Write prototype of scanf() function.
+
+How to call scanf() and write an integer value from STDIN.	
+
+How to get an address of a variable and store it in a pointer?
