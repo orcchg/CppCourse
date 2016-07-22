@@ -95,6 +95,26 @@ int envelope_open(EVP_PKEY *priv_key, unsigned char *ciphertext, int ciphertext_
 
 int main (void)
 {
+  unsigned char* plaintext = (unsigned char*) "hello";
+  unsigned char output[128];
+  int plaintext_len = strlen((const char*) plaintext);
+  unsigned char* encrypted_key = new unsigned char[256];
+  int encrypted_key_len = 0;
+  unsigned char iv[128];
+  unsigned char ciphertext[128];
+  memset(iv, 0, 128);
+  memset(ciphertext, 0, 128);
 
+  EVP_PKEY** pub_key, *priv_key;
+
+  int ciphertext_len = envelope_seal(pub_key, plaintext, plaintext_len,
+	&encrypted_key, &encrypted_key_len, iv, ciphertext);
+
+  int output_len = envelope_open(priv_key, ciphertext, ciphertext_len,
+      encrypted_key, encrypted_key_len, iv, output);
+
+  printf("[%i] %.*s", output_len, output_len, output);
+  delete [] encrypted_key;
+  return 0;
 }
 
