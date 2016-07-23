@@ -1,9 +1,12 @@
 #include <openssl/conf.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
+#include <openssl/pem.h>
+#include <openssl/rsa.h>
 #include <iostream>
 #include <string>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 void handleErrors(void)
 {
@@ -105,16 +108,25 @@ int main (void)
   memset(iv, 0, 128);
   memset(ciphertext, 0, 128);
 
-  EVP_PKEY** pub_key, *priv_key;
+  FILE* public_key_file = fopen("../advanced/public.pem", "rt");
+  FILE* private_key_file = fopen("../advanced/private.pem", "rt");
 
-  int ciphertext_len = envelope_seal(pub_key, plaintext, plaintext_len,
+  EVP_PKEY* pub_key, *priv_key;
+  pub_key = PEM_read_PUBKEY(public_key_file, nullptr, nullptr, nullptr);
+  priv_key = PEM_read_PrivateKey(private_key_file, nullptr, nullptr, nullptr);
+
+  int ciphertext_len = envelope_seal(&pub_key, plaintext, plaintext_len,
 	&encrypted_key, &encrypted_key_len, iv, ciphertext);
 
   int output_len = envelope_open(priv_key, ciphertext, ciphertext_len,
       encrypted_key, encrypted_key_len, iv, output);
 
   printf("[%i] %.*s", output_len, output_len, output);
+
   delete [] encrypted_key;
+  fclose(public_key_file);
+  fclose(private_key_file);
+
   return 0;
 }
 
