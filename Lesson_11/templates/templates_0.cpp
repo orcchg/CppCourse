@@ -1,4 +1,5 @@
 #include <cstdio>
+#include "logger.h"
 
 struct Point {
   float x, y;
@@ -35,6 +36,8 @@ void printArray(T array[], size_t size) {
 }
 
 int main(int argc, char** argv) {
+  DBG("[Lesson 11]: Templates 0");
+
   int integers[] = {5, -2, 0, 6, -8, 4, 3};
   printArray<int>(integers, sizeof(integers) / sizeof(integers[0]));
 
@@ -44,6 +47,7 @@ int main(int argc, char** argv) {
   Point points[] = {{3.14, 2.71}, {0.05, 2.7}, {-1.0, 0.5}, {0.02, -0.04}};
   printArray<Point>(points, sizeof(points) / sizeof(points[0]));
 
+  DBG("[Lesson 11]: Templates 0 END");
   return 0;
 }
 
