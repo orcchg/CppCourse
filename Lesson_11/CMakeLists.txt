@@ -12,3 +12,5 @@ if( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX )
 endif()
 
 # -----------------------------------------------------------------------------
+ADD_SUBDIRECTORY( templates )
+
