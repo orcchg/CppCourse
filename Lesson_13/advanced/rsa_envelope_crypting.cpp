@@ -99,14 +99,15 @@ int envelope_open(EVP_PKEY *priv_key, unsigned char *ciphertext, int ciphertext_
 int main (void)
 {
   unsigned char* plaintext = (unsigned char*) "hello";
-  unsigned char output[128];
+  unsigned char output[256];
   int plaintext_len = strlen((const char*) plaintext);
   unsigned char* encrypted_key = new unsigned char[256];
   int encrypted_key_len = 0;
-  unsigned char iv[128];
-  unsigned char ciphertext[128];
+  unsigned char iv[256];
+  unsigned char ciphertext[256];
   memset(iv, 0, 128);
-  memset(ciphertext, 0, 128);
+  memset(ciphertext, 0, 256);
+  memset(output, 0, 256);
 
   FILE* public_key_file = fopen("../advanced/public.pem", "rt");
   FILE* private_key_file = fopen("../advanced/private.pem", "rt");
