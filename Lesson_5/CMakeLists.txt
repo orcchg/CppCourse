@@ -10,4 +10,5 @@ ADD_SUBDIRECTORY( inheritance )
 ADD_SUBDIRECTORY( polymorphism )
 ADD_SUBDIRECTORY( abstract )
 ADD_SUBDIRECTORY( c_style )
+ADD_SUBDIRECTORY( vtable )
 

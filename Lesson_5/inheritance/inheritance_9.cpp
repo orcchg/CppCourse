@@ -25,6 +25,7 @@ protected:
 };
 
 size_t Base::hashCode() const {
+  WRN("base");
   return static_cast<size_t>(m_key);
 }
 
@@ -53,6 +54,7 @@ private:
 };
 
 size_t Derived::hashCode() const {
+  WRN("derived");
   size_t base_code = Base::hashCode();
   
   // Java String hash code: s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]
