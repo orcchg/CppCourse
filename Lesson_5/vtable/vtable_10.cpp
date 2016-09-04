@@ -3,7 +3,7 @@
 struct Base {
   virtual void foo() { INF("Base::foo()"); }
   virtual void bar() { INF("Base::bar()"); }
-  void ext()        { INF("Base::ext()"); }
+  void ext()         { INF("Base::ext()"); }
 };
 
 struct Derived : public Base {

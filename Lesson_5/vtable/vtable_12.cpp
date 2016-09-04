@@ -1,13 +1,13 @@
 #include "logger.h"
 
 struct Base {
-  virtual void foo() { INF("Base::foo()"); }
-  virtual void bar() { INF("Base::bar()"); }
-  void ext()         { INF("Base::ext()"); }
+  void foo() { INF("Base::foo()"); }
+  void bar() { INF("Base::bar()"); }
+  void ext() { INF("Base::ext()"); }
 };
 
 struct Derived : public Base {
-  void foo() override { WRN("Derived::foo()"); }
+  virtual void foo() { WRN("Derived::foo()"); }
 
   void ext() /*hide*/ { WRN("Derived::ext()"); }
 };
@@ -21,7 +21,7 @@ struct Further : public Derived {
 /* Main */
 // ----------------------------------------------------------------------------
 int main(int argc, char** argv) {
-  DBG("[Lesson 5]: Vtable 11");
+  DBG("[Lesson 5]: Vtable 12");
 
   Base base;
   Derived derived;
@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 
   Base* pb = &base;
   Base* pd = &derived;
-  Derived* pf = &further;
+  Base* pf = &further;
 
   DBG("Pointer to Base");
   pb->foo();
@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
   pf->bar();
   pf->ext();
 
-  DBG("[Lesson 5]: Vtable 11 [END]");
+  DBG("[Lesson 5]: Vtable 12 [END]");
   return 0;
 }
 
