@@ -1,0 +1,28 @@
+Lesson_0:
+
+0. main function
+1. C++ IO: std::cin, std::cout
+2. std::string, std::getline, const char*
+3. variables: declaration, definition, macros
+4. int, float, double, long long, char, bool
+5. short, long, unsigned
+6. arithmetic operators: +, -, *, /, %, ==, !=, <, >, <=, >=
+7. if, while, for
+8. functions: declaration, definition
+9. functions: max, sum, power, circle length, circle square
+10. sqrt(), square equation roots
+11. arrays, printArray(), copyArray()
+12. std::vector<T>
+13. scalar products of two arrays, vectors
+14. std::vector vs std::string
+
+Lesson_1:
+
+1. switch, case, break
+2. break, return, continue in loops
+3. scan command from stdin
+4. insertionSort()
+5. factorial, fibonacci
+6. mergeSort()
+7. std::sort(), stress-testing
+
